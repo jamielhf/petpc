@@ -10,7 +10,7 @@
   "author": "jamie",
   "license": "ISC",
   "devDependencies": {
-    "axios": "^0.15.2",
+    "axios": "^0.15.3",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-object-assign": "^6.8.0",

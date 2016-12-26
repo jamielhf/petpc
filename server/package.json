@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "another-json-schema": "^2.1.0",

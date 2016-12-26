@@ -53,6 +53,7 @@ module.exports = {
             'vue$': 'vue/dist/vue.js',
             'vuex$': 'vuex/dist/vuex.js',
             'vueRouter$': 'vue-router/dist/vue-router.js',
+            'axios$': 'axios/dist/axios.min.js'
         }
 
     },

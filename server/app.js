@@ -23,7 +23,6 @@ app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 
 
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,6 +44,20 @@ app.use(session({
 
 app.use(flash());
 
+//跨域访问
+//allow custom header and CORS
+app.all('*',function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+
+  if (req.method == 'OPTIONS') {
+    res.send(200); //让options请求快速返回
+  }
+  else {
+    next();
+  }
+});
 // 路由
 routes(app);
 

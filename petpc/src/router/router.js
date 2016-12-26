@@ -5,7 +5,8 @@ import Vue from 'vue';
 import VueRouter from 'vueRouter';
 import App from '../App.vue'
 import Index from '../page/index.vue'
-import Logup from '../page/logup.vue'
+import Signup from '../page/signup.vue'
+import Signin from '../page/signin.vue'
 
 Vue.use(VueRouter);
 
@@ -16,7 +17,8 @@ const routes = [
 
         ]
     },
-    {path: '/logup', component: Logup}
+    {path: '/signup', component: Signup},
+    {path: '/signin', component: Signin}
 ];
 
 

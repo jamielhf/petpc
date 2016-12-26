@@ -33,5 +33,13 @@
       height: 40px;
       border-radius: 100%;
     }
+    p{
+      position: relative;
+      float: right;
+      right: 0;
+      a{
+        color: $color;
+      }
+    }
   }
 }

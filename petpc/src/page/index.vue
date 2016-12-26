@@ -3,7 +3,7 @@
 <template>
 
 <div class="p-index">
-    <com-nav></com-nav>
+    <com-nav :isLogin = isLogin></com-nav>
     <com-content></com-content>
 </div>
 
@@ -21,6 +21,9 @@ import content from '../components/content.vue';
     data:function () {
       return {}
     },
+     computed:{
+
+     },
      components:{
          comNav:nav,
          comContent:content,

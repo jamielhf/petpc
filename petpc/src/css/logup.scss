@@ -3,8 +3,27 @@
 .p-logup{
   position: relative;
   width: 400px;
-  margin: 20% auto;
-  padding: 40px;
+  margin: 10% auto;
+  padding: 40px 40px 60px 40px;
   background-color: #fff;
+  border-radius: 5px;
 
+}
+
+.form-horizontal{
+  position: relative;
+}
+.alert-warning{
+ position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+  padding: 5px 0;
+}
+.link{
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+  margin-top: 10px;
+  width: 100%;
 }

@@ -27,3 +27,10 @@ html,body{
   font-family: -apple-system,PingFang SC,Hiragino Sans GB,Arial,Microsoft YaHei,Helvetica Neue,sans-serif;
   text-rendering: optimizeLegibility;
 }
+
+.z-none{
+  display: none;
+}
+button{
+  outline: none;
+}

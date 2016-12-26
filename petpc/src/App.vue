@@ -1,6 +1,6 @@
 <template>
   <div >
-    <com-header></com-header>
+    <com-header :isLogin = isLogin></com-header>
 
       <router-view></router-view>
   </div>
@@ -16,6 +16,12 @@ export default {
   data () {
     return {
 
+    }
+  },
+  computed:{
+    isLogin:function () {
+
+      return this.$store.state.login.loginStatus;
     }
   },
   components:{
