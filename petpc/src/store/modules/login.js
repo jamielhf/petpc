@@ -6,42 +6,45 @@ import api from '../../api/api'
 
 const state = {
     loginStatus:false,
-    singUpInfo:{},
-    singInInfo:{},
+    info:{},
+    status:{},
 }
 
 const getters = {
-    singUpStatus : state => state.singUpInfo.status,
-    singInStatus : state => state.singInInfo.status,
+    signStatus : state => state.status
 }
 
 
 const actions = {
     signup({commit},data){
         api.signup(data,function (res) {
-            commit(types.SIGNUP_STATUS,res)
+            commit(types.SIGN_STATUS,res)
         })
     },
     signin({commit},data){
         api.signin(data,function (res) {
-            commit(types.SIGNIN_STATUS,res)
+            commit(types.SIGN_STATUS,res)
         })
     },
     setSignStatus({commit},data){
         commit(types.SET_SIGN_STATUS,data);
+    },
+    checkedLogin({commit}){
+       api.checkLogin(function (res) {
+           commit(types.SET_SIGN_STATUS,res);
+       })
     }
 }
 
 const mutations = {
-    [types.SIGNUP_STATUS](state,res){
-        state.singUpInfo = res;
+    [types.SIGN_STATUS](state,res){
+        state.status = res.status;
+        state.info = res.data;
     },
-    [types.SIGNIN_STATUS](state,res){
-        state.singInInfo = res;
-    },
+
     [types.SET_SIGN_STATUS](state,res){
-        state.loginStatus = res;
-       
+        state.loginStatus = res.status;
+        state.info = res.data;
     }
 }
 

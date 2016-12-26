@@ -24,6 +24,7 @@
         <button type="button" @click ="submit" class="btn btn-primary  btn-default btn-block">注册</button>
         <router-link to="/signin"   class="link">有账号，去登录</router-link>
         <div class="alert-warning " :class = "{'z-none':this.tips ==''?true:false}" role="alert">{{tips}}</div>
+        <div class="alert-warning " :class = "{'z-none':this.tips2 ==''?true:false}" role="alert">{{tips2}}</div>
     </form>
 </div>
 
@@ -41,20 +42,26 @@ require('../css/logup');
           username:'',
           password:'',
           email:'',
+          tips2:''
       }
     },
+     created:function(){
+         this.$store.dispatch('checkedLogin');
+     },
      computed:{
          tips:function () {
              let t ="";
              let vm = this;
-             switch (this.$store.getters.singUpStatus){
+             console.log(123);
+             switch (this.$store.getters.signStatus){
                  case 200 :t = "注册成功";
                      vm.$store.dispatch('setSignStatus',true)
                  setTimeout(function () {
-                    location.href = "/"
-                 },1000);break;
+//                     vm.$router.push('/');
+                 },500);break;
                  case 301 :t = "换个用户名吧，这个已经存在了";break;
                  case 302 :t = "邮件已经被人用了~";break;
+                 default:t = "";
              }
              return t;
 
@@ -63,20 +70,23 @@ require('../css/logup');
      methods:{
          submit:function () {
              const vm = this;
-             if(this.username==''){
-                this.tips = "要输入正确昵称哦";
+             const reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+             if(vm.username==''){
+                 vm.tips2 = "要输入正确昵称哦";
                  return false
              }
-             if(this.email==''){
-                 this.tips = "要输入正确邮箱哦";
+            if(!reg.test(vm.email)){
+                vm.tips2 = "要输入正确邮箱哦";
+                 return false
+
+             }
+
+             if(vm.password==''){
+                 vm.tips2 = "弄啥呢，密码都不写";
                  return false
              }
-             if(this.password==''){
-                 this.tips = "弄啥呢，密码都不写";
-                 return false
-             }
-             this.tips ="";
-             this.$store.dispatch('signup',{
+             vm.tips2 ="";
+             vm.$store.dispatch('signup',{
                  username:vm.username ,
                  email:vm.email,
                  password:vm.password

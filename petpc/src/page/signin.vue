@@ -21,6 +21,7 @@
             <router-link to="/signup"  class="link">去注册</router-link>
 
             <div class="alert-warning " :class = "{'z-none':this.tips ==''?true:false}" role="alert">{{tips}}</div>
+            <div class="alert-warning " :class = "{'z-none':this.tips2 ==''?true:false}" role="alert">{{tips2}}</div>
         </form>
     </div>
 
@@ -38,18 +39,24 @@
     data:function () {
       return {
           password:'',
-          email:''
+          email:'',
+          tips2:''
       }
     },
+
+     mounted:function () {
+
+     },
+
      computed:{
          tips:function () {
              let t ="";
              let vm = this;
-             switch (this.$store.getters.singInStatus){
+             switch (this.$store.getters.signStatus){
                  case 200 :t = "登录成功";
                      vm.$store.dispatch('setSignStatus',true);
                       setTimeout(function () {
-                          vm.$router.push('/');
+//                          vm.$router.push('/');
                      },500);break;
                  case 301 :t = "邮箱或密码错误";break;
              }
@@ -61,14 +68,14 @@
          submit:function () {
              const vm = this;
              if(this.email==''){
-                 this.tips = "要输入正确邮箱哦";
+                 this.tips2 = "要输入正确邮箱哦";
                  return false
              }
              if(this.password==''){
-                 this.tips = "弄啥呢，密码都不写";
+                 this.tips2 = "弄啥呢，密码都不写";
                  return false
              }
-             this.tips ="";
+             this.tips2 ="";
              this.$store.dispatch('signin',{
                  username:vm.username ,
                  email:vm.email

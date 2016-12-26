@@ -20,6 +20,16 @@ export  default {
 
     },
     /*
+    *
+    * 检查是否登录
+    * */
+    checkLogin:function (cb) {
+        axios.get(baseUrl+'signin').then(function (res) {
+            console.log(res.data);
+            cb(res.data)
+        });
+    },
+    /*
      * 登录
      * */
 

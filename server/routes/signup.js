@@ -3,7 +3,7 @@ var router = express.Router();
 
 var User = require('../model/user');
 
-// var checkNotLogin = require('../middlewares/check').checkNotLogin;
+
 
 // GET /signup 注册页
 router.get('/', function(req, res, next) {
@@ -16,7 +16,8 @@ router.post('/', function(req, res, next) {
 
     User.find({username:req.body.username},function (err, doc) {
         if(!err){
-            console.log(doc)
+
+
             if(doc.length>0){
                 res.json({
                     status:301,
@@ -35,6 +36,9 @@ router.post('/', function(req, res, next) {
                         }else{
                             user.save(function (err) {
                                 if(!err){
+
+                                    req.session.user = doc[0];
+                                    console.log(req.session.user)
                                     res.json({
                                         status:200,
                                         msg:"注册成功",
