@@ -9,6 +9,23 @@ module.exports = {
             next();
         }
 
+    },
+    ensureAuthorized:function (req, res, next) {
+        var bearerToken;
+        var bearerHeader = req.headers["authorization"];
+        var bearer = bearerHeader.split(" ");
+        bearerToken = bearer[1];
+    
+        if (!(bearerToken == 'undefined')) {
+            req.token = bearerToken;
+            next();
+        } else {
+            res.json({
+                status: false,
+                data: {}
+            });
+        }
     }
+
 
 };

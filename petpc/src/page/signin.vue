@@ -44,7 +44,15 @@
       }
     },
 
-     mounted:function () {
+     created:function () {
+            const vm = this;
+
+            this.$store.dispatch('checkedLogin').then(function () {
+                if(vm.$store.getters.isLogin){
+                    vm.$router.push('/index');
+                }
+            })
+
 
      },
 
@@ -54,9 +62,9 @@
              let vm = this;
              switch (this.$store.getters.signStatus){
                  case 200 :t = "登录成功";
-                     vm.$store.dispatch('setSignStatus',true);
+
                       setTimeout(function () {
-//                          vm.$router.push('/');
+                          vm.$router.push('/');
                      },500);break;
                  case 301 :t = "邮箱或密码错误";break;
              }

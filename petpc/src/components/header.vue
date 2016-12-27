@@ -7,10 +7,15 @@
                <a><span class="glyphicon glyphicon-plus"></span></a>
                <a><span class="glyphicon glyphicon-search"></span></a>
                <a><span class="glyphicon glyphicon-bell"></span></a>
-               <a class="img-box">
+               <a class="img-box" @click = "">
                    <img src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
                </a>
            </div>
+           <ul class="list-box">
+               <li>我的主页</li>
+               <li>我的收藏</li>
+               <li>我的文章</li>
+           </ul>
            <div class="info" v-show = !isLogin>
 
                <a><span class="glyphicon glyphicon-search"></span></a>

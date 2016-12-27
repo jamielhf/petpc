@@ -3,7 +3,7 @@
 <template>
 
 <div class="p-index">
-    <com-nav :isLogin = isLogin></com-nav>
+    <com-nav ></com-nav>
     <com-content></com-content>
 </div>
 

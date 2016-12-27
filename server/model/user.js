@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var _User = new Schema({
     username : String,
     email : String,
-    password : String
+    password : String,
+    token:String
 });
 // export them
 

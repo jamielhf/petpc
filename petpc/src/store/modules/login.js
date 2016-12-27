@@ -11,7 +11,9 @@ const state = {
 }
 
 const getters = {
-    signStatus : state => state.status
+    signStatus : state => state.status,
+    isLogin : state => state.loginStatus,
+    getToken : state => state.info.getToken
 }
 
 
@@ -26,9 +28,7 @@ const actions = {
             commit(types.SIGN_STATUS,res)
         })
     },
-    setSignStatus({commit},data){
-        commit(types.SET_SIGN_STATUS,data);
-    },
+  
     checkedLogin({commit}){
        api.checkLogin(function (res) {
            commit(types.SET_SIGN_STATUS,res);
@@ -40,7 +40,11 @@ const mutations = {
     [types.SIGN_STATUS](state,res){
         state.status = res.status;
         state.info = res.data;
-    },
+        if(state.info){
+            state.loginStatus = true
+        }
+    }
+    ,
 
     [types.SET_SIGN_STATUS](state,res){
         state.loginStatus = res.status;

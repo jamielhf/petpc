@@ -6,6 +6,10 @@ import axios from 'axios';
 
 const baseUrl = "http://localhost:3000/";
 
+let token = localStorage.token;
+
+axios.defaults.headers.common['Authorization'] = 'Bearer ' +token;
+
 export  default {
 
     /*
@@ -15,6 +19,10 @@ export  default {
 
         axios.post(baseUrl+'signup',data).then(function (res) {
             console.log(res.data);
+            if(res.data.status==200){
+                localStorage.token = res.data.data.token;
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' +res.data.data.token;
+            }
                 cb(res.data)
         });
 
@@ -24,8 +32,8 @@ export  default {
     * 检查是否登录
     * */
     checkLogin:function (cb) {
-        axios.get(baseUrl+'signin').then(function (res) {
-            console.log(res.data);
+        axios.get(baseUrl+'signin',{headers: {'X-Requested-With': 'XMLHttpRequest'}}).then(function (res) {
+
             cb(res.data)
         });
     },
@@ -37,6 +45,10 @@ export  default {
 
         axios.post(baseUrl+'signin',data).then(function (res) {
             console.log(res.data);
+            if(res.data.status==200){
+                localStorage.token = res.data.data.token;
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' +res.data.data.token;
+            }
             cb(res.data)
         });
 

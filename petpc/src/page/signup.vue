@@ -45,8 +45,13 @@ require('../css/logup');
           tips2:''
       }
     },
-     created:function(){
-         this.$store.dispatch('checkedLogin');
+     created:function () {
+         const vm = this;
+         this.$store.dispatch('checkedLogin').then(function () {
+             if(vm.$store.getters.isLogin){
+                 vm.$router.push('/index');
+             }
+         })
      },
      computed:{
          tips:function () {
@@ -55,9 +60,9 @@ require('../css/logup');
              console.log(123);
              switch (this.$store.getters.signStatus){
                  case 200 :t = "注册成功";
-                     vm.$store.dispatch('setSignStatus',true)
+
                  setTimeout(function () {
-//                     vm.$router.push('/');
+                     vm.$router.push('/');
                  },500);break;
                  case 301 :t = "换个用户名吧，这个已经存在了";break;
                  case 302 :t = "邮件已经被人用了~";break;

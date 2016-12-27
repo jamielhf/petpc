@@ -2,13 +2,10 @@ var express = require('express');
 var mongoose = require('mongoose');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var flash = require('connect-flash');
+var jwt    = require("jsonwebtoken");
 var config = require('config-lite');
 var routes = require('./routes');
 var  ejs = require('ejs');
@@ -23,41 +20,42 @@ app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 
 
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// session 中间件
-app.use(session({
-  name: config.session.key,// 设置 cookie 中保存 session id 的字段名称
-  secret: config.session.secret,// 通过设置 secret 来计算 hash 值并放在 cookie 中，使产生的 signedCookie 防篡改
-  cookie: {
-    maxAge: config.session.maxAge// 过期时间，过期后 cookie 中的 session id 自动删除
-  },
-  store: new MongoStore({// 将 session 存储到 mongodb
-    url: config.mongodb// mongodb 地址
-  })
-}));
-// flash 中间价，用来显示通知
 
-app.use(flash());
 
 //跨域访问
 //allow custom header and CORS
-app.all('*',function (req, res, next) {
+// app.all('*',function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
+//   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+//
+//   if (req.method == 'OPTIONS') {
+//     res.sendStatus(200); //让options请求快速返回
+//   }
+//   else {
+//     next();
+//   }
+// });
+app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-
   if (req.method == 'OPTIONS') {
-    res.send(200); //让options请求快速返回
+    res.sendStatus(200); //让options请求快速返回
   }
   else {
     next();
   }
 });
+
+
+
 // 路由
 routes(app);
 
