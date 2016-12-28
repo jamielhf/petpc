@@ -7,14 +7,15 @@
                <a><span class="glyphicon glyphicon-plus"></span></a>
                <a><span class="glyphicon glyphicon-search"></span></a>
                <a><span class="glyphicon glyphicon-bell"></span></a>
-               <a class="img-box" @click = "">
+               <a class="img-box" @click = "detail">
                    <img src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
                </a>
            </div>
-           <ul class="list-box">
-               <li>我的主页</li>
-               <li>我的收藏</li>
-               <li>我的文章</li>
+
+           <ul class="list-group"  >
+               <li class="list-group-item">我的主页</li>
+               <li class="list-group-item">我的收藏</li>
+               <li class="list-group-item">我的文章</li>
            </ul>
            <div class="info" v-show = !isLogin>
 
@@ -34,14 +35,13 @@ require('../css/header.scss');
     export default{
         data(){
             return{
-
+                isShow:false
             }
         },
-        mounted:function () {
-            console.log(this.$store.state.login)
-        },
-        updated:function () {
-            console.log(this.isLogin)
+        methods:{
+          detail:function () {
+              this.isShow = !this.isShow;
+          }
         },
         props:{
             isLogin:{
