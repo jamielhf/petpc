@@ -18,10 +18,6 @@ export default {
 
     }
   },
-  created:function () {
-    this.$store.dispatch('checkedLogin')
-  },
-
   computed:{
     isLogin:function () {
 

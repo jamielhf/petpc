@@ -11,6 +11,7 @@
     margin:0 auto;
   }
   .info{
+    position: relative;
     height: 80px;
     line-height: 80px;
     float: right;
@@ -45,14 +46,17 @@
   .list-group{
     position: absolute;
     z-index: 4;
-    right: 116px;
+    right: 0px;
     top:80px;
-    opacity: 0;
+    width: 120px;
     transition: opacity .5s;
     li{
       color: #999;
       cursor: pointer;
-      padding: 10px 25px;
+      padding: 0 25px;
+      height: 45px;
+      line-height: 45px;
+      box-sizing: border-box;
       &:hover{
         transition: all .5s;
         background-color: #f9f9f9;

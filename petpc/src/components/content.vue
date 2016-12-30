@@ -3,9 +3,9 @@
         <div class="content-top">
             <ul class="top-left clearfix">
                 <li>最新</li>
-                <li>热门</li>
-                <li>已完成</li>
-                <li>进行中</li>
+                <li>最多收藏</li>
+                <li>完成领养</li>
+                <li>未被领养</li>
             </ul>
 
         </div>

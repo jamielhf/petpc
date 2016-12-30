@@ -39,15 +39,25 @@ router.post('/', function(req, res, next) {
 router.get('/',ensureAuthorized,function (req, res, next) {
 
         User.findOne({token: req.token}, function(err, user) {
+            console.log(user);
             if (!err) {
-                res.json({
-                    status: true,
-                    data: {
-                        email:user.email,
-                        token:user.token,
-                        username:user.username
-                    }
-                });
+                if(user){
+                    res.json({
+                        status: true,
+                        data: {
+                            email:user.email,
+                            token:user.token,
+                            username:user.username
+                        }
+                    });
+                }else{
+                    res.json({
+                        status: false,
+                        data: {}
+                    });
+                }
+
+
             }
         });
 

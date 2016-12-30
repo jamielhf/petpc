@@ -15,8 +15,6 @@
                     <input type="password" v-model="password" class="form-control" id="inputPassword3" placeholder="密码">
                 </div>
             </div>
-
-
             <button type="button" @click ="submit" class="btn btn-primary  btn-default btn-block">登录</button>
             <router-link to="/signup"  class="link">去注册</router-link>
 
@@ -44,18 +42,6 @@
       }
     },
 
-     created:function () {
-            const vm = this;
-
-            this.$store.dispatch('checkedLogin').then(function () {
-                if(vm.$store.getters.isLogin){
-                    vm.$router.push('/index');
-                }
-            })
-
-
-     },
-
      computed:{
          tips:function () {
              let t ="";
@@ -71,6 +57,7 @@
              return t;
 
          }
+
      },
      methods:{
          submit:function () {
@@ -89,7 +76,11 @@
                  email:vm.email
              });
 
+         },
+         checkLogin:function () {
+            console.log(123);
          }
+
      }
  }
 

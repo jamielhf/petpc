@@ -10,13 +10,15 @@
                <a class="img-box" @click = "detail">
                    <img src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
                </a>
+               <ul class="list-group"  v-show=isShow>
+                   <li class="list-group-item">我的主页</li>
+                   <li class="list-group-item">我的收藏</li>
+                   <li class="list-group-item">我的文章</li>
+                   <li class="list-group-item" @click="signout">登出</li>
+               </ul>
            </div>
 
-           <ul class="list-group"  >
-               <li class="list-group-item">我的主页</li>
-               <li class="list-group-item">我的收藏</li>
-               <li class="list-group-item">我的文章</li>
-           </ul>
+
            <div class="info" v-show = !isLogin>
 
                <a><span class="glyphicon glyphicon-search"></span></a>
@@ -41,6 +43,9 @@ require('../css/header.scss');
         methods:{
           detail:function () {
               this.isShow = !this.isShow;
+          },
+          signout:function () {
+                this.$store.dispatch('signout');
           }
         },
         props:{

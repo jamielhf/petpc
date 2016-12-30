@@ -33,7 +33,7 @@ export  default {
     * */
     checkLogin:function (cb) {
         axios.get(baseUrl+'signin',{headers: {'X-Requested-With': 'XMLHttpRequest'}}).then(function (res) {
-
+            console.log(res.data)
             cb(res.data)
         });
     },

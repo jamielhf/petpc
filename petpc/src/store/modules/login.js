@@ -30,10 +30,21 @@ const actions = {
     },
   
     checkedLogin({commit}){
+
        api.checkLogin(function (res) {
-           commit(types.SET_SIGN_STATUS,res);
+
+            commit(types.SET_SIGN_STATUS,res);
+
        })
+    },
+
+    signout({commit}){
+        localStorage.token = null;
+        commit(types.SET_SIGN_STATUS,{status:false,data:{}});
+        commit(types.SIGN_STATUS,{status:false,data:{}});
     }
+
+
 }
 
 const mutations = {
@@ -47,9 +58,13 @@ const mutations = {
     ,
 
     [types.SET_SIGN_STATUS](state,res){
+
         state.loginStatus = res.status;
+
         state.info = res.data;
-    }
+    },
+
+
 }
 
 
