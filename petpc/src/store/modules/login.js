@@ -39,9 +39,10 @@ const actions = {
     },
 
     signout({commit}){
-        localStorage.token = null;
+        localStorage.token = '';
         commit(types.SET_SIGN_STATUS,{status:false,data:{}});
-        commit(types.SIGN_STATUS,{status:false,data:{}});
+        commit(types.SIGN_STATUS,{status:false,data:''});
+
     }
 
 
@@ -51,16 +52,20 @@ const mutations = {
     [types.SIGN_STATUS](state,res){
         state.status = res.status;
         state.info = res.data;
-        if(state.info){
-            state.loginStatus = true
+        console.log(res)
+        if(res.data!=''){
+            state.loginStatus = true;
         }
+
     }
     ,
 
     [types.SET_SIGN_STATUS](state,res){
 
         state.loginStatus = res.status;
-
+        if(!state.loginStatus){
+            localStorage.token = '';
+        }
         state.info = res.data;
     },
 

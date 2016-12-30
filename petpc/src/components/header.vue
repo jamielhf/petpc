@@ -1,7 +1,7 @@
 <template>
-    <div class="m-header">
+    <div class="m-header" >
        <div class="content">
-            <a>logo</a>
+           <router-link to="/">logo</router-link>
            <div class="info" v-show = isLogin>
 
                <a><span class="glyphicon glyphicon-plus"></span></a>
@@ -11,10 +11,11 @@
                    <img src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
                </a>
                <ul class="list-group"  v-show=isShow>
-                   <li class="list-group-item">我的主页</li>
-                   <li class="list-group-item">我的收藏</li>
-                   <li class="list-group-item">我的文章</li>
-                   <li class="list-group-item" @click="signout">登出</li>
+                   <li class="list-group-item" @click = "detail"><router-link to="/user/setting">我的主页</router-link></li>
+                   <li class="list-group-item" @click = "detail">我的收藏</li>
+                   <li class="list-group-item" @click = "detail">我的文章</li>
+                   <li class="list-group-item" @click = "detail">我的宠物</li>
+                   <li  class="list-group-item" @click="signout">登出</li>
                </ul>
            </div>
 
@@ -45,6 +46,7 @@ require('../css/header.scss');
               this.isShow = !this.isShow;
           },
           signout:function () {
+              this.isShow = !this.isShow;
                 this.$store.dispatch('signout');
           }
         },

@@ -7,12 +7,24 @@ import App from '../App.vue'
 import Index from '../page/index.vue'
 import Signup from '../page/signup.vue'
 import Signin from '../page/signin.vue'
+import User from '../page/user.vue'
 
 Vue.use(VueRouter);
 
-const checkLogin = (to, from, next) => {
+const isLogin = (to, from, next) => {
     let token = localStorage.getItem('token');
-    console.log(!token)
+
+    if (token) {
+        console.log(132);
+        next({
+            path: '/index'
+        })
+    } else {
+        next()
+    }
+}
+const notLogin = (to, from, next) => {
+    let token = localStorage.getItem('token');
     if (!token) {
         console.log(132);
         next({
@@ -23,25 +35,30 @@ const checkLogin = (to, from, next) => {
     }
 }
 
-
 const routes = [
     { path: '/',redirect: '/index', component: App,
         children: [
             {path: 'index', component: Index},
+            {
+                path: 'user/setting',
+                component: User,
+                beforeEnter: notLogin,
+            },
         ]
     },
 
     {
         path: '/signup',
         component: Signup,
-        beforeEnter: checkLogin
+        beforeEnter: isLogin
     },
     {
         path: '/signin',
         component: Signin,
-        beforeEnter: checkLogin
+        beforeEnter: isLogin
     },
-    {path:'*',redirect: '/index'},
+
+    // {path:'*',redirect: '/index'},
 
 ];
 

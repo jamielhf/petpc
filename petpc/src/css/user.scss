@@ -1,0 +1,72 @@
+@import "base/min";
+
+.p-setting{
+  position: relative;
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px 80px;
+  background-color: #fff;
+  .m-list-box{
+    position: relative;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+    color: #666;
+    h3{
+      font-size: 22px;
+      line-height: 1.5;
+      color: #333;
+    }
+    img{
+      width: 80px;
+      height: 80px;
+      border-radius: 100%;
+      margin-left: 30px;
+    }
+    .u-p1{
+      position: absolute;
+      display: inline-block;
+      font-size: 14px;
+      margin-left: 20px;
+      margin-top: 20px;
+    }
+    .u-btn{
+      cursor: pointer;
+      position: absolute;
+      margin-left: 20px;
+      margin-top: 50px;
+      display: inline-block;
+      padding: 5px;
+      border-radius: 4px;
+      background-color: $color;
+      color: #fff;
+      font-size: 14px;
+    }
+    input{
+      margin-left: 30px;
+      border:0;
+      font-size: 16px;
+      color: #666;
+    }
+
+  }
+  .glyphicon-pencil,.cancel{
+    position: relative;
+    color: $color;
+    cursor: pointer;
+    margin-right: 15px;
+    float: right;
+  }
+  .u-edit{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    color: $color;
+    margin-top: -10px;
+    .edit{
+      cursor: pointer;
+      margin-right: 40px;
+    }
+  }
+
+
+}

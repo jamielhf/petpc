@@ -45,14 +45,7 @@ require('../css/logup');
           tips2:''
       }
     },
-     created:function () {
-         const vm = this;
-         this.$store.dispatch('checkedLogin').then(function () {
-             if(vm.$store.getters.isLogin){
-                 vm.$router.push('/index');
-             }
-         })
-     },
+
      computed:{
          tips:function () {
              let t ="";
