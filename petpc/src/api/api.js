@@ -52,6 +52,17 @@ export  default {
             cb(res.data)
         });
 
+    },
+    /*
+    *
+    * 修改用户名
+    *
+    * */
+    changeInfo:function (data, cb) {
+        console.log(data);
+        axios.post(baseUrl+'user',data).then(function (res) {
+            console.log(res.data);
+        })
     }
 
 }

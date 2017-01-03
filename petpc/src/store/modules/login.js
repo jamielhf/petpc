@@ -13,7 +13,8 @@ const state = {
 const getters = {
     signStatus : state => state.status,
     isLogin : state => state.loginStatus,
-    getToken : state => state.info.getToken
+    getToken : state => state.info.getToken,
+    getInfo : state => state.info
 }
 
 
@@ -43,6 +44,14 @@ const actions = {
         commit(types.SET_SIGN_STATUS,{status:false,data:{}});
         commit(types.SIGN_STATUS,{status:false,data:''});
 
+    },
+    changeInfo({commit},data){
+        api.changeInfo(data,function (res) {
+            return
+            commit(types.SET_USER_INFO,res);
+
+        })
+
     }
 
 
@@ -59,7 +68,9 @@ const mutations = {
 
     }
     ,
-
+    [types.SET_USER_INFO](state,res){
+        
+    },
     [types.SET_SIGN_STATUS](state,res){
 
         state.loginStatus = res.status;

@@ -18,7 +18,7 @@ module.exports = {
     
         if (!(bearerToken == 'undefined')) {
             req.token = bearerToken;
-            console.log(req.token)
+          
             next();
         } else {
             res.json({

@@ -1,14 +1,17 @@
 <template>
   <div >
+   <comLoading></comLoading>
     <com-header :isLogin = isLogin></com-header>
 
       <router-view></router-view>
+
   </div>
 </template>
 
 <script>
 
   import header from './components/header.vue'
+  import loading from './components/loading.vue'
 
   require('./css/style.scss');
 export default {
@@ -28,7 +31,8 @@ export default {
     }
   },
   components:{
-    comHeader:header
+    comHeader:header,
+    comLoading:loading
   }
 
 }
