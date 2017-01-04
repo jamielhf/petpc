@@ -1,5 +1,5 @@
 <template>
-    <div class="loading-bar opacity-fade-transition z-none">
+    <div class="loading-bar opacity-fade-transition " :class = "{'z-none':!isLoading}">
         <div class="m-progress"></div>
     </div>
 </template>
@@ -10,6 +10,11 @@ require('../css/loading.scss');
         data(){
             return{
 
+            }
+        },
+        computed:{
+            isLoading(){
+                return this.$store.getters.isLoading
             }
         }
 

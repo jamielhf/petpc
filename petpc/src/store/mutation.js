@@ -9,7 +9,7 @@
 * */
 
 export const SET_LOADING = 'SET_LOADING'
-
+export const SET_TIPS = 'SET_TIPS'
 
 /*
 *
@@ -24,3 +24,4 @@ export const SET_SIGN_STATUS = 'SET_SIGN_STATUS'
 * */
 
 export const SET_USER_INFO = 'SET_USER_INFO'
+export const SET_USER_HEAD = 'SET_USER_HEAD'

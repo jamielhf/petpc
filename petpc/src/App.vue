@@ -1,6 +1,7 @@
 <template>
   <div >
    <comLoading></comLoading>
+   <comTips></comTips>
     <com-header :isLogin = isLogin></com-header>
 
       <router-view></router-view>
@@ -12,6 +13,7 @@
 
   import header from './components/header.vue'
   import loading from './components/loading.vue'
+  import tips from './components/tips.vue'
 
   require('./css/style.scss');
 export default {
@@ -32,6 +34,7 @@ export default {
   },
   components:{
     comHeader:header,
+    comTips:tips,
     comLoading:loading
   }
 

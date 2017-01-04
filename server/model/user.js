@@ -5,7 +5,8 @@ var _User = new Schema({
     username : String,
     email : String,
     password : String,
-    token:String
+    token:String,
+    head:String
 });
 // export them
 

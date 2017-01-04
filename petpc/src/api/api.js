@@ -60,8 +60,22 @@ export  default {
     * */
     changeInfo:function (data, cb) {
         console.log(data);
-        axios.post(baseUrl+'user',data).then(function (res) {
+        setTimeout(function () {
+            axios.post(baseUrl+'user',data).then(function (res) {
+                console.log(res.data);
+                cb(res.data)
+            })
+        },1000)
+
+    },
+    /*
+    *
+    * 修改头像
+    * */
+    setHead:function (data,cb) {
+        axios.post(baseUrl+'user/head',data,{'content-type': 'multipart/form-data'}).then(function (res) {
             console.log(res.data);
+            cb(res.data)
         })
     }
 
@@ -74,5 +88,4 @@ export  default {
 //             cb(res.data.data.data);
 //         }, 300)
 //     }
-//
 // });

@@ -24,7 +24,7 @@
         <input id="username" :value=username @focus = "focus(0,$event)" :class = "{color6:isEdit[0]}">
         <div class="u-edit">
                 <span v-show = "isEdit[0]" @click="edit(0)"  class="cancel ">取消</span>
-                <span v-show = "isEdit[0]" @click = "saveName" >保存</span>
+                <span v-show = "isEdit[0]" @click = "saveName(0)" >保存</span>
                 <span v-show = "!isEdit[0]" @click="edit(0)" class="edit" >编辑</span>
         </div>
 
@@ -53,26 +53,25 @@
     <div class="m-list-box">
 
         <span>旧密码</span>
-        <input placeholder="输入当前密码">
+        <input type="password" v-model="pwd" placeholder="输入当前密码">
 
 
     </div>
     <div class="m-list-box">
 
         <span>新密码</span>
-        <input  placeholder="设置6位或以上的密码">
+        <input type="password" v-model = "npwd"  placeholder="设置6位或以上的密码">
 
 
     </div>
     <div class="m-list-box">
-
 
         <span>确认新密码</span>
-        <input  placeholder="确认新密码">
+        <input type="password" v-model = "npwd2"   placeholder="确认新密码">
 
     </div>
     <div class="m-list-box">
-        <a class="btn btn-primary  btn-default btn-block">保存修改</a>
+        <a class="btn btn-primary  btn-default btn-block" @click = "savePassword">保存修改</a>
         </div>
 </div>
 
@@ -92,13 +91,16 @@ require('../css/user');
               0:false,
 //              1:false,
           },
-          file:'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg'
+          file:'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg',
+          pwd:'',
+          npwd:'',
+          npwd2:'',
       }
     },
 
      computed:{
          username:function () {
-           let a = this.$store.getters.getInfo.username;
+            let a = this.$store.getters.getInfo.username;
             return a
         }
      },
@@ -118,9 +120,12 @@ require('../css/user');
 
          },
          upload:function (event) {
+             let vm =this;
              let file = event.target.files[0];
              console.log(event.target.files[0]);
-             let vm =this;
+             let data = new FormData();
+             data.append("file",file);
+             console.log(data.get('file'))
              if(file){
                  var fr = new FileReader();
                  fr.onloadend = function(e) {
@@ -130,17 +135,28 @@ require('../css/user');
              }
 
 
+             this.$store.dispatch('setHead',data)
 
          },
          clickImg:function () {
             document.querySelector('#file').click();
          },
-         saveName:function () {
+         saveName:function (num) {
                 let username = document.querySelector('#username').value;
                 if(username==this.username){
-                    return false
+                    this.isEdit[num] = false;
+                    return
                 }
-                this.$store.dispatch('changeInfo',{username:username})
+                 this.$store.dispatch('changeInfo',{username:username});
+                 this.isEdit[num] = false;
+         },
+         savePassword:function () {
+                let vm = this;
+               if(this.npwd != this.npwd2){
+                   this.$store.commit('SET_TIPS','新密码前后输入不一致');
+                   return
+               }
+             this.$store.dispatch('changeInfo',{password:this.pwd,nPassword:this.npwd})
          }
 
      }
