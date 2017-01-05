@@ -8,6 +8,7 @@ import Index from '../page/index.vue'
 import Signup from '../page/signup.vue'
 import Signin from '../page/signin.vue'
 import User from '../page/user.vue'
+import Write from '../page/write.vue'
 
 Vue.use(VueRouter);
 
@@ -44,6 +45,11 @@ const routes = [
                 component: User,
                 beforeEnter: notLogin,
             },
+            {
+                path: '/write',
+                component: Write,
+                beforeEnter: notLogin
+            },
         ]
     },
 
@@ -57,6 +63,7 @@ const routes = [
         component: Signin,
         beforeEnter: isLogin
     },
+
 
     // {path:'*',redirect: '/index'},
 
