@@ -1,14 +1,20 @@
 <template>
     <div class="g-write">
-        <quill-editor ref="myTextEditor"
-                      v-model="content"
-                      :config="editorOption"
-                      @blur="onEditorBlur($event)"
-                      @focus="onEditorFocus($event)"
-                      @ready="onEditorReady($event)"
-                      @change="onEditorChange($event)">>
-        </quill-editor>
-            <a class="btn">保存</a>
+
+        <input class="title " v-model = 'title' placeholder="标题"/>
+
+        <div class="m-editor">
+            <quill-editor ref="myTextEditor"
+                          v-model="content"
+                          :config="editorOption"
+                          @blur="onEditorBlur($event)"
+                          @focus="onEditorFocus($event)"
+                          @ready="onEditorReady($event)"
+                          @change="onEditorChange($event)">>
+            </quill-editor>
+        </div>
+
+            <a class="btn btn-primary  btn-default btn-block">投递文章</a>
     </div>
 
 </template>
@@ -27,7 +33,8 @@
                 content: '<h2>I am Example</h2>',
                 editorOption: {
                     // something config
-                }
+                },
+                title:''
             }
         },
         components: {
