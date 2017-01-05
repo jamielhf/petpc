@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div @click = "hidden">
    <comLoading></comLoading>
    <comTips></comTips>
     <com-header :isLogin = isLogin></com-header>
@@ -30,6 +30,11 @@ export default {
     isLogin:function () {
 
       return this.$store.state.login.loginStatus;
+    }
+  },
+  methods:{
+    hidden(){
+      
     }
   },
   components:{

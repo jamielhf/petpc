@@ -12,7 +12,7 @@ import User from '../page/user.vue'
 Vue.use(VueRouter);
 
 const isLogin = (to, from, next) => {
-    let token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('token');
 
     if (token) {
         console.log(132);
@@ -24,7 +24,7 @@ const isLogin = (to, from, next) => {
     }
 }
 const notLogin = (to, from, next) => {
-    let token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('token');
     if (!token) {
         console.log(132);
         next({
@@ -74,7 +74,7 @@ const router = new VueRouter({
 
 
 // router.beforeEach(function (transition) {
-//     if (!localStorage.getItem('token')) {
+//     if (!sessionStorage.getItem('token')) {
 //         next({
 //             path: '/login',
 //             query: { redirect: to.fullPath }

@@ -5,11 +5,11 @@ var multer  = require('multer');
 var t =  new Date();
 var m = t.getMonth()+1>=10?t.getMonth()+1:(0+(t.getMonth()+1).toString());
 var d = t.getDate()+1>=10?t.getDate()+1:(0+t.getDate().toString());
-var dir = t.getFullYear().toString()+m+d
-
+var dir = 'uploads/'+t.getFullYear().toString()+m+d+'/'
+console.log(dir);
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/'+dir+'/')
+        cb(null, 'uploads/')
     },
     filename: function (req, file, cb) {
         var fileFormat = (file.originalname).split(".");

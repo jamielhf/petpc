@@ -42,13 +42,10 @@ router.get('/',ensureAuthorized,function (req, res, next) {
         
             if (!err) {
                 if(user){
+                    user.password = '';
                     res.json({
                         status: true,
-                        data: {
-                            email:user.email,
-                            token:user.token,
-                            username:user.username
-                        }
+                        data:user
                     });
                 }else{
                     res.json({

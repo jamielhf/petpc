@@ -47,14 +47,11 @@ router.post('/', function(req, res, next) {
                     user.token = jwt.sign(user, 'pet');
                     user.save(function(err, user1) {
                         if(!err){
+                            user1.password = ''
                             res.json({
                                 status:200,
                                 msg:"注册成功",
-                                data:{
-                                    username:req.body.username,
-                                    email:req.body.email,
-                                    token:user1.token
-                                }
+                                data:user1
                             })
                         }
                     });

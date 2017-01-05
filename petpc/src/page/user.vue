@@ -91,7 +91,7 @@ require('../css/user');
               0:false,
 //              1:false,
           },
-          file:'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg',
+//          file:'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg',
           pwd:'',
           npwd:'',
           npwd2:'',
@@ -102,7 +102,15 @@ require('../css/user');
          username:function () {
             let a = this.$store.getters.getInfo.username;
             return a
-        }
+         },
+         file:function () {
+             console.log(this.$store.getters.getInfo.head)
+             if(this.$store.getters.getInfo.head){
+                 return this.$store.getters.getInfo.head
+             }else{
+                 return 'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg'
+             }
+         }
      },
      components:{
 
@@ -122,10 +130,9 @@ require('../css/user');
          upload:function (event) {
              let vm =this;
              let file = event.target.files[0];
-             console.log(event.target.files[0]);
              let data = new FormData();
              data.append("file",file);
-             console.log(data.get('file'))
+
              if(file){
                  var fr = new FileReader();
                  fr.onloadend = function(e) {
@@ -133,7 +140,6 @@ require('../css/user');
                  };
                  fr.readAsDataURL(file);
              }
-
 
              this.$store.dispatch('setHead',data)
 

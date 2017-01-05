@@ -8,13 +8,12 @@
                <a><span class="glyphicon glyphicon-search"></span></a>
                <a><span class="glyphicon glyphicon-bell"></span></a>
                <a class="img-box" @click = "detail">
-                   <img src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
+                   <img :src=file>
                </a>
                <ul class="list-group"  v-show=isShow>
                    <li class="list-group-item" @click = "detail"><router-link to="/user/setting">我的主页</router-link></li>
                    <li class="list-group-item" @click = "detail">我的收藏</li>
                    <li class="list-group-item" @click = "detail">我的文章</li>
-                   <li class="list-group-item" @click = "detail">我的宠物</li>
                    <li  class="list-group-item" @click="signout">登出</li>
                </ul>
            </div>
@@ -48,7 +47,8 @@ require('../css/header.scss');
           signout:function () {
               this.isShow = !this.isShow;
                 this.$store.dispatch('signout');
-          }
+          },
+
         },
         props:{
             isLogin:{
@@ -58,6 +58,15 @@ require('../css/header.scss');
         computed:{
             a:function () {
                 return this.isLogin
+            },
+            file:function () {
+                console.log(this.$store.getters.getInfo.head)
+                if(this.$store.getters.getInfo.head){
+                    return this.$store.getters.getInfo.head
+                }else{
+                    return 'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg'
+                }
+
             }
         }
 

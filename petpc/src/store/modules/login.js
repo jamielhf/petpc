@@ -41,7 +41,7 @@ const actions = {
     },
 
     signout({commit}){
-        localStorage.token = '';
+        sessionStorage.token = '';
         commit(types.SET_SIGN_STATUS,{status:false,data:{}});
         commit(types.SIGN_STATUS,{status:false,data:''});
 
@@ -61,8 +61,13 @@ const actions = {
 
     },
     setHead({commit},data){
+        commit(types.SET_LOADING,true);
         api.setHead(data,function (res) {
-            console.log(res);
+            commit(types.SET_LOADING,false);
+            if(res.status==200){
+                commit(types.SET_USER_INFO,res.data);
+            }
+            commit(types.SET_TIPS,res.msg);
         })
     }
 
@@ -88,7 +93,7 @@ const mutations = {
 
         state.loginStatus = res.status;
         if(!state.loginStatus){
-            localStorage.token = '';
+            sessionStorage.token = '';
         }
         state.info = res.data;
     },
