@@ -1,7 +1,68 @@
 <template>
     <div class="g-write">
+        <div class="c-type">
+            <h3>标题</h3>
+        </div>
+        <div class="c-type">
+            <input class="title " v-model = 'title' placeholder="输入标题"/>
+        </div>
+        <div class="c-type">
+            <h3>宠物信息</h3>
+        </div>
+        <div class="c-type">
+            <p>地区：</p>
+            <select id="cmbProvince" name="cmbProvince"></select>
+            <select id="cmbCity" name="cmbCity"></select>
+            <select id="cmbArea" name="cmbArea"></select>
+        </div>
+        <div class="c-type">
+            <p>种类：</p>
+            <span @click ="selectType" type = "0" class="z-active" >全部</span>
+            <span @click ="selectType" type = "1"  >狗狗</span>
+            <span @click ="selectType"  type = "2" >猫猫</span>
+            <span @click ="selectType"  type = "3" >兔子</span>
+            <span @click ="selectType"  type = "4" >鼠类</span>
+            <span @click ="selectType" type = "5" >其他</span>
+        </div>
+        <div class="c-type">
+            <p>性别：</p>
+            <span class="z-active">GG</span>
+            <span>MM</span>
+        </div>
+        <div class="c-type">
+            <p>年龄：</p>
+            <select >
+                <option v-for="n in 11">{{ n }}个月</option>
+                <option v-for="d in 20">{{ d }}岁</option>
+            </select>
+        </div>
+        <div class="c-type">
+            <p>来源：</p>
+            <span class="z-active">家养</span>
+            <span>流浪</span>
+        </div>
 
-        <input class="title " v-model = 'title' placeholder="标题"/>
+        <div class="c-type ">
+            <p>绝育：</p>
+            <span >是</span>
+            <span>否</span>
+            <span class="z-active">不详</span>
+        </div>
+        <div class="c-type">
+            <p>免疫：</p>
+            <span >是</span>
+            <span>否</span>
+            <span class="z-active">不详</span>
+        </div>
+        <div class="c-type">
+            <p>体内驱虫：</p>
+            <span >是</span>
+            <span>否</span>
+            <span class="z-active">不详</span>
+        </div>
+        <div class="c-type last">
+            <h3>宠物描述以及领养要求</h3>
+        </div>
 
         <div class="m-editor">
             <quill-editor ref="myTextEditor"
@@ -14,7 +75,7 @@
             </quill-editor>
         </div>
 
-            <a class="btn btn-primary  btn-default btn-block">投递文章</a>
+        <a @click = "saveArticle" class="btn btn-primary  btn-default btn-block">投递领养信息</a>
     </div>
 
 </template>
@@ -22,6 +83,7 @@
 
 
 <script>
+   import {addressInit} from '../js/lib/address';
 
 
     import { quillEditor } from 'vue-quill-editor'
@@ -30,13 +92,16 @@
     export default {
         data(){
             return{
-                content: '<h2>I am Example</h2>',
+                content: '',
                 editorOption: {
                     // something config
                 },
-                title:''
+                title:'',
+                type:2
             }
         },
+
+
         components: {
             quillEditor
         },
@@ -54,6 +119,35 @@
 //                 console.log('editor change!', editor, html, text)
                 this.content = html;
                 console.log(this.content)
+            },
+            selectType(e){
+              let d = e.target;
+
+                if(d.classList.value.indexOf('z-active')<0){
+                    d.parentNode.querySelector('.z-active').classList.remove('z-active');
+                    d.classList.add('z-active');
+                    this.type = d.getAttribute('type');
+
+                }
+
+            },
+            /*
+            *
+            * 保存文章
+            * */
+            saveArticle:function () {
+                let address = document.querySelector('#cmbProvince').value +"|"+
+                             document.querySelector('#cmbCity').value +"|"+
+                             document.querySelector('#cmbArea').value ;
+                let data = {
+                    title:this.title,
+                    type:this.type,
+                    content : this.content,
+                    address:address
+                };
+//                this.$store.dispatch('saveArticle',data)
+                console.log(data);
+
             }
         },
         // if you need to get the current editor object, you can find the editor object like this, the $ref object is a ref attribute corresponding to the dom redefined
@@ -64,8 +158,9 @@
             }
         },
         mounted() {
+            addressInit('cmbProvince', 'cmbCity', 'cmbArea');
             // you can use current editor object to do something(editor methods)
-            console.log('this is my editor', this.editor)
+//            console.log('this is my editor', this.editor)
             // this.editor to do something...
         }
     }

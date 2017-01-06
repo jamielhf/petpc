@@ -4,7 +4,7 @@
            <router-link to="/">logo</router-link>
            <div class="info" v-show = isLogin>
 
-               <a><span class="glyphicon glyphicon-plus"></span></a>
+               <router-link to="/write"><span class="glyphicon glyphicon-plus"></span></router-link>
                <a><span class="glyphicon glyphicon-search"></span></a>
                <a><span class="glyphicon glyphicon-bell"></span></a>
                <a class="img-box" @click = "detail">

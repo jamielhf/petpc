@@ -6,9 +6,10 @@ var _Article = new Schema({
     title:String,      //标题
     uid :String,      //用户id
     uHead :String,      //用户id
-    username :String,      //用户id
+    username :String,   //用户id
     tag:String,      //标签
     time:Date,      //日期
+    address:String, //地区
     comments:[
         {
             content:String,
@@ -21,9 +22,12 @@ var _Article = new Schema({
             rUsername:String,
         }
     ], //评论
+    pet:{
+        
+    },
     star:Number,    //收藏人数
     status:String, //文章状态
-    types:String  //文章类型，是否领养成功
+    types:Boolean  //文章类型，是否领养成功
 });
 // export them
 

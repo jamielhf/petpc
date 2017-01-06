@@ -9,4 +9,5 @@ module.exports = function (app) {
   app.use('/posts', require('./posts'));
   app.use('/user', require('./user'));
   app.use('/user/head', require('./upload'));
+  app.use('/article', require('./article'));
 };
