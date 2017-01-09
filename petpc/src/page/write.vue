@@ -60,6 +60,18 @@
             <span>否</span>
             <span class="z-active">不详</span>
         </div>
+        <div class="c-type">
+            <p>宠物图片：</p>
+            <div class="c-img-list">
+                <div class="c-img">
+                    <img :src="file">
+                </div>
+                <div class="c-add">
+                    <span class="glyphicon glyphicon-picture"></span>
+                    <input  type="file" id="file" @change = "upload" >
+                </div>
+            </div>
+        </div>
         <div class="c-type last">
             <h3>宠物描述以及领养要求</h3>
         </div>
@@ -97,7 +109,9 @@
                     // something config
                 },
                 title:'',
-                type:2
+                type:2,//宠物类型
+                imgArr:[],
+                file:'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg'
             }
         },
 
@@ -148,7 +162,31 @@
 //                this.$store.dispatch('saveArticle',data)
                 console.log(data);
 
-            }
+            },
+            /*
+            * 图片上传
+            *
+            * */
+            upload:function (event) {
+                let vm =this;
+                let file = event.target.files[0];
+                let data = new FormData();
+                data.append("file",file);
+
+                if(file){
+                    var fr = new FileReader();
+                    fr.onloadend = function(e) {
+                        vm.file =  e.target.result;
+                    };
+                    fr.readAsDataURL(file);
+                }
+
+//                this.$store.dispatch('setHead',data)
+
+            },
+            clickImg:function () {
+                document.querySelector('#file').click();
+            },
         },
         // if you need to get the current editor object, you can find the editor object like this, the $ref object is a ref attribute corresponding to the dom redefined
         // 如果你需要得到当前的editor对象来做一些事情，你可以像下面这样定义一个方法属性来获取当前的editor对象，实际上这里的$refs对应的是当前组件内所有关联了ref属性的组件元素对象

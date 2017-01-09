@@ -10,6 +10,7 @@ var _Article = new Schema({
     tag:String,      //标签
     time:Date,      //日期
     address:String, //地区
+    img:[],
     comments:[
         {
             content:String,
