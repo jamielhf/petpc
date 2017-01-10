@@ -36,7 +36,6 @@ fs.readdir("./uploads/user/"+dir+"/",function(err, files){
 });
 
 
-// console.log(dir);
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/user/'+dir+'/')

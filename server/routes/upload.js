@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var User = require('../model/user');
 var ensureAuthorized = require('../middlewares/check').ensureAuthorized;
-var fs = require('fs'), gm = require('gm');
-var upload = require('../lib/multerUtil');
+var fs = require('fs');
+var upload = require('../middlewares/multerHead');
 
 
 var url = 'http://localhost:3000/';

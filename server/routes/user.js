@@ -10,7 +10,7 @@ var ensureAuthorized = require('../middlewares/check').ensureAuthorized;
  * */
 router.post('/',ensureAuthorized,function (req, res, next) {
         var params =  req.body;
-        // console.log(params);
+    
         if(!params){
             res.json({
                 status: 401,

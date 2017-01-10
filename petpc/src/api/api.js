@@ -77,6 +77,16 @@ export  default {
             console.log(res.data);
             cb(res.data)
         })
+    },
+    /*
+    *
+    *articlePhoto
+    * */
+    articlePhoto(data,cb){
+        axios.post(baseUrl+'article/photo',data,{'content-type': 'multipart/form-data'}).then(function (res) {
+
+            cb(res.data)
+        })
     }
 
 }

@@ -88,7 +88,7 @@
     }
     h3{
       font-size: 20px;
-      padding: 40px 0 20px;
+      padding: 30px 0 20px;
       border-bottom: 1px solid $color;
       color:#333;
     }
@@ -130,13 +130,29 @@
     }
     .c-img-list{
       position: relative;
+      padding: 10px 0;
       img{
-        width: 150px;
-        height: 150px;
+        width: 200px;
         padding: 5px;
         border-radius: 2px;
         border:1px solid #ddd;
         box-sizing: border-box;
+      }
+      .glyphicon-remove{
+        position: absolute;
+        right: 2px;
+        top:2px;
+        z-index: 5;
+        font-size: 14px;
+        text-decoration: none;
+        &:hover{
+          color: $color
+        }
+      }
+      .img-box{
+        position: relative;
+        display: block;
+        float: left;
       }
       #file{
         width: 0;
@@ -145,11 +161,14 @@
       }
     }
     .c-add{
-      .glyphicon-picture{
+
+      .btn-add{
+        margin-top: 20px;
         box-sizing: border-box;
         border-radius: 2px;
-        border:1px solid #ddd;
-        font-size: 80px;
+        font-size: 16px;
+        padding: 5px 20px;
+        border:1px solid $color;
         color: $color;
       }
 

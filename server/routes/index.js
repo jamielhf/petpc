@@ -10,4 +10,5 @@ module.exports = function (app) {
   app.use('/user', require('./user'));
   app.use('/user/head', require('./upload'));
   app.use('/article', require('./article'));
+  app.use('/article/photo', require('./articlePhoto'));
 };

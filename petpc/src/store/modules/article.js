@@ -18,6 +18,11 @@ const getters = {
 const actions = {
     saveArticle({commit},data){
         commit(types.SAVE_ARTICLE,data)
+    },
+    articlePhoto({commit},data){
+        api.articlePhoto(data,function (res) {
+            console.log(res);
+        })
     }
 
 }
