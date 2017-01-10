@@ -1,8 +1,6 @@
 <template>
     <div class="g-write">
-        <div class="c-type">
-            <h3>标题</h3>
-        </div>
+       
         <div class="c-type">
             <input class="title " v-model = 'title' placeholder="输入标题"/>
         </div>
