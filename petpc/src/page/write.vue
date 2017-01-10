@@ -54,7 +54,7 @@
             <p>宠物图片：</p>
             <div class="c-img-list">
                 <div class="c-img clearfix">
-                    <div v-for="img in imgArr" class="img-box"><a @click="remove" :img = "img" class="glyphicon glyphicon-remove"></a><img  :src="img"></div>
+                    <div v-for="(value, key) in imgArr" class="img-box"><a @click="remove" :type="key"   class="glyphicon glyphicon-remove"></a><img  :src="value.sPhoto"></div>
                 </div>
                 <div class="c-add">
                     <span @click = 'clickImg' class="btn-add btn">添加</span>
@@ -109,7 +109,6 @@
                 immune:2,//免疫
                 insect:2,//驱虫
                 otherData:['是','否','不详'],
-                imgArr:[],
                 file:'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg'
             }
         },
@@ -188,15 +187,14 @@
             clickImg:function () {
                 document.querySelector('#file').click();
             },
+
             /*
             * 删除图片
             *
             * */
             remove:function (e) {
-                let i = e.target.getAttribute('img');
-                for(let k = 0;k<this.imgArr.length;k++){
-                    console.log(this.imgArr[k]);
-                }
+                let k = e.target.getAttribute('type');
+                this.$store.commit('REMOVE_ARTICLE_PHOTO',k)
             }
         },
         // if you need to get the current editor object, you can find the editor object like this, the $ref object is a ref attribute corresponding to the dom redefined
@@ -204,6 +202,14 @@
         computed: {
             editor() {
                 return this.$refs.myTextEditor.quillEditor
+            },
+            imgArr:function () {
+                console.log(this.$store.getters.getImgArr)
+                if(this.$store.getters.getImgArr.length>0){
+                    return this.$store.getters.getImgArr
+                }else{
+                    return []
+                }
             }
         },
         mounted() {

@@ -38,8 +38,8 @@
       <file leaf-file-name="articlePhoto.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/articlePhoto.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+            <state relative-caret-position="513">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -285,10 +285,6 @@
               <option name="myItemId" value="article" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="20170111" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -473,12 +469,12 @@
       <workItem from="1483580607992" duration="12047000" />
       <workItem from="1483667707177" duration="5567000" />
       <workItem from="1483926945579" duration="11345000" />
-      <workItem from="1484013875063" duration="7214000" />
+      <workItem from="1484013875063" duration="9347000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="463092000" />
+    <option name="totallyTimeSpent" value="465225000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -779,8 +775,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/articlePhoto.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+        <state relative-caret-position="513">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>

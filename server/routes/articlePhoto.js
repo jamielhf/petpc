@@ -20,14 +20,14 @@ router.post('/',ensureAuthorized,upload.single('file'),function (req, res, next)
             if(doc){
                 var imgUrl = (req.file.destination+ req.file.filename).split('/');
                 images(req.file.destination+ req.file.filename)
-                    .size(150)
+                    .size(200)
                     .save(req.file.destination+'s_'+ req.file.filename, {
-                        quality : 70
+                        quality : 100
                     });
 
                 var photoUrl = url+imgUrl[2]+'/'+imgUrl[3]+'/'+imgUrl[4];
                 var sPhotoUrl = url+imgUrl[2]+'/'+imgUrl[3]+'/s_'+imgUrl[4];
-                console.log(photoUrl)
+
                     res.json({
                         status: 200,
                         msg:'上传图片成功',
