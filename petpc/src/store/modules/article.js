@@ -5,7 +5,8 @@ import * as types from '../mutation'
 import api from '../../api/api'
 
 const state = {
-        imgArr:[]
+        imgArr:[],
+        content:[]
 }
 
 const getters = {
@@ -15,18 +16,30 @@ const getters = {
 
 const actions = {
     saveArticle({commit},data){
-        commit(types.SAVE_ARTICLE,data)
+        commit(types.SET_LOADING,true);
+        api.saveArticle(data,function (res) {
+            commit(types.SET_LOADING,false);
+            if(res.status==200){
+                commit(types.SET_TIPS,'投递成功');
+            }
+        })
     },
     articlePhoto({commit},data){
         commit(types.SET_LOADING,true);
         api.articlePhoto(data,function (res) {
             commit(types.SET_LOADING,false);
             if(res.status==200){
+                commit(types.SET_TIPS,'上传成功');
                 commit(types.SAVE_ARTICLE_PHOTO,res.data)
             }
         })
     },
-
+    getArticle({commit},data){
+        api.getArticle(data,function (res) {
+            console.log(res);
+        })
+    }
+    
 
 }
 
@@ -44,9 +57,7 @@ const mutations = {
         }else{
             console.log(parseInt(key)+1);
             state.imgArr = state.imgArr.slice(0,key).concat(state.imgArr.slice(parseInt(key)+1));
-
         }
-
 
     },
 

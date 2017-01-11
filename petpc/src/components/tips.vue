@@ -21,7 +21,7 @@ require('../css/tips.scss');
                         vm.show = false;
                         vm.$store.commit('SET_TIPS','');
                         return
-                    },2000)
+                    },1200)
                 }
                 return this.$store.getters.tips;
             }

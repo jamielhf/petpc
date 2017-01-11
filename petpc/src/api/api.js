@@ -80,13 +80,36 @@ export  default {
     },
     /*
     *
-    *articlePhoto
+    *上次文章图片
     * */
     articlePhoto(data,cb){
         axios.post(baseUrl+'article/photo',data,{'content-type': 'multipart/form-data'}).then(function (res) {
-
+            console.log(res.data);
             cb(res.data)
         })
+    },
+    /*
+    *
+    * 保存文章
+    * */
+    saveArticle(data,cb){
+        axios.post(baseUrl+'article',data).then(function (res) {
+            console.log(res.data);
+            cb(res.data)
+        })
+    },
+    /*
+    * 获取文章
+    * */
+    getArticle(data,cb){
+        console.log(data);
+        axios.get(baseUrl+'article').then(function (res) {
+
+            console.log(res.data);
+            cb(res.data)
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
 }

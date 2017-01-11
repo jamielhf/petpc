@@ -1,18 +1,8 @@
 <template>
-    <div class="m-content">
-        <div class="content-top">
-            <ul class="top-left clearfix">
-                <li>最新</li>
-                <li>最多收藏</li>
-                <li>完成领养</li>
-                <li>未被领养</li>
-            </ul>
 
-        </div>
-
-        <div class="content-box">
+        <div class="m-content-box">
             <ul>
-                <li class="clearfix">
+                <li class="clearfix m-list">
 
                     <div class="list-row">
                         <a href="#">1231231232</a>
@@ -48,7 +38,7 @@
 
                 </li>
 
-                <li class="clearfix">
+                <li class="clearfix m-list">
 
                     <div class="list-row">
                         <a href="#">1231231232</a>
@@ -85,11 +75,14 @@
                 </li>
             </ul>
         </div>
-    </div>
+
 </template>
 
 <script>
-require('../css/content.scss');
+
+
+    require('../css/content-list.scss');
+
     export default{
         data(){
             return{

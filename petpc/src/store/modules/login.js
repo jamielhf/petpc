@@ -15,7 +15,8 @@ const getters = {
     isLogin : state => state.loginStatus,
     getToken : state => state.info.getToken,
     getInfo : state => state.info,
-    getHead : state => state.info.head
+    getHead : state => state.info.head,
+    getUid : state => state.info._id
 }
 
 
@@ -44,6 +45,7 @@ const actions = {
         sessionStorage.token = '';
         commit(types.SET_SIGN_STATUS,{status:false,data:{}});
         commit(types.SIGN_STATUS,{status:false,data:''});
+        location.href = '/index'
 
     },
     changeInfo({commit},data){

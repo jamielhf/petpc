@@ -24,7 +24,7 @@
         </div>
         <div class="c-type">
             <p>年龄：</p>
-            <select >
+            <select id="age">
                 <option v-for="n in 11">{{ n }}个月</option>
                 <option v-for="d in 20">{{ d }}岁</option>
             </select>
@@ -100,7 +100,7 @@
                 },
                 title:'',
                 type:0,//宠物类型
-                typeData:['全部','狗狗','猫猫','兔子', '鼠类', '其他'],
+                typeData:['狗狗','猫猫','兔子', '鼠类', '其他'],
                 sex:0,//性别
                 sexData:['GG','MM'],
                 from:0,//来源
@@ -153,14 +153,23 @@
                 let address = document.querySelector('#cmbProvince').value +"|"+
                              document.querySelector('#cmbCity').value +"|"+
                              document.querySelector('#cmbArea').value ;
+                let age = document.querySelector('#age').value;
                 let data = {
                     title:this.title,
                     type:this.type,
+                    imgArr:this.imgArr,
+                    pet:{
+                        sex:this.sex,
+                        from:this.from,
+                        immune:this.immune,
+                        sterilization:this.sterilization,
+                        insect:this.insect,
+                        age:age
+                    },
                     content : this.content,
                     address:address
                 };
-//                this.$store.dispatch('saveArticle',data)
-                console.log(data);
+                this.$store.dispatch('saveArticle',data)
 
             },
             /*

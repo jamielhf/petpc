@@ -9,6 +9,7 @@ import Signup from '../page/signup.vue'
 import Signin from '../page/signin.vue'
 import User from '../page/user.vue'
 import Write from '../page/write.vue'
+import Article from '../page/article.vue'
 
 Vue.use(VueRouter);
 
@@ -43,6 +44,11 @@ const routes = [
             {
                 path: 'user/setting',
                 component: User,
+                beforeEnter: notLogin,
+            },
+            {
+                path: 'user/article',
+                component: Article,
                 beforeEnter: notLogin,
             },
             {

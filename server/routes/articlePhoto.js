@@ -16,7 +16,9 @@ var url = 'http://localhost:3000/';
 router.post('/',ensureAuthorized,upload.single('file'),function (req, res, next) {
 
     User.findOne({token: req.token},function (err,doc){
+
         if(!err){
+           
             if(doc){
                 var imgUrl = (req.file.destination+ req.file.filename).split('/');
                 images(req.file.destination+ req.file.filename)

@@ -1,0 +1,59 @@
+@import "base/min";
+
+.m-content {
+  position: relative;
+  width: 830px;
+  background-color: #fff;
+  float: left;
+  box-sizing: border-box;
+  padding:0 20px 30px 20px;
+  margin-top: 10px;
+  .content-top{
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #eee;
+  }
+  .top-left{
+    width: 100%;
+    float: left;
+    li{
+      cursor: pointer;
+      float: left;
+      height: 50px;
+      line-height: 50px;
+      color: #999;
+      font-size: 14px;
+      position: relative;
+      &:after{
+        content:' ';
+        width:1px;
+        height: 15px;
+        line-height: 50px;
+        background-color: #eee;
+        display: inline-block;
+        position: relative;
+        margin: 0 10px;
+        top:2px;
+      }
+      &:last-child:after{
+        display: none;
+      }
+      &:first-child{
+
+      }
+      &.z-active,&:hover{
+        color: $color;
+      }
+
+    }
+  }
+
+}
+
+.m-main-content{
+  position: relative;
+  width: 1000px;
+  margin: 0 auto;
+  padding: 20px 180px;
+  background-color: #fff;
+}

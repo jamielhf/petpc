@@ -2,7 +2,7 @@
 
 <template>
 
-<div class="p-setting">
+<div class="p-setting m-main-content">
     <div class="m-list-box">
 
         <h3>用户信息</h3>
@@ -100,8 +100,8 @@ require('../css/user');
 
      computed:{
          username:function () {
-            let a = this.$store.getters.getInfo.username;
-            return a
+             return   this.$store.getters.getInfo.username;
+
          },
          file:function () {
              console.log(this.$store.getters.getInfo.head)

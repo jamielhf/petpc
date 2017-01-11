@@ -13,7 +13,7 @@
                <ul class="list-group"  v-show=isShow>
                    <li class="list-group-item" @click = "detail"><router-link to="/user/setting">我的主页</router-link></li>
                    <li class="list-group-item" @click = "detail">我的收藏</li>
-                   <li class="list-group-item" @click = "detail">我的文章</li>
+                   <li class="list-group-item" @click = "detail"><router-link to="/user/article">我的文章</router-link></li>
                    <li  class="list-group-item" @click="signout">登出</li>
                </ul>
            </div>
