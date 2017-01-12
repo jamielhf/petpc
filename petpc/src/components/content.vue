@@ -2,70 +2,33 @@
 
         <div class="m-content-box">
             <ul>
-                <li class="clearfix m-list">
+
+                <li v-for = "(v,k) in article"  class="clearfix m-list">
 
                     <div class="list-row">
-                        <a href="#">1231231232</a>
-                        <time>10小时前</time>
+                        <a href="#">{{v.title}}</a>
+                        <time>{{v.time}}</time>
                     </div>
-                    <div class="list-row">
+                    <div class="list-row h100">
 
-                        <img class="list-img " src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
-                        <img class="list-img" src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
-                        <img class="list-img" src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
-                        <div class="c-row">
-                            <div class="list-icon" title="收藏">
-                                <div class="glyphicon glyphicon-heart"></div>
-                                <div class="p1">2</div>
-
-                            </div>
-                            <div class="list-icon" title="评论">
-                                <div class="glyphicon glyphicon-comment"></div>
-                                <div class="p1">3</div>
-                            </div>
-                        </div>
-                        <div class="c-row">
-                            <div class="list-right">
-                                <span>123</span>
-                                <span>12</span>
-                                <span>123</span>
-                                <img src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
-                            </div>
-                        </div>
+                            <img v-for = "(v1,k1) in v.imgArr" :class="{'z-none':k1>2}" class="list-img" :src="v1.sPhoto">
 
 
-                    </div>
-
-                </li>
-
-                <li class="clearfix m-list">
-
-                    <div class="list-row">
-                        <a href="#">1231231232</a>
-                        <time>10小时前</time>
-                    </div>
-                    <div class="list-row">
-
-                            <img class="list-img " src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
-                            <img class="list-img" src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
-                            <img class="list-img" src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
                             <div class="c-row">
                                 <div class="list-icon" title="收藏">
                                     <div class="glyphicon glyphicon-heart"></div>
-                                    <div class="p1">2</div>
+                                    <div class="p1">{{v.star}}</div>
 
                                 </div>
                                 <div class="list-icon" title="评论">
                                     <div class="glyphicon glyphicon-comment"></div>
-                                    <div class="p1">3</div>
+                                    <div class="p1">{{v.comments.length}}</div>
                                 </div>
                             </div>
                             <div class="c-row">
                                 <div class="list-right">
-                                    <span>123</span>
-                                    <span>12</span>
-                                    <span>123</span>
-                                    <img src="https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg">
+                                    <span v-for = "item in v.tag">{{item}}</span>
+                                    <img :src=v.uHead>
                                 </div>
                             </div>
 
@@ -86,6 +49,20 @@
     export default{
         data(){
             return{
+
+            }
+        },
+        props:{
+            article: {
+                type: Array,
+                required: true
+            },
+        },
+        updated:function () {
+            console.log(this.article[0].imgArr)
+        },
+        computed:{
+            aList(){
 
             }
         }

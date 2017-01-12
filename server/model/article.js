@@ -23,14 +23,7 @@ var _Article = new Schema({
             rUsername:String,
         }
     ], //评论
-    pet:{
-        sex:Number,
-        from:Number,
-        immune:Number,
-        sterilization:Number,
-        insect:Number,
-        age:String
-    },
+    pet:{},
     star:Number,    //收藏人数
     status:String, //文章审核状态
     isDone:Boolean  //文章类型，是否领养成功

@@ -16,6 +16,9 @@
     display: -ms-flexbox;      /* TWEENER - IE 10 */
     display: -webkit-flex;     /* NEW - Chrome */
     display: flex;
+    &.h100{
+      height: 102px;
+    }
     a{
       -webkit-box-flex: 1 ;  /* OLD - iOS 6-, Safari 3.1-6 */
       -moz-box-flex: 1;    /* OLD - Firefox 19- */
@@ -109,11 +112,14 @@
       padding: 4px 8px;
       border-radius: 2px;
       margin: 0 5px;
+      background-color:#f9f9f9;
       &:hover{
-        background-color: #e4e6e9;
+        background-color: $color;
+        color: #fff;
       }
     }
     img{
+      border-radius: 100%;
       cursor: pointer;
       width: 35px;
       height: 35px;

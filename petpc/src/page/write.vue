@@ -120,7 +120,7 @@
         methods: {
             onEditorBlur(editor) {
 //                console.log('editor blur!', editor)
-                console.log(this.content)
+//                console.log(this.content)
             },
             onEditorFocus(editor) {
             },
@@ -130,7 +130,7 @@
             onEditorChange({ editor, html, text }) {
 //                 console.log('editor change!', editor, html, text)
                 this.content = html;
-                console.log(this.content)
+//                console.log(this.content)
             },
             selectType(t,e){
                 let d = e.target;
@@ -154,18 +154,30 @@
                              document.querySelector('#cmbCity').value +"|"+
                              document.querySelector('#cmbArea').value ;
                 let age = document.querySelector('#age').value;
+                if(this.title==''){
+                    this.$store.commit('SET_TIPS','请填写标题')
+                    return false
+                }
+                if(this.content==''){
+                    this.$store.commit('SET_TIPS','请填写领养要求')
+                    return false
+                }
+                if(this.imgArr.length==0){
+                    this.$store.commit('SET_TIPS','请至少上传一张图片')
+                    return false
+                }
                 let data = {
                     title:this.title,
-                    type:this.type,
                     imgArr:this.imgArr,
-                    pet:{
-                        sex:this.sex,
-                        from:this.from,
-                        immune:this.immune,
-                        sterilization:this.sterilization,
-                        insect:this.insect,
+                    pet:[{
+                        type:this.typeData[this.type],
+                        sex:this.sexData[this.sex],
+                        from:this.fromData[this.from],
+                        immune:this.otherData[this.immune],
+                        sterilization:this.otherData[this.sterilization],
+                        insect:this.otherData[this.insect],
                         age:age
-                    },
+                    }],
                     content : this.content,
                     address:address
                 };

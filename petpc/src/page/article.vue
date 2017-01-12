@@ -13,7 +13,7 @@
                 </ul>
 
             </div>
-            <com-content></com-content>
+            <com-content  :article = article></com-content>
         </div>
     </div>
 
@@ -42,6 +42,12 @@ import content from '../components/content.vue';
                 this.nav = t;
          }
      },
+     created:function () {
+         let id = this.$store.getters.getUid;
+       if(id){
+           this.$store.dispatch('getArticle',{id:id})
+       }
+     },
      watch:{
        uid: function () {
            this.$store.dispatch('getArticle',{id:this.uid})
@@ -50,7 +56,12 @@ import content from '../components/content.vue';
      computed:{
         uid:function () {
                 return this.$store.getters.getUid
-        }
+        },
+         article(){
+
+             let a =  this.$store.getters.getArticleList?this.$store.getters.getArticleList:[];
+             return a
+         }
      },
      components:{
          comContent:content,

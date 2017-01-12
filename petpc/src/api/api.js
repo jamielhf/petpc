@@ -83,7 +83,7 @@ export  default {
     *上次文章图片
     * */
     articlePhoto(data,cb){
-        axios.post(baseUrl+'article/photo',data,{'content-type': 'multipart/form-data'}).then(function (res) {
+        axios.post(baseUrl+'articleList/photo',data,{'content-type': 'multipart/form-data'}).then(function (res) {
             console.log(res.data);
             cb(res.data)
         })
@@ -93,7 +93,7 @@ export  default {
     * 保存文章
     * */
     saveArticle(data,cb){
-        axios.post(baseUrl+'article',data).then(function (res) {
+        axios.post(baseUrl+'articleList',data).then(function (res) {
             console.log(res.data);
             cb(res.data)
         })
@@ -102,9 +102,7 @@ export  default {
     * 获取文章
     * */
     getArticle(data,cb){
-        console.log(data);
-        axios.get(baseUrl+'article').then(function (res) {
-
+        axios.get(baseUrl+'articleList',{params:data}).then(function (res) {
             console.log(res.data);
             cb(res.data)
         }).catch(function (error) {

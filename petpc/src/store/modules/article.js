@@ -10,7 +10,8 @@ const state = {
 }
 
 const getters = {
-    getImgArr : state => state.imgArr
+    getImgArr : state => state.imgArr,
+    getArticleList : state => state.content
 }
 
 
@@ -35,8 +36,14 @@ const actions = {
         })
     },
     getArticle({commit},data){
+        console.log(data);
         api.getArticle(data,function (res) {
-            console.log(res);
+            if(res.status==200){
+                commit(types.GET_ARTICLE,res.data)
+            }else{
+                commit(types.SET_TIPS,res.msg);
+            }
+
         })
     }
     
@@ -46,6 +53,37 @@ const actions = {
 const mutations = {
     [types.SAVE_ARTICLE](state,data){
 
+    },
+    [types.GET_ARTICLE](state,data){
+         if(data.length>0){
+             let t;
+             let now = (new Date().getTime()/1000);
+
+             for(let i=0;i<data.length;i++){
+                 t = (now - (new Date(data[i].time).getTime()/1000))/3600 ;
+                 if(t<24){
+                     if(parseInt(t)==0){
+                         data[i].time = '刚刚'
+                     }else{
+                         data[i].time = parseInt(t)+'小时前';
+                     }
+
+                 }else if(t<720){
+                     data[i].time = parseInt(t/24)+'天前'
+                 }else if(t<8640){
+                     data[i].time = parseInt(t/720)+'月前'
+                 }else{
+                     data[i].time = parseInt(t/8640)+'年前'
+                 }
+
+                 console.log(t);
+             }
+         }
+        
+        
+        
+        
+         state.content = data;
     },
     [types.SAVE_ARTICLE_PHOTO](state,data){
 
