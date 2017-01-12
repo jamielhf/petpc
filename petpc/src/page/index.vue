@@ -14,7 +14,7 @@
             </ul>
 
         </div>
-        <com-content></com-content>
+        <com-content :article = article></com-content>
     </div>
 
 </div>
@@ -32,7 +32,9 @@ import content from '../components/content.vue';
 
  export default {
     data:function () {
-      return {}
+      return {
+          article:[]
+      }
     },
      computed:{
 

@@ -37,14 +37,17 @@ const actions = {
     },
     getArticle({commit},data){
         console.log(data);
-        api.getArticle(data,function (res) {
-            if(res.status==200){
-                commit(types.GET_ARTICLE,res.data)
-            }else{
-                commit(types.SET_TIPS,res.msg);
-            }
-
+        return new Promise((resolve, reject) => {
+                api.getArticle(data,function (res) {
+                    if(res.status==200){
+                        commit(types.GET_ARTICLE,res.data)
+                    }else{
+                        commit(types.SET_TIPS,res.msg);
+                    }
+                    resolve()
+                })
         })
+
     }
     
 
@@ -76,12 +79,8 @@ const mutations = {
                      data[i].time = parseInt(t/8640)+'年前'
                  }
 
-                 console.log(t);
              }
          }
-        
-        
-        
         
          state.content = data;
     },

@@ -45,6 +45,7 @@ router.post('/', function(req, res, next) {
             var userModel = new User(req.body);
                 userModel.save(function(err, user) {
                     user.token = jwt.sign(user, 'pet');
+                    user.head = 'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg';
                     user.save(function(err, user1) {
                         if(!err){
                             user1.password = ''

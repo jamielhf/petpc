@@ -10,9 +10,7 @@
                         <time>{{v.time}}</time>
                     </div>
                     <div class="list-row h100">
-
-                            <img v-for = "(v1,k1) in v.imgArr" :class="{'z-none':k1>2}" class="list-img" :src="v1.sPhoto">
-
+                            <img  v-for = "(v1,k1) in v.imgArr" :class="{'z-none':k1>2}" class="list-img" :src="v1.sPhoto">
 
                             <div class="c-row">
                                 <div class="list-icon" title="收藏">
@@ -36,6 +34,11 @@
                     </div>
 
                 </li>
+
+
+                <li class="c-tips" v-if = "article.length==0">
+                    <p>暂无文章</p>
+                </li>
             </ul>
         </div>
 
@@ -54,12 +57,12 @@
         },
         props:{
             article: {
-                type: Array,
-                required: true
+                type: Array
             },
         },
         updated:function () {
-            console.log(this.article[0].imgArr)
+
+//            console.log(this.article[0].imgArr)
         },
         computed:{
             aList(){

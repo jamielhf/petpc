@@ -54,7 +54,6 @@ router.get('/',ensureAuthorized,function (req, res, next) {
                     });
                 }
 
-
             }
         });
 
