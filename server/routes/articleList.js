@@ -23,7 +23,26 @@ router.get('/',function (req, res, next) {
                 q.uid = req.query.uid;
         }
         if(req.query.id){
-                q._id = req.query.id;
+
+                Article.findOne({_id:req.query.id}).exec(function (err, doc) {
+                    Article.findByIdAndUpdate(req.query.id,{$set:{read:doc.read+1}},function (err,doc1) {
+                      if(!err){
+                          res.json({
+                                  status:200,
+                                  msg:"文章列表",
+                                  data:doc1
+                          })
+                      }else{
+                          res.json({
+                              status:404,
+                              msg:"未知错误",
+                              data:''
+                          })
+                        }
+                  })
+
+                });
+            return
         }
         if(req.query.status){
                 q.status = req.query.status;
@@ -81,6 +100,7 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                                 data.comments = [];
                                 data.star = 0;
                                 data.status = 0;
+                                data.read = 0;
                                 data.isDone = false;
                                 var article = new Article(data)
                                 article.save(function (err, doc) {

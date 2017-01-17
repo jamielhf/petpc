@@ -52,10 +52,7 @@ const routes = [
                 component: Article,
                 beforeEnter: notLogin,
             },
-            {
-              path:'article/content',
-                component:Content
-            },
+
             {
                 path: '/write',
                 component: Write,
@@ -63,7 +60,10 @@ const routes = [
             },
         ]
     },
-
+    {
+        path:'/article/content',
+        component:Content
+    },
     {
         path: '/signup',
         component: Signup,
@@ -91,16 +91,6 @@ const router = new VueRouter({
 
 
 
-// router.beforeEach(function (transition) {
-//     if (!sessionStorage.getItem('token')) {
-//         next({
-//             path: '/login',
-//             query: { redirect: to.fullPath }
-//         })
-//     } else {
-//         next()
-//     }
-// })
 
 
 export  default router

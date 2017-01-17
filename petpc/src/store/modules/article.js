@@ -3,7 +3,7 @@
  */
 import * as types from '../mutation'
 import api from '../../api/api'
-
+import util from '../../js/util'
 const state = {
         imgArr:[],
         artList:[],     //文章列表
@@ -56,6 +56,7 @@ const actions = {
     getArticleContent({commit},data){
         return new Promise((resolve, reject) => {
             api.getArticle(data,function (res) {
+                console.log(res);
                 if(res.status==200){
                     commit(types.GET_ARTICLE_CONTENT,res.data)
                 }else{
@@ -75,25 +76,12 @@ const mutations = {
     },
     [types.GET_ARTICLE](state,data){
          if(data.length>0){
-             let t;
-             let now = (new Date().getTime()/1000);
+
 
              for(let i=0;i<data.length;i++){
-                 t = (now - (new Date(data[i].time).getTime()/1000))/3600 ;
-                 if(t<24){
-                     if(parseInt(t)==0){
-                         data[i].time = '刚刚'
-                     }else{
-                         data[i].time = parseInt(t)+'小时前';
-                     }
 
-                 }else if(t<720){
-                     data[i].time = parseInt(t/24)+'天前'
-                 }else if(t<8640){
-                     data[i].time = parseInt(t/720)+'月前'
-                 }else{
-                     data[i].time = parseInt(t/8640)+'年前'
-                 }
+                     data[i].time =   util.changeTime(data[i].time);
+
 
              }
          }
@@ -115,8 +103,8 @@ const mutations = {
     },
 
     [types.GET_ARTICLE_CONTENT](state,data){
+        data.time = util.changeTime(data.time);
         state.content = data;
-        console.log( state.content)
     }
 
 }

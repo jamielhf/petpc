@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var checkLogin = require('../middlewares/check').checkLogin;
 
-
 // var User = userModel.User;
 
 // GET /posts 所有用户或者特定用户的文章页
