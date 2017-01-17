@@ -194,14 +194,6 @@
                 let data = new FormData();
                 data.append("file",file);
 
-//                if(file){
-//                    var fr = new FileReader();
-//                    fr.onloadend = function(e) {
-//                        vm.imgArr.push(e.target.result);
-//                    };
-//                    fr.readAsDataURL(file);
-//                }
-
                 this.$store.dispatch('articlePhoto',data)
 
             },
@@ -225,7 +217,7 @@
                 return this.$refs.myTextEditor.quillEditor
             },
             imgArr:function () {
-                console.log(this.$store.getters.getImgArr)
+
                 if(this.$store.getters.getImgArr.length>0){
                     return this.$store.getters.getImgArr
                 }else{

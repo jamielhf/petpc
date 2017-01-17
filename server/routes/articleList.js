@@ -19,8 +19,11 @@ var ensureAuthorized = require('../middlewares/check').ensureAuthorized;
 router.get('/',function (req, res, next) {
 
         var q = {};
+        if(req.query.uid){
+                q.uid = req.query.uid;
+        }
         if(req.query.id){
-                q.uid = req.query.id;
+                q._id = req.query.id;
         }
         if(req.query.status){
                 q.status = req.query.status;

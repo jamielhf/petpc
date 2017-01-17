@@ -10,6 +10,7 @@ import Signin from '../page/signin.vue'
 import User from '../page/user.vue'
 import Write from '../page/write.vue'
 import Article from '../page/article.vue'
+import Content from '../page/content.vue'
 
 Vue.use(VueRouter);
 
@@ -50,6 +51,10 @@ const routes = [
                 path: 'user/article',
                 component: Article,
                 beforeEnter: notLogin,
+            },
+            {
+              path:'article/content',
+                component:Content
             },
             {
                 path: '/write',

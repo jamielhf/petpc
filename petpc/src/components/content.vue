@@ -6,7 +6,7 @@
                 <li v-for = "(v,k) in article"  class="clearfix m-list">
 
                     <div class="list-row">
-                        <a href="#">{{v.title}}</a>
+                        <router-link :to="{path:'/article/content',query:{id:v._id}}">{{v.title}} </router-link>
                         <time>{{v.time}}</time>
                     </div>
                     <div class="list-row h100">

@@ -6,12 +6,14 @@ import api from '../../api/api'
 
 const state = {
         imgArr:[],
-        content:[]
+        artList:[],     //文章列表
+        content:[]  //文章详情
 }
 
 const getters = {
     getImgArr : state => state.imgArr,
-    getArticleList : state => state.content
+    getArticleList : state => state.artList,
+    getArticleContent : state => state.content
 }
 
 
@@ -35,6 +37,7 @@ const actions = {
             }
         })
     },
+    //文章列表
     getArticle({commit},data){
         console.log(data);
         return new Promise((resolve, reject) => {
@@ -48,6 +51,19 @@ const actions = {
                 })
         })
 
+    },
+    //文章详情
+    getArticleContent({commit},data){
+        return new Promise((resolve, reject) => {
+            api.getArticle(data,function (res) {
+                if(res.status==200){
+                    commit(types.GET_ARTICLE_CONTENT,res.data)
+                }else{
+                    commit(types.SET_TIPS,res.msg);
+                }
+                resolve()
+            })
+        })
     }
     
 
@@ -82,7 +98,7 @@ const mutations = {
              }
          }
         
-         state.content = data;
+         state.artList = data;
     },
     [types.SAVE_ARTICLE_PHOTO](state,data){
 
@@ -97,6 +113,11 @@ const mutations = {
         }
 
     },
+
+    [types.GET_ARTICLE_CONTENT](state,data){
+        state.content = data;
+        console.log( state.content)
+    }
 
 }
 

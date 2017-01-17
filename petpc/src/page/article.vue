@@ -55,9 +55,10 @@ import content from '../components/content.vue';
              }
          },
          getData(){
+
              this.all =  this.$store.getters.getArticleList?this.$store.getters.getArticleList:[];
              this.articleData  = this.all;
-             //  console.log(this.articleData)
+               console.log(this.articleData+'_____123')
              let k;
 
              for(let v = 0;v<this.$store.getters.getArticleList.length;v++){
@@ -74,10 +75,11 @@ import content from '../components/content.vue';
          }
      },
      created:function () {
+         let vm =this;
          let id = this.$store.getters.getUid;
            if(id){
-               this.$store.dispatch('getArticle',{id:id}).then(function () {
-                  this.getData()
+               this.$store.dispatch('getArticle',{uid:id}).then(function () {
+                   vm.getData()
                })
            }
 
@@ -90,7 +92,7 @@ import content from '../components/content.vue';
      watch:{
        uid: function () {
            let vm = this;
-           this.$store.dispatch('getArticle',{id:this.uid}).then(function () {
+           this.$store.dispatch('getArticle',{uid:this.uid}).then(function () {
                vm.getData()
            })
        }
