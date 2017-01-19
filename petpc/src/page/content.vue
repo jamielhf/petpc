@@ -1,5 +1,6 @@
 <template>
     <div >
+        <com-expand :img="content.imgArr"></com-expand>
     <span @click="goBack" class="glyphicon glyphicon-remove"></span>
     <div class="g-content">
 
@@ -56,7 +57,7 @@
 
 
 <script>
-
+import expand from '../components/expand.vue';
 require('../css/content');
     export default {
         data(){
@@ -70,7 +71,9 @@ require('../css/content');
             this.$store.dispatch('getArticleContent',{id:this.$route.query.id})
 
         },
-
+        components:{
+           comExpand:expand
+        },
         methods: {
             goBack(){
                 this.$router.go(-1);

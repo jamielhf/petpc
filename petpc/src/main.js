@@ -10,6 +10,7 @@ import VueQuillEditor from 'vue-quill-editor'
 Vue.use(VueQuillEditor)
 require('./css/base/base.scss');
 
+// require('./css/bootstrap.min.scss');
 
 
 let data = {
