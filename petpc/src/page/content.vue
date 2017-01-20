@@ -1,7 +1,7 @@
 <template>
     <div >
         <com-expand :img="content.imgArr"></com-expand>
-    <span @click="goBack" class="glyphicon glyphicon-remove"></span>
+    <span @click="goBack" class="glyphicon glyphicon-remove g-content-remove"></span>
     <div class="g-content">
 
         <div class="c-type c-title">
