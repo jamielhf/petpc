@@ -1,7 +1,8 @@
 <template>
     <div >
-        <com-expand :img="content.imgArr"></com-expand>
-    <span @click="goBack" class="glyphicon glyphicon-remove g-content-remove"></span>
+     <com-expand v-show = show  @prev = "prev" @next = "next" :selNum = 'selNum'  @changeShow="changeShow" :img="content.imgArr"></com-expand>
+
+        <span @click="goBack" class="glyphicon glyphicon-remove g-content-remove"></span>
     <div class="g-content">
 
         <div class="c-type c-title">
@@ -36,15 +37,13 @@
             <div class="c-type">
                 <p>宠物图片：</p>
                 <div class="c-img-list">
-                    <img v-for = "value in content.imgArr" :src="value.sPhoto">
+                    <img @click="showExpand"  v-for = "(value,key) in content.imgArr"  :data = "key" :src="value.sPhoto">
                 </div>
             </div>
             <div class="c-type last">
                 <h3>宠物描述以及领养要求</h3>
             </div>
-            <div class="c-art-content" v-html ="content.content">
-
-            </div>
+            <div class="c-art-content" v-html ="content.content"> </div>
 
         </div>
 
@@ -62,7 +61,9 @@ require('../css/content');
     export default {
         data(){
             return{
-
+                show:false,
+                imgArr:{},
+                selNum :0
             }
         },
         created(){
@@ -77,7 +78,25 @@ require('../css/content');
         methods: {
             goBack(){
                 this.$router.go(-1);
+            },
+            changeShow(){
+                this.show = !this.show
+            },
+            showExpand(e){
+                this.selNum =  parseInt(e.target.getAttribute('data'));
+                this.show = true
+            },
+            prev(){
+                if(this.selNum>0){
+                    this.selNum--;
+                }
+            },
+            next(){
+                if(this.selNum+1<this.content.imgArr.length){
+                    this.selNum++;
+                }
             }
+
 
         },
          computed: {

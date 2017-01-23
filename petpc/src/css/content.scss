@@ -27,6 +27,9 @@
   }
   .c-img-list{
     padding: 10px 0;
+    img{
+      cursor: pointer;
+    }
   }
   .c-type{
     padding: 3px 0;
@@ -46,6 +49,7 @@
       color: #fff;
       img{
         float: left;
+        cursor: pointer;
         width: 45px;
         height: 45px;
         border-radius: 100%;
