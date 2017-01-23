@@ -1,6 +1,6 @@
 <template>
     <div >
-     <com-expand v-show = show  @prev = "prev" @next = "next" :selNum = 'selNum'  @changeShow="changeShow" :img="content.imgArr"></com-expand>
+     <com-expand  :class ="{'z-active':show}"  @prev = "prev" @next = "next" :selNum = 'selNum'  @changeShow="changeShow" :img="content.imgArr"></com-expand>
 
         <span @click="goBack" class="glyphicon glyphicon-remove g-content-remove"></span>
     <div class="g-content">

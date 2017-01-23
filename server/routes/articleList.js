@@ -25,21 +25,23 @@ router.get('/',function (req, res, next) {
         if(req.query.id){
 
                 Article.findOne({_id:req.query.id}).exec(function (err, doc) {
-                    Article.findByIdAndUpdate(req.query.id,{$set:{read:doc.read+1}},function (err,doc1) {
-                      if(!err){
-                          res.json({
-                                  status:200,
-                                  msg:"文章列表",
-                                  data:doc1
-                          })
-                      }else{
-                          res.json({
-                              status:404,
-                              msg:"未知错误",
-                              data:''
-                          })
-                        }
-                  })
+                    Article.findByIdAndUpdate(req.query.id,{$set:{read:doc.read+1}}).exec(function(err,doc1) {
+
+                            if(!err){
+
+                                    res.json({
+                                            status:200,
+                                            msg:"文章列表",
+                                            data:doc1
+                                    })
+                            }else{
+                                    res.json({
+                                            status:404,
+                                            msg:"未知错误",
+                                            data:''
+                                    })
+                            }
+                    })
 
                 });
             return
@@ -64,7 +66,7 @@ router.get('/',function (req, res, next) {
         }
 
 
-        Article.find(q).exec(function (err, doc) {
+        Article.find(q).sort({time:-1}).exec(function (err, doc) {
                 res.json({
                         status:200,
                         msg:"文章列表",

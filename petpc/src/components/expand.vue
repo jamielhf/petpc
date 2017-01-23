@@ -30,9 +30,17 @@ require('../css/expand');
 
             }
         },
-        mounted(){
-             
+
+        updated(){
+
+//            let iDom =  document.querySelector('li.z-active img');
+//
+//            let h = iDom.offsetHeight;
+//            let w =  iDom.offsetWidth;
+//            console.log(w,h)
+//            iDom.style.marginTop = '-'+h/2+'px';
         },
+
         computed:{
 
 
