@@ -93,10 +93,10 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                                 data = req.body;
 
                                 data.uid =  doc._id,
-                                    data.uHead = doc.head,
-                                    data.username = doc.username,
-                                    data.time = (new Date()).getTime(),
-                                    data.tag = [];
+                                data.uHead = doc.head,
+                                data.username = doc.username,
+                                data.time = (new Date()).getTime(),
+                                data.tag = [];
                                 data.tag.push(req.body.pet[0].type);
                                 data.tag.push(req.body.address.split('|')[0]);
                                 data.comments = [];
@@ -104,6 +104,7 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                                 data.status = 0;
                                 data.read = 0;
                                 data.isDone = false;
+                                data.isStar = false;
                                 var article = new Article(data)
                                 article.save(function (err, doc) {
                                         console.log(doc);

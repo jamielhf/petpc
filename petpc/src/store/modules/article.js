@@ -65,8 +65,11 @@ const actions = {
                 resolve()
             })
         })
+    },
+//   点赞
+    setArticleStar({commit},aid){
+        commit(types.SET_ARTICLE_STAR,aid)
     }
-    
 
 }
 
@@ -105,10 +108,22 @@ const mutations = {
     [types.GET_ARTICLE_CONTENT](state,data){
         data.time = util.changeTime(data.time);
         state.content = data;
+    },
+    /*
+    *
+    * @aid 文章id
+    * */
+    [types.SET_ARTICLE_STAR](state,aid){
+
+        let [l,i] = [state.artList.length,0];
+        for(;i<l;i++){
+            if(state.artList[i]._id == aid){
+                state.artList[i].star++;
+            }
+        }
     }
 
 }
-
 
 export  default{
     state,

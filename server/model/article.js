@@ -27,7 +27,8 @@ var _Article = new Schema({
     read:Number,
     star:Number,    //收藏人数
     status:String, //文章审核状态
-    isDone:Boolean  //文章类型，是否领养成功
+    isDone:Boolean,  //文章类型，是否领养成功
+    isStar:Boolean
 });
 // export them
 

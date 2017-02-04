@@ -13,10 +13,9 @@
                             <img  v-for = "(v1,k1) in v.imgArr" :class="{'z-none':k1>2}" class="list-img" :src="v1.sPhoto">
 
                             <div class="c-row">
-                                <div class="list-icon" title="收藏">
+                                <div class="list-icon" title="收藏" @click = "star(v._id,$event)" :class = "{'z-active':!v.isStar}">
                                     <div class="glyphicon glyphicon-heart"></div>
                                     <div class="p1">{{v.star}}</div>
-
                                 </div>
                                 <div class="list-icon" title="评论">
                                     <div class="glyphicon glyphicon-comment"></div>
@@ -65,7 +64,11 @@
 //            console.log(this.article[0].imgArr)
         },
         computed:{
-            aList(){
+
+        },
+        methods:{
+            star(id,e){
+               this.$store.dispatch('setArticleStar',id);
 
             }
         }
