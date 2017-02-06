@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 var _Article = new Schema({
     content:String,     //内容
     title:String,      //标题
-    uid :String,      //用户id
-    uHead :String,      //用户id
-    username :String,   //用户id
+    uid :String,      //发布用户id
+    uHead :String,      //发布用户头像
+    username :String,   //发布用户昵称
     tag:[],      //标签
     time:Date,      //日期
     address:String, //地区

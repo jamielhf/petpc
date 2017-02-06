@@ -67,8 +67,13 @@ const actions = {
         })
     },
 //   点赞
-    setArticleStar({commit},aid){
-        commit(types.SET_ARTICLE_STAR,aid)
+    setArticleStar({commit},data){
+
+        api.setStar(data,(res)=>{
+           commit(types.SET_ARTICLE_STAR,data)
+
+        })
+
     }
 
 }
@@ -113,12 +118,21 @@ const mutations = {
     *
     * @aid 文章id
     * */
-    [types.SET_ARTICLE_STAR](state,aid){
+    [types.SET_ARTICLE_STAR](state,data){
 
         let [l,i] = [state.artList.length,0];
         for(;i<l;i++){
-            if(state.artList[i]._id == aid){
-                state.artList[i].star++;
+            if(state.artList[i]._id == data.aid){
+
+                if(data.star){
+                    state.artList[i].star++;
+                    state.artList[i].isStar  = true;
+
+                }else{
+                    state.artList[i].star--;
+                    state.artList[i].isStar  = false;
+                }
+
             }
         }
     }

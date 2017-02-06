@@ -108,6 +108,19 @@ export  default {
         }).catch(function (error) {
             console.log(error);
         });
+    },
+    /*
+    *
+    * 收藏
+    * */
+    setStar(data,cb){
+        axios.get(baseUrl+'articleList/star',{params:data}).then(function (res) {
+            console.log(res.data);
+            cb(res.data)
+
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
 }

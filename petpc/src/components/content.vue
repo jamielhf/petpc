@@ -13,7 +13,7 @@
                             <img  v-for = "(v1,k1) in v.imgArr" :class="{'z-none':k1>2}" class="list-img" :src="v1.sPhoto">
 
                             <div class="c-row">
-                                <div class="list-icon" title="收藏" @click = "star(v._id,$event)" :class = "{'z-active':!v.isStar}">
+                                <div class="list-icon" title="收藏" @click = "star(v._id,v.isStar)" :class = "{'z-active':v.isStar}">
                                     <div class="glyphicon glyphicon-heart"></div>
                                     <div class="p1">{{v.star}}</div>
                                 </div>
@@ -64,11 +64,19 @@
 //            console.log(this.article[0].imgArr)
         },
         computed:{
-
+            uid(){
+                return this.$store.getters.getUid;
+            }
         },
         methods:{
-            star(id,e){
-               this.$store.dispatch('setArticleStar',id);
+            star(id,isStar){
+                let vm = this;
+
+                    this.$store.dispatch('setArticleStar',{
+                        uid:vm.uid,
+                        aid :id,
+                        star:!isStar
+                    });
 
             }
         }
