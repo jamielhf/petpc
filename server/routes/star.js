@@ -23,16 +23,17 @@ router.get('/',ensureAuthorized,function (req,res,next) {
             if(!err){
                 if(doc[0]){
 
-                    if(star){
+                    if(star=="true"){
                        if( doc[0]._aid.indexOf(aid)<0){
                            doc[0]._aid.push(aid);
                        }else{
-                           console.log(star)
+
                            res.json({
                                status:201,
                                msg:"已经收藏",
                                data:''
                            })
+                           return
                        }
 
                     }else{
@@ -47,18 +48,38 @@ router.get('/',ensureAuthorized,function (req,res,next) {
                     }
 
                     Star.update({_id:doc[0]._id},{$set:{_aid:doc[0]._aid}},function(err,result){
+
+                        Article.find({_id:aid},function(err,doc){
+                            if(!err){
+                                if(star=="true"){
+                                    Article.update({_id:aid},{$set:{star:doc[0].star+1}},function (err,d) {
+                                        console.log(d)
+                                    })
+                                }else{
+                                    Article.update({_id:aid},{$set:{star:doc[0].star-1}},function (err,d) {
+                                        console.log(d)
+                                    })
+                                }
+                            }
+
+                        })
+
+
+
                         if(!err&&result){
                             res.json({
                                 status:200,
-                                msg:star?"收藏成功":"取消收藏成功",
+                                msg:star=="true"?"收藏成功":"取消收藏成功",
                                 data:''
-                            })
+                            });
+                            return false
                         }else{
                             res.json({
                                 status:401,
-                                msg:star?"收藏失败":"取消收藏失败",
+                                msg:star=="true"?"收藏失败":"取消收藏失败",
                                 data:''
-                            })
+                            });
+                            return false
                         }
 
                     })
@@ -69,17 +90,28 @@ router.get('/',ensureAuthorized,function (req,res,next) {
                     })
                     nStar.save(function(err,doc){
                         if(!err){
-                            res.json({
-                                status:200,
-                                msg:"收藏成功",
-                                data:''
+                            Article.find({_id:aid},function(err,doc){
+                                if(!err){
+                                    if(star=="true"){
+                                        doc[0].star++
+                                    }
+                                    res.json({
+                                        status:200,
+                                        msg:"收藏成功",
+                                        data:''
+                                    })
+                                }
+
                             })
+
+                            return
                         }else{
                             res.json({
                                 status:401,
                                 msg:"收藏失败",
                                 data:''
                             })
+                            return
                         }
 
                     })

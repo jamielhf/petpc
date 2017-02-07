@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../model/user');
 var Article = require('../model/article');
+var Star = require('../model/star');
 var ensureAuthorized = require('../middlewares/check').ensureAuthorized;
 
 
@@ -41,6 +42,7 @@ router.get('/',function (req, res, next) {
                                             data:''
                                     })
                             }
+
                     })
 
                 });
@@ -66,12 +68,36 @@ router.get('/',function (req, res, next) {
         }
 
 
-        Article.find(q).sort({time:-1}).exec(function (err, doc) {
-                res.json({
-                        status:200,
-                        msg:"文章列表",
-                        data:doc
-                })
+        Article.find(q).sort({time:-1}).limit(10).exec(function (err, doc) {
+
+
+                if(!err){
+                        /*
+                        *
+                        * 查询哪些文章收藏过
+                        * */
+                        Star.find({_uid:q.uid},function (err,star) {
+
+                                if(!err){
+                                        var i =0,l = doc.length;
+                                       for(;i<l;i++){
+                                               if(star[0]._aid.indexOf(doc[i]._id)>=0){
+                                                       doc[i].isStar = true;
+                                                       console.log(doc[i]._id)
+                                               }
+                                       }
+                                        res.json({
+                                                status:200,
+                                                msg:"文章列表",
+                                                data:doc
+                                        })
+
+
+                                }
+                        });
+
+                }
+
         });
 
 

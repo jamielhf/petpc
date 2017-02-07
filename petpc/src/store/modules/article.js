@@ -70,7 +70,10 @@ const actions = {
     setArticleStar({commit},data){
 
         api.setStar(data,(res)=>{
-           commit(types.SET_ARTICLE_STAR,data)
+            if(res){
+                commit(types.SET_ARTICLE_STAR,data)
+            }
+
 
         })
 
