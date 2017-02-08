@@ -45,9 +45,16 @@ import content from '../components/content.vue';
           article:[]
       }
     },
-     computed:{
-
+     created:function () {
+         let vm =this;
+         let id = this.$store.getters.getUid;
+         if(id){
+             this.$store.dispatch('getArticle',{uid:id,type:'all'}).then(function () {
+                 vm.article = vm.$store.getters.getArticleList;
+             })
+         }
      },
+
      components:{
          comNav:nav,
          comContent:content,

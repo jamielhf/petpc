@@ -87,9 +87,7 @@
                 &:hover{
                     color: $color;
                 }
-                &:visited{
-                    color: #999;
-                }
+
             }
             time{
                 -webkit-box-flex: 1 ;  /* OLD - iOS 6-, Safari 3.1-6 */

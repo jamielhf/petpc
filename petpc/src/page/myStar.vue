@@ -27,7 +27,7 @@
             let vm =this;
             let id = this.$store.getters.getUid;
             if(id){
-                this.$store.dispatch('getArticle',{uid:id,star:true}).then(function () {
+                this.$store.dispatch('getArticle',{uid:id,type:'myStar'}).then(function () {
                         vm.starData = vm.$store.getters.getArticleList;
                 })
             }

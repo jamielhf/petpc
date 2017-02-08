@@ -45,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="star.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="star.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/star.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="54" column="30" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
+            <state relative-caret-position="324">
+              <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -79,13 +79,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="articleList.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="articleList.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/articleList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="93" column="29" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
+            <state relative-caret-position="513">
+              <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
               <folding>
-                <element signature="e#4101#6698#0" expanded="false" />
+                <element signature="e#441#1313#0" expanded="false" />
+                <element signature="e#4045#6642#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -499,12 +500,12 @@
       <workItem from="1486177283005" duration="2371000" />
       <workItem from="1486346530834" duration="9658000" />
       <workItem from="1486432368334" duration="7373000" />
-      <workItem from="1486518991373" duration="4591000" />
+      <workItem from="1486518991373" duration="8448000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="523045000" />
+    <option name="totallyTimeSpent" value="526902000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -576,7 +577,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -730,16 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/articlePhoto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="15" column="81" selection-start-line="15" selection-start-column="81" selection-end-line="15" selection-end-column="81" />
-          <folding>
-            <element signature="e#427#1611#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
@@ -798,21 +789,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/articleList.js">
+    <entry file="file://$PROJECT_DIR$/routes/star.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="93" column="29" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
+        <state relative-caret-position="324">
+          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/articlePhoto.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="15" column="81" selection-start-line="15" selection-start-column="81" selection-end-line="15" selection-end-column="81" />
           <folding>
-            <element signature="e#4101#6698#0" expanded="false" />
+            <element signature="e#427#1611#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/star.js">
+    <entry file="file://$PROJECT_DIR$/routes/articleList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="54" column="30" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
-          <folding />
+        <state relative-caret-position="513">
+          <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+          <folding>
+            <element signature="e#441#1313#0" expanded="false" />
+            <element signature="e#4045#6642#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

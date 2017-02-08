@@ -90,7 +90,7 @@ import content from '../components/content.vue';
          let vm =this;
          let id = this.$store.getters.getUid;
            if(id){
-               this.$store.dispatch('getArticle',{uid:id}).then(function () {
+               this.$store.dispatch('getArticle',{uid:id,type:'my'}).then(function () {
                    vm.getData()
                })
            }

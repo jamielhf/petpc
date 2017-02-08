@@ -20,10 +20,7 @@ var ensureAuthorized = require('../middlewares/check').ensureAuthorized;
 
 router.get('/',function (req, res, next) {
 
-        var q = {};
-        if(req.query.uid){
-                q.uid = req.query.uid;
-        }
+
 
         if(req.query.id){
                 Article.findOne({_id:req.query.id}).exec(function (err, doc) {
@@ -50,92 +47,94 @@ router.get('/',function (req, res, next) {
             return
         }
 
-        if(req.query.status){
-                q.status = req.query.status;
-        }
-        if(req.query.type){
-                var s ;
+        /*
+         * 用户收藏的文章
+         *
+         * */
+
+
+        if(req.query.type&&req.query.uid){
+                var s , q = {};
                 switch(req.query.type){
                         case 'time' :s = {time:-1};break;
                         case 'star' :s = {star:-1};break;
+                        case 'all' :s = {time:-1};break;
+                        case 'my' :s = {star:-1};q = {uid:req.query.uid};break;
+                        default :s = {time:-1};
                 }
-                Article.find({}).sort({s:-1}).exec(function (err, doc) {
-                        res.json({
+
+            if(req.query.type=='myStar'){
+                Star.find({_uid:req.query.uid}).limit(20).exec(function (err, doc) {
+
+                    if(!err){
+                        Article.find({_id:{$in:doc[0]._aid}}).sort({time:-1}).exec(function (err, r) {
+                            if(!err){
+                                var i=0,l=r.length;
+                                for(;i<l;i++){
+                                    r[i].isStar = true
+                                }
+                                res.json({
+                                    status:200,
+                                    msg:"文章列表",
+                                    data:r
+                                })
+                            }else{
+                                res.json({
+                                    status:404,
+                                    msg:"请求失败",
+                                    data:''
+                                })
+                            }
+
+                        })
+                    }
+
+                })
+
+            }else{
+                Article.find(q).sort(s).limit(20).exec(function (err, doc) {
+                    /*
+                     *
+                     * 查询哪些文章收藏过
+                     * */
+                    Star.find({_uid:req.query.uid},function (err,star) {
+
+                        if(!err){
+                            console.log(star.length>0);
+                            if(star.length>0){
+                                var i =0,l = doc.length;
+                                for(;i<l;i++){
+                                    if(star[0]._aid.indexOf(doc[i]._id)>=0){
+                                        doc[i].isStar = true;
+
+                                    }
+                                }
+
+                            }
+
+                            res.json({
                                 status:200,
                                 msg:"文章列表",
                                 data:doc
-                        })
+                            })
+
+                        }
+                    });
+
                 });
                 return false
+            }
+
+
+
         }
 
-    /*
-    * 用户收藏的文章
-    *
-    * */
-       if(req.query.star){
-           Star.find({_uid:q.uid}).limit(10).exec(function (err, doc) {
 
 
 
-               if(!err){
-                   Article.find({_id:{$in:doc[0]._aid}}).exec(function (err, r) {
-                       if(!err){
-                           res.json({
-                               status:200,
-                               msg:"文章列表",
-                               data:r
-                           })
-                       }else{
-                           res.json({
-                               status:404,
-                               msg:"请求是吧",
-                               data:''
-                           })
-                       }
-
-                   })
-               }
-
-           })
-           return
-       }
-
-        /*
-        * 用户自己的文章
-        *
-        * */
-        Article.find({uid:q.uid}).sort({time:-1}).limit(10).exec(function (err, doc) {
-                if(!err){
-                        /*
-                        *
-                        * 查询哪些文章收藏过
-                        * */
-                        Star.find({_uid:q.uid},function (err,star) {
-
-                                if(!err){
-                                        var i =0,l = doc.length;
-                                       for(;i<l;i++){
-                                               if(star[0]._aid.indexOf(doc[i]._id)>=0){
-                                                       doc[i].isStar = true;
-
-                                               }
-                                       }
-                                        res.json({
-                                            status:200,
-                                            msg:"文章列表",
-                                            data:doc
-                                        })
-                                    return
 
 
 
-                                }
-                        });
-
-                }
-
-        });
 
 
 })
