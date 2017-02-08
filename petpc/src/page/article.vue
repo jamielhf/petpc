@@ -22,10 +22,22 @@
 
 </template>
 
-
+<style rel="stylesheet/scss" lang="scss">
+    .p-user-article{
+        .m-content {
+            width: 100%;
+            float: none;
+        }
+        .m-main-content{
+            margin-top: 20px;
+            width: 800px;
+            padding: 0 ;
+        }
+    }
+</style>
 
 <script>
-    require('../css/user-article')
+
 
 import content from '../components/content.vue';
 

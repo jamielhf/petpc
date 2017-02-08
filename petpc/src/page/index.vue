@@ -22,11 +22,20 @@
 
 </template>
 
+<style  rel="stylesheet/scss" lang="scss">
+    @import "../css/base/min";
+    @import "../css/comm";
 
+    .p-index{
+        position: relative;
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+</style>
 
 <script>
-require('../css/index');
-require('../css/comm');
+
 import nav from '../components/nav.vue';
 import content from '../components/content.vue';
 

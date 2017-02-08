@@ -82,15 +82,196 @@
 
 </template>
 
+<style  rel="stylesheet/scss" lang="scss">
+    @import "../css/base/min";
+
+    .g-write{
+
+        width: 1000px;
+        margin: 0px auto ;
+        resize: vertical;
+        padding: 10px 100px 100px;
+        box-sizing: border-box;
+        background-color: #fff;
+    .title{
+        height: 50px;
+        line-height: 50px;
+        margin-bottom: 10px;
+        width: 100%;
+        border:1px solid #ddd;
+        border-radius: 4px;
+        background-color:transparent;
+        padding-left: 20px;
+        font-size: 16px;
+        color: #666;
+    //box-shadow: 1px 1px 3px #ccc;
+    &:focus{
+     //box-shadow: 0 0 15px #ccc;
+     }
+
+    }
+
+    .m-editor{
+        border-right:0;
+        border-left:0;
+        margin-bottom: 30px;
+        color: #666;
+        line-height: 1.4;
+    //box-shadow: 1px 1px 4px #ccc;
+    .ql-editor.ql-blank::before{ /* WebKit browsers */
+        font-style: normal;
+        color: #999;
+    }
+    }
+    .ql-container .ql-editor {
+        min-height: 500px;
+        background-color: #fff;
+    img{
+        max-height:500px;
+    }
+    }
+
+    .ql-toolbar.ql-snow{
+        border-right:0;
+        border-left:0;
+        border-top:1px solid  $color;;
+        border-bottom:1px solid #ddd;;
+    }
+    .ql-editor p, .ql-editor ol, .ql-editor ul, .ql-editor pre, .ql-editor blockquote, .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6{
+        line-height: 1.5;
+    }
+    .ql-container.ql-snow{
+        border-right:0;
+        border-left:0;
+        border-top:1px solid $color;
+        border-bottom:1px solid $color;;
+    }
+    .ql-editor p{
+        font-size: 16px;
+        font-family: "Microsoft YaHei";
+        color: #666;
+    }
+    .btn-primary{
+        width: 150px;
+        margin: 0 auto;
+        background-color: $color;
+        border: 0;
+    }
+    .btl{
+        border-top: 1px solid $color;
+        padding-top: 20px;
+    }
+
+    .c-type{
+        position: relative;
+        margin: 15px 0;
+    &.last{
+         margin-bottom: 0;
+    h3{
+        border: 0;
+    }
+    }
+    h3{
+        font-size: 20px;
+        padding: 30px 0 20px;
+        border-bottom: 1px solid $color;
+        color:#333;
+    }
+    p{
+        display: inline-block;
+        color: #666;
+        font-size: 16px;
+    }
+    span{
+        display: inline-block;
+        font-size: 14px;
+        color:  #999;
+        border: 1px solid #999;
+        background-color: #fff;
+        padding: 2px 10px;
+        line-height: 1.2;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-right: 5px;
+    &.z-active{
+         border: 1px solid $color;
+         background-color: $color;
+         color: #fff;
+     }
 
 
+    }
+    select{
+        border: 1px solid #999;
+        font-size: 14px;
+        color: #666;
+        margin-right: 10px;
+        outline: none;
+        border-radius: 3px;
+        height: 22px;
+        line-height: 22px;
+        text-align: center;
+        padding: 0 5px;
+    }
+    .c-img-list{
+        position: relative;
+        padding: 10px 0;
+    img{
+        width: 200px;
+        padding: 5px;
+        border-radius: 2px;
+        border:1px solid #ddd;
+        box-sizing: border-box;
+    }
+    .glyphicon-remove{
+        position: absolute;
+        right: 2px;
+        top:2px;
+        z-index: 5;
+        font-size: 14px;
+        text-decoration: none;
+    &:hover{
+         color: $color
+     }
+    }
+    .img-box{
+        position: relative;
+        display: block;
+        float: left;
+        width:200px;
+        min-height:200px;
+    }
+    #file{
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    }
+    .c-add{
+
+    .btn-add{
+        margin-top: 20px;
+        box-sizing: border-box;
+        border-radius: 2px;
+        font-size: 16px;
+        padding: 5px 20px;
+        border:1px solid $color;
+        color: $color;
+    }
+
+    }
+    }
+
+    }
+
+</style>
 <script>
    import {addressInit} from '../js/lib/address';
 
 
     import { quillEditor } from 'vue-quill-editor'
 
-    require('../css/write')
+
     export default {
         data(){
             return{

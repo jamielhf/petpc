@@ -12,7 +12,7 @@
                </a>
                <ul class="list-group"  v-show=isShow>
                    <li class="list-group-item" @click = "detail"><router-link to="/user/setting">我的主页</router-link></li>
-                   <li class="list-group-item" @click = "detail">我的收藏</li>
+                   <li class="list-group-item" @click = "detail"><router-link to="/user/star">我的收藏</router-link></li>
                    <li class="list-group-item" @click = "detail"><router-link to="/user/article">我的文章</router-link></li>
                    <li  class="list-group-item" @click="signout">登出</li>
                </ul>
@@ -31,9 +31,92 @@
        </div>
     </div>
 </template>
+<style  rel="stylesheet/scss" lang="scss">
+    @import "../css/base/min";
+    .m-header{
+        position: relative;
+        height: 80px;
+        background-color: #fff;
+        border-bottom:1px solid #eee;
+        .content{
+            width: 1000px;
+            height: 80px;
+            margin:0 auto;
+        }
+        .info{
+            position: relative;
+            height: 80px;
+            line-height: 80px;
+            float: right;
+            a{
+                display: inline-block;
+                margin: 0 10px;
+                cursor:pointer;
+                span{
+                    color: #999;
+                }
+                span:hover{
+                    color: $color;
+                }
+            }
+            .img-box{
 
+            }
+            img{
+                width: 40px;
+                height: 40px;
+                border-radius: 100%;
+            }
+            p{
+                position: relative;
+                float: right;
+                right: 0;
+                a{
+                    color: $color;
+                }
+            }
+        }
+        .list-group{
+            position: absolute;
+            z-index: 4;
+            right: 0px;
+            top:80px;
+            width: 120px;
+            transition: opacity .5s;
+            li{
+                color: #999;
+                cursor: pointer;
+                padding: 0 25px;
+                height: 45px;
+                line-height: 45px;
+                box-sizing: border-box;
+                &:hover{
+                    transition: all .5s;
+                    background-color: #f9f9f9;
+                    a{
+                        color: $color
+                    }
+                }
+                a{
+                    text-decoration: none;
+                    width: 100%;
+                    height: 100%;
+                    color: #999;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+        .glyphicon-plus{
+            top: -2px;
+        }
+        .glyphicon-search{
+            top: -1px;
+        }
+    }
+</style>
 <script>
-require('../css/header.scss');
+
     export default{
         data(){
             return{

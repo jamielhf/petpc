@@ -11,6 +11,7 @@ import User from '../page/user.vue'
 import Write from '../page/write.vue'
 import Article from '../page/article.vue'
 import Content from '../page/content.vue'
+import MyStar from '../page/myStar.vue'
 
 Vue.use(VueRouter);
 
@@ -52,7 +53,11 @@ const routes = [
                 component: Article,
                 beforeEnter: notLogin,
             },
-
+            {
+                path: 'user/star',
+                component: MyStar,
+                beforeEnter: notLogin,
+            },
             {
                 path: '/write',
                 component: Write,
@@ -64,6 +69,7 @@ const routes = [
         path:'/article/content',
         component:Content
     },
+
     {
         path: '/signup',
         component: Signup,

@@ -34,9 +34,66 @@
       </ul>
     </div>
 </template>
+<style  rel="stylesheet/scss" lang="scss">
+    @import "../css/base/min";
 
+    .m-nav{
+        position: relative;
+        width: 150px;
+        margin-right: 20px;
+        float: left;
+        .nav-li{
+            text-align: center;
+            margin:10px 0 ;
+            &.active, &:hover{
+                div{
+
+                    background-color: #dcdcdc;
+                }
+            }
+            &.active{
+                .nav-ul-ul{
+                    display: block;
+                }
+            }
+            div{
+                transition: all .3s;
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 2px;
+                color: #333;
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+        .nav-ul-ul{
+            display: none;
+        }
+        .nav-ul-ul li{
+
+            position: relative;
+            margin: 10px 0;
+            font-size: 14px;
+            cursor: pointer;
+            a{
+                color: #999;
+                text-decoration: none;
+                transition: color .3s;
+                &.active{
+                    font-weight: 600;
+                    color: $color;
+                }
+                &:hover{
+
+                    color: $color;
+                }
+
+            }
+        }
+    }
+</style>
 <script>
-require('../css/nav.scss');
+
     export default{
         data(){
             return{

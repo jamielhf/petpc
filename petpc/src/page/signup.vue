@@ -31,10 +31,13 @@
 
 </template>
 
+<style rel="stylesheet" lang="scss">
+    @import "../css/logup";
 
+</style>
 
 <script>
-require('../css/logup');
+
 
  export default {
     data:function () {
