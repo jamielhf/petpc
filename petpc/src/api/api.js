@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const baseUrl = "http://localhost:3000/";
 
-let token = sessionStorage.token;
+let token = localStorage.token;
 
 axios.defaults.headers.common['Authorization'] = 'Bearer ' +token;
 
@@ -20,7 +20,8 @@ export  default {
         axios.post(baseUrl+'signup',data).then(function (res) {
             console.log(res.data);
             if(res.data.status==200){
-                sessionStorage.token = res.data.data.token;
+                localStorage.token = res.data.data.token;
+                localStorage.uid = res.data.data._id;
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' +res.data.data.token;
             }
                 cb(res.data)
@@ -46,7 +47,8 @@ export  default {
         axios.post(baseUrl+'signin',data).then(function (res) {
             console.log(res.data);
             if(res.data.status==200){
-                sessionStorage.token = res.data.data.token;
+                localStorage.token = res.data.data.token;
+                localStorage.uid = res.data.data._id;
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' +res.data.data.token;
             }
             cb(res.data)

@@ -12,6 +12,7 @@ var ensureAuthorized = require('../middlewares/check').ensureAuthorized;
  * @param id 用户id
  * @param status 用户文章类型
  * @param type 文章类型
+ * @param star 收藏的文章
  *
  *
  * */
@@ -23,8 +24,8 @@ router.get('/',function (req, res, next) {
         if(req.query.uid){
                 q.uid = req.query.uid;
         }
-        if(req.query.id){
 
+        if(req.query.id){
                 Article.findOne({_id:req.query.id}).exec(function (err, doc) {
                     Article.findByIdAndUpdate(req.query.id,{$set:{read:doc.read+1}}).exec(function(err,doc1) {
 
@@ -48,6 +49,7 @@ router.get('/',function (req, res, next) {
                 });
             return
         }
+
         if(req.query.status){
                 q.status = req.query.status;
         }
@@ -67,10 +69,43 @@ router.get('/',function (req, res, next) {
                 return false
         }
 
+    /*
+    * 用户收藏的文章
+    *
+    * */
+       if(req.query.star){
+           Star.find({_uid:q.uid}).limit(10).exec(function (err, doc) {
 
-        Article.find(q).sort({time:-1}).limit(10).exec(function (err, doc) {
 
 
+               if(!err){
+                   Article.find({_id:{$in:doc[0]._aid}}).exec(function (err, r) {
+                       if(!err){
+                           res.json({
+                               status:200,
+                               msg:"文章列表",
+                               data:r
+                           })
+                       }else{
+                           res.json({
+                               status:404,
+                               msg:"请求是吧",
+                               data:''
+                           })
+                       }
+
+                   })
+               }
+
+           })
+           return
+       }
+
+        /*
+        * 用户自己的文章
+        *
+        * */
+        Article.find({uid:q.uid}).sort({time:-1}).limit(10).exec(function (err, doc) {
                 if(!err){
                         /*
                         *
@@ -83,14 +118,16 @@ router.get('/',function (req, res, next) {
                                        for(;i<l;i++){
                                                if(star[0]._aid.indexOf(doc[i]._id)>=0){
                                                        doc[i].isStar = true;
-                                                       console.log(doc[i]._id)
+
                                                }
                                        }
                                         res.json({
-                                                status:200,
-                                                msg:"文章列表",
-                                                data:doc
+                                            status:200,
+                                            msg:"文章列表",
+                                            data:doc
                                         })
+                                    return
+
 
 
                                 }
@@ -99,7 +136,6 @@ router.get('/',function (req, res, next) {
                 }
 
         });
-
 
 
 })

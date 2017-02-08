@@ -18,6 +18,7 @@ router.post('/', function(req, res, next) {
                 status:200,
                 msg:'登录成功',
                 data:{
+                    _id:doc[0]._id,
                     username:doc[0].username,
                     email:doc[0].email,
                     token:doc[0].token,

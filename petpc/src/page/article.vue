@@ -97,24 +97,6 @@ import content from '../components/content.vue';
 
 
      },
-     mounted:function () {
-
-
-     },
-     watch:{
-       uid: function () {
-           let vm = this;
-           this.$store.dispatch('getArticle',{uid:this.uid}).then(function () {
-               vm.getData()
-           })
-       }
-     },
-     computed:{
-        uid:function () {
-                return this.$store.getters.getUid
-        },
-
-     },
      components:{
          comContent:content,
      }

@@ -16,7 +16,7 @@ import MyStar from '../page/myStar.vue'
 Vue.use(VueRouter);
 
 const isLogin = (to, from, next) => {
-    let token = sessionStorage.getItem('token');
+    let token = localStorage.getItem('token');
 
     if (token) {
         console.log(132);
@@ -28,7 +28,7 @@ const isLogin = (to, from, next) => {
     }
 }
 const notLogin = (to, from, next) => {
-    let token = sessionStorage.getItem('token');
+    let token = localStorage.getItem('token');
     if (!token) {
         console.log(132);
         next({

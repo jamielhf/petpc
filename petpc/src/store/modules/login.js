@@ -16,22 +16,30 @@ const getters = {
     getToken : state => state.info.getToken,
     getInfo : state => state.info,
     getHead : state => state.info.head,
-    getUid : state => state.info._id
+    getUid : state => state.info._id||localStorage.uid 
 }
 
 
 const actions = {
+    /*
+    * 注册
+    * */
     signup({commit},data){
         api.signup(data,function (res) {
             commit(types.SIGN_STATUS,res)
         })
     },
+    /*
+     * 登录
+     * */
     signin({commit},data){
         api.signin(data,function (res) {
             commit(types.SIGN_STATUS,res)
         })
     },
-  
+    /*
+     * 判断登录
+     * */
     checkedLogin({commit}){
 
        api.checkLogin(function (res) {
@@ -40,14 +48,20 @@ const actions = {
 
        })
     },
-
+    /*
+     * 登出
+     * */
     signout({commit}){
-        sessionStorage.token = '';
+        localStorage.token = '';
+        localStorage.uid = '';
         commit(types.SET_SIGN_STATUS,{status:false,data:{}});
         commit(types.SIGN_STATUS,{status:false,data:''});
         location.href = '/index'
 
     },
+    /*
+     * 修改信息
+     * */
     changeInfo({commit},data){
         commit(types.SET_LOADING,true);
         api.changeInfo(data,function (res) {
@@ -62,6 +76,9 @@ const actions = {
         })
 
     },
+    /*
+     * 修改头像
+     * */
     setHead({commit},data){
         commit(types.SET_LOADING,true);
         api.setHead(data,function (res) {
@@ -95,7 +112,8 @@ const mutations = {
 
         state.loginStatus = res.status;
         if(!state.loginStatus){
-            sessionStorage.token = '';
+            localStorage.token = '';
+            localStorage.uid = ''
         }
         state.info = res.data;
     },
