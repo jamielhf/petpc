@@ -49,6 +49,8 @@
 
 
     </div>
+
+        <comComment></comComment>
     </div>
 
 </template>
@@ -68,7 +70,7 @@
     .g-content{
         position: relative;
         margin: 0 auto;
-        width: 900px;
+        width: 800px;
         color: #333;
         background-color: #fff;
         padding: 0 0 100px;
@@ -144,6 +146,7 @@
 
 <script>
 import expand from '../components/expand.vue';
+import comment from '../components/comment.vue';
 
     export default {
         data(){
@@ -160,7 +163,8 @@ import expand from '../components/expand.vue';
 
         },
         components:{
-           comExpand:expand
+           comExpand:expand,
+           comComment:comment
         },
         methods: {
             goBack(){
