@@ -3,7 +3,7 @@
         <p class="c-title">评论</p>
         <div class="c-p">
             <img src="http://localhost:3000/user/20170117/file-1484533279305.png">
-            <textarea placeholder="说说你的想法" @keyup.enter="enter"  :style="{ height:heightNum + 'px' }"></textarea>
+            <textarea placeholder="说说你的想法" @keyup.enter="enter" ></textarea>
             <div class="c-submit clearfix" >
                 <div class="c-btn" >评论</div>
             </div>
@@ -13,11 +13,11 @@
                 <img src="http://localhost:3000/user/20170117/file-1484533279305.png">
                 <p class="c-name">卑劣者</p>
                 <time>2017.02.09 13:17</time>
-                <p class="c-content">拍马屁，我只服那一句“笔落惊风雨，诗成泣鬼神”</p>
+                <p class="c-content">拍马屁，我只服那一句“笔神落惊风雨，诗成泣鬼”</p>
                 <span @click = "showReply">回复</span>
-                <div class="c-reply">
+                <div class="c-reply content">
                     <textarea placeholder="对 卑劣者 的回复"></textarea>
-                    <a class="c-btn cancel">取消</a>
+                    <a @click="cancel" class="c-btn cancel">取消</a>
                     <a class="c-btn sure">确定</a>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <span @click = "showReply">回复</span>
                 <div class="c-reply">
                     <textarea placeholder="对 卑劣者 的回复"></textarea>
-                    <a class="c-btn cancel">取消</a>
+                    <a  @click="cancel" class="c-btn cancel">取消</a>
                     <a class="c-btn sure">确定</a>
                 </div>
             </div>
@@ -81,6 +81,7 @@
            textarea{
                left: 30px;
                top:0;
+               height: 80px;;
            }
 
        }
@@ -136,14 +137,13 @@
            }
        }
        .c-reply{
-            position: relative;
-            transition:all .3s;
+           position: relative;
+           transition:all .3s;
            margin-bottom: 50px;
            display: none;
            textarea{
                margin-top: 10px;
                height: 80px;
-
            }
            .sure{
                 margin-top: 10px;;
@@ -201,11 +201,19 @@
         },
         methods:{
             enter(){
-//                this.heightNum+=22;
 
             },
             showReply(e){
-                console.log(e.target.parentNode.querySelector('.c-reply').classList.add('z-show'))
+                let d = e.target.parentNode.querySelector('.c-reply').classList;
+               if(d.value.indexOf('z-show')>=0){
+                   d.remove('z-show')
+               }else{
+                   d.add('z-show')
+               }
+
+            },
+            cancel(e){
+                e.target.parentNode.classList.remove('z-show');
             }
         }
 
