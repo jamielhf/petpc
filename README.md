@@ -8,3 +8,13 @@
 1. 消息提醒----待完成
 1. 文章审核----待完成
 1. 管理员权限----待完成
+
+
+### 运行
+>cd server
+npm install
+npm run dev
+cd petpc
+npm install
+npm run dev
+

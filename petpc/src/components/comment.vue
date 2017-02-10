@@ -14,19 +14,19 @@
                 <p class="c-name">卑劣者</p>
                 <time>2017.02.09 13:17</time>
                 <p class="c-content">拍马屁，我只服那一句“笔神落惊风雨，诗成泣鬼”</p>
-                <span class="c-reply-btn" @click = "showReply">回复</span>
+                <span class="c-reply-btn" @click = "showReply('',$event)">回复</span>
                 <ul class="c-ul-list">
                     <li>
                         <p><a>卑劣者</a>:<span>我只服那一句</span></p>
-                        <time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply">回复</span>
+                        <time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者',$event)">回复</span>
                     </li>
                     <li>
                         <p><a>卑劣者</a>:<span>我只服那一句</span></p>
-                        <time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply">回复</span>
+                        <time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者1',$event)">回复</span>
                     </li>
                 </ul>
-                <div class="c-reply content">
-                    <textarea placeholder="对 卑劣者 的回复"></textarea>
+                <div ref="replyContent"  class="c-reply content">
+                    <textarea :placeholder="replyName"></textarea>
                     <a @click="cancel" class="c-btn cancel">取消</a>
                     <a class="c-btn sure">确定</a>
                 </div>
@@ -234,20 +234,37 @@
     export default{
         data(){
             return{
-                heightNum:80,
+                replyName:'评论',
+                eTarget:''
             }
         },
         methods:{
             enter(){
 
             },
-            showReply(e){
-                let d = e.target.parentNode.querySelector('.c-reply').classList;
-               if(d.value.indexOf('z-show')>=0){
-                   d.remove('z-show')
-               }else{
-                   d.add('z-show')
-               }
+            showReply(name,e){
+                let vm = this;
+
+                let d = this.$refs.replyContent.classList;
+
+
+                    if(d.value.indexOf('z-show')>=0){
+                        if(this.eTarget==e.target){
+                            d.remove('z-show')
+                        }else{
+                            if(name){
+                                this.replyName = '对 '+name+' 的回复'
+                            }else{
+                                this.replyName = '评论'
+                            }
+
+                        }
+                    }else{
+                        d.add('z-show')
+                    }
+               this.eTarget =  e.target;
+
+
 
             },
             cancel(e){

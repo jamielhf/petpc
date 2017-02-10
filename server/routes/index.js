@@ -11,4 +11,5 @@ module.exports = function (app) {
   app.use('/articleList', require('./articleList'));
   app.use('/articleList/photo', require('./articlePhoto'));
   app.use('/articleList/star', require('./star'));
+  app.use('/articleList/comments', require('./comments'));
 };

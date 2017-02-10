@@ -48,8 +48,8 @@
       <file leaf-file-name="index.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/page/index.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="51" column="65" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="65" />
+            <state relative-caret-position="864">
+              <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -65,19 +65,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="comment.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="comment.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/comment.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="200" column="27" selection-start-line="200" selection-start-column="27" selection-end-line="200" selection-end-column="27" />
+            <state relative-caret-position="502">
+              <caret line="253" column="30" selection-start-line="253" selection-start-column="30" selection-end-line="253" selection-end-column="30" />
               <folding>
-                <element signature="e#1886#2010#0" expanded="false" />
-                <element signature="e#2027#2249#0" expanded="false" />
-                <element signature="e#2261#2785#0" expanded="false" />
-                <element signature="e#2804#2897#0" expanded="false" />
-                <element signature="e#4147#4774#0" expanded="false" />
-                <element signature="e#4790#5190#0" expanded="false" />
-                <element signature="e#5204#5509#0" expanded="false" />
+                <element signature="n#style#0;n#!!top" expanded="false" />
+                <element signature="e#1947#2071#0" expanded="false" />
+                <element signature="e#2088#2310#0" expanded="false" />
+                <element signature="e#2322#2846#0" expanded="false" />
+                <element signature="e#2865#2958#0" expanded="false" />
+                <element signature="e#4208#4835#0" expanded="false" />
+                <element signature="e#4851#5251#0" expanded="false" />
+                <element signature="e#5265#5570#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -92,22 +93,6 @@
             <state split_layout="FIRST">
               <first_editor relative-caret-position="0">
                 <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../README.md">
-          <provider editor-type-id="MarkdownFxPreviewEditor">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="243">
-                <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -212,8 +197,8 @@
         <option value="$PROJECT_DIR$/src/page/myStar.vue" />
         <option value="$PROJECT_DIR$/src/page/article.vue" />
         <option value="$PROJECT_DIR$/src/page/content.vue" />
-        <option value="$PROJECT_DIR$/src/components/comment.vue" />
         <option value="$PROJECT_DIR$/../README.md" />
+        <option value="$PROJECT_DIR$/src/components/comment.vue" />
       </list>
     </option>
   </component>
@@ -389,12 +374,12 @@
       <workItem from="1486433401202" duration="4161000" />
       <workItem from="1486519015530" duration="10667000" />
       <workItem from="1486605420908" duration="11470000" />
-      <workItem from="1486691610201" duration="4005000" />
+      <workItem from="1486691610201" duration="6143000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="282483000" />
+    <option name="totallyTimeSpent" value="284621000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
@@ -680,22 +665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/index.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="51" column="65" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/myStar.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="29" column="71" selection-start-line="29" selection-start-column="57" selection-end-line="29" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/content.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2781">
@@ -744,19 +713,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/comment.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="200" column="27" selection-start-line="200" selection-start-column="27" selection-end-line="200" selection-end-column="27" />
-          <folding>
-            <element signature="e#1886#2010#0" expanded="false" />
-            <element signature="e#2027#2249#0" expanded="false" />
-            <element signature="e#2261#2785#0" expanded="false" />
-            <element signature="e#2804#2897#0" expanded="false" />
-            <element signature="e#4147#4774#0" expanded="false" />
-            <element signature="e#4790#5190#0" expanded="false" />
-            <element signature="e#5204#5509#0" expanded="false" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/../README.md">
+      <provider selected="true" editor-type-id="MarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="486">
+            <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -774,17 +741,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
+    <entry file="file://$PROJECT_DIR$/src/page/myStar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="783">
+          <caret line="29" column="71" selection-start-line="29" selection-start-column="57" selection-end-line="29" selection-end-column="71" />
+          <folding />
+        </state>
       </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="243">
-            <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
-            <folding />
-          </first_editor>
-          <second_editor />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/page/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/comment.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="253" column="30" selection-start-line="253" selection-start-column="30" selection-end-line="253" selection-end-column="30" />
+          <folding>
+            <element signature="n#style#0;n#!!top" expanded="false" />
+            <element signature="e#1947#2071#0" expanded="false" />
+            <element signature="e#2088#2310#0" expanded="false" />
+            <element signature="e#2322#2846#0" expanded="false" />
+            <element signature="e#2865#2958#0" expanded="false" />
+            <element signature="e#4208#4835#0" expanded="false" />
+            <element signature="e#4851#5251#0" expanded="false" />
+            <element signature="e#5265#5570#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
