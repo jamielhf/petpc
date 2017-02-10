@@ -14,25 +14,25 @@
                 <p class="c-name">卑劣者</p>
                 <time>2017.02.09 13:17</time>
                 <p class="c-content">拍马屁，我只服那一句“笔神落惊风雨，诗成泣鬼”</p>
-                <span @click = "showReply">回复</span>
+                <span class="c-reply-btn" @click = "showReply">回复</span>
+                <ul class="c-ul-list">
+                    <li>
+                        <p><a>卑劣者</a>:<span>我只服那一句</span></p>
+                        <time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply">回复</span>
+                    </li>
+                    <li>
+                        <p><a>卑劣者</a>:<span>我只服那一句</span></p>
+                        <time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply">回复</span>
+                    </li>
+                </ul>
                 <div class="c-reply content">
                     <textarea placeholder="对 卑劣者 的回复"></textarea>
                     <a @click="cancel" class="c-btn cancel">取消</a>
                     <a class="c-btn sure">确定</a>
                 </div>
+
             </div>
-            <div class="comments-list">
-                <img src="http://localhost:3000/user/20170117/file-1484533279305.png">
-                <p class="c-name">卑劣者</p>
-                <time>2017.02.09 13:17</time>
-                <p class="c-content">拍马屁，我只服那一句“笔落惊风雨，诗成泣鬼神”</p>
-                <span @click = "showReply">回复</span>
-                <div class="c-reply">
-                    <textarea placeholder="对 卑劣者 的回复"></textarea>
-                    <a  @click="cancel" class="c-btn cancel">取消</a>
-                    <a class="c-btn sure">确定</a>
-                </div>
-            </div>
+
         </div>
     </div>
 </template>
@@ -122,17 +122,18 @@
                font-size: 12px;;
            }
            &:hover{
-               span{
-                   display: block;
+               .c-reply-btn{
+
                }
            }
-           span{
+           .c-reply-btn{
                position: absolute;
                z-index: 3;
                right: 40px;
                top:30px;
-               color: $color;
-               display: none;
+               font-size: 14px;
+               color: #999;
+               display: block;
                cursor: pointer;
            }
        }
@@ -188,6 +189,43 @@
            border-radius: 2px;
            border: none;
            padding:5px 12px;
+       }
+       .c-ul-list{
+           margin: 10px 0;
+           border-left: 3px solid #e1e1e1;
+           padding-left: 20px;
+           .c-l-reply{
+               position:relative;
+               display: inline-block;
+                font-size: 12px;
+               color: #999;
+               cursor: pointer;
+           }
+           p{
+               color: #666;
+               font-size: 14px;
+
+           }
+           span{
+                padding-left: 5px;;
+           }
+           a{
+               color: #5a7a96;
+               padding-right: 5px;
+           }
+           time{
+               color: #999;
+               display: inline-block;
+               position: relative;
+               top:0;
+               left:0;
+               font-size: 12px;;
+           }
+           li{
+               position:relative;
+               padding:10px 0;
+               border-bottom:1px dashed #f1f1f1;
+           }
        }
    }
 </style>
