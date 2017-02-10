@@ -50,7 +50,8 @@ import content from '../components/content.vue';
           pass:[],   //审核已通过
           reviewed:[], //审核中
           noPass:[],  //未通过
-          navData:['全部','审核已通过','审核中','未通过']
+          navData:['全部','审核已通过','审核中','未通过'],
+
       }
     },
 

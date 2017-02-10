@@ -40,12 +40,12 @@ const actions = {
     /*
      * 判断登录
      * */
-    checkedLogin({commit}){
+    checkedLogin({commit},cb){
 
        api.checkLogin(function (res) {
 
             commit(types.SET_SIGN_STATUS,res);
-
+            cb(res)
        })
     },
     /*
@@ -56,7 +56,7 @@ const actions = {
         localStorage.uid = '';
         commit(types.SET_SIGN_STATUS,{status:false,data:{}});
         commit(types.SIGN_STATUS,{status:false,data:''});
-        location.href = '/index'
+        location.href = location.href
 
     },
     /*

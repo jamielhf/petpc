@@ -47,12 +47,23 @@ import content from '../components/content.vue';
     },
      created:function () {
          let vm =this;
-         let id = this.$store.getters.getUid;
-         if(id){
-             this.$store.dispatch('getArticle',{uid:id,type:'all'}).then(function () {
-                 vm.article = vm.$store.getters.getArticleList;
-             })
-         }
+
+         this.$store.dispatch('checkedLogin',function (res) {
+             if(res.status){
+                 let id = vm.$store.getters.getUid;
+                 vm.$store.dispatch('getArticle',{uid:id,type:'all'}).then(function () {
+                     vm.article = vm.$store.getters.getArticleList;
+                 })
+             }else{
+                 vm.$store.dispatch('getArticle',{uid:0,type:'all'}).then(function () {
+                     vm.article = vm.$store.getters.getArticleList;
+                 })
+             }
+
+         })
+
+
+
      },
 
      components:{

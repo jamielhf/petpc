@@ -53,7 +53,7 @@
                  case 200 :t = "登录成功";
 
                       setTimeout(function () {
-                          vm.$router.push('/');
+                          vm.$router.go(-1);
                      },500);break;
                  case 301 :t = "邮箱或密码错误";break;
              }

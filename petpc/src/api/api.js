@@ -25,7 +25,9 @@ export  default {
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' +res.data.data.token;
             }
                 cb(res.data)
-        });
+        }).catch(function (error) {
+            console.log(error);
+        });;
 
     },
     /*
@@ -36,7 +38,9 @@ export  default {
         axios.get(baseUrl+'signin',{headers: {'X-Requested-With': 'XMLHttpRequest'}}).then(function (res) {
             console.log(res.data)
             cb(res.data)
-        });
+        }).catch(function (error) {
+            console.log(error);
+        });;
     },
     /*
      * 登录
@@ -52,7 +56,9 @@ export  default {
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' +res.data.data.token;
             }
             cb(res.data)
-        });
+        }).catch(function (error) {
+            console.log(error);
+        });;
 
     },
     /*
@@ -66,7 +72,9 @@ export  default {
             axios.post(baseUrl+'user',data).then(function (res) {
                 console.log(res.data);
                 cb(res.data)
-            })
+            }).catch(function (error) {
+                console.log(error);
+            });
         },1000)
 
     },
@@ -78,7 +86,9 @@ export  default {
         axios.post(baseUrl+'user/head',data,{'content-type': 'multipart/form-data'}).then(function (res) {
             console.log(res.data);
             cb(res.data)
-        })
+        }).catch(function (error) {
+            console.log(error);
+        });
     },
     /*
     *
@@ -88,7 +98,9 @@ export  default {
         axios.post(baseUrl+'articleList/photo',data,{'content-type': 'multipart/form-data'}).then(function (res) {
             console.log(res.data);
             cb(res.data)
-        })
+        }).catch(function (error) {
+            console.log(error);
+        });
     },
     /*
     *
@@ -98,7 +110,9 @@ export  default {
         axios.post(baseUrl+'articleList',data).then(function (res) {
             console.log(res.data);
             cb(res.data)
-        })
+        }).catch(function (error) {
+            console.log(error);
+        });
     },
     /*
     * 获取文章
@@ -123,8 +137,22 @@ export  default {
         }).catch(function (error) {
             console.log(error);
         });
+    },
+    /*
+    * 提交评论
+    *
+    *
+    * */
+    setComments(data,cb){
+        axios.post(baseUrl+'articleList/star',data).then(function (res) {
+            console.log(res.data);
+            if(res.data.status==200){
+                cb(res.data.data)
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
-
 }
 
 

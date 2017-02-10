@@ -2,10 +2,13 @@
     <div class="m-comments">
         <p class="c-title">评论</p>
         <div class="c-p">
-            <img src="http://localhost:3000/user/20170117/file-1484533279305.png">
-            <textarea placeholder="说说你的想法" @keyup.enter="enter" ></textarea>
+            <img :src="userData.head||'/src/assets/avatar_default.png'">
+            <textarea ref = 't1' v-model="content1" placeholder="说说你的想法"  ></textarea>
             <div class="c-submit clearfix" >
-                <div class="c-btn" >评论</div>
+                <div class="c-btn" @click="setComments">评论</div>
+            </div>
+            <div class="c-login" v-if="isShowLogin">
+                <router-link to="/signin" class="c-btn">登录</router-link><span>后发表评论</span>
             </div>
         </div>
         <div class="c-comments">
@@ -26,7 +29,7 @@
                     </li>
                 </ul>
                 <div ref="replyContent"  class="c-reply content">
-                    <textarea :placeholder="replyName"></textarea>
+                    <textarea v-model="content2" :placeholder="replyName"></textarea>
                     <a @click="cancel" class="c-btn cancel">取消</a>
                     <a class="c-btn sure">确定</a>
                 </div>
@@ -46,6 +49,25 @@
        box-sizing: border-box;
        background-color: #fff;
        border-top:1px solid #f1f1f1;
+       .c-login{
+           position: absolute;
+           width: 100%;
+           height: 100%;
+           z-index: 5;
+           text-align: center;
+           top:0;
+           left:0;
+           a,span{
+               position: relative;
+               top:45px;
+               display: inline-block;
+               font-size: 14px;;
+           }
+           a{
+               margin-right: 10px;
+           }
+
+       }
        .c-title{
            text-align: center;
            color: #909090;
@@ -74,6 +96,7 @@
                position: absolute;
                display: block;
                left: 1.5em;
+               border-radius: 100%;;
                top: 20px;
                width:40px;
                height: 2.5em;
@@ -235,40 +258,84 @@
         data(){
             return{
                 replyName:'评论',
-                eTarget:''
+                eTarget:'',
+                content1:'',
+                content2:'',
+                userData:{},
+                isShowLogin:true
             }
+        },
+        created(){
+            let vm = this;
+
+            this.$store.dispatch('checkedLogin',function (res) {
+                console.log(res.status);
+                    if(res.status){
+                        vm.isShowLogin = false
+                        vm.userData = res.data;
+                    }else{
+                        vm.isShowLogin = true
+                        console.log(vm.$refs.t1);
+                        vm.$refs.t1.setAttribute('disabled','disabled');
+                        vm.$refs.t1.setAttribute('placeholder','');
+                    }
+            })
+
         },
         methods:{
             enter(){
 
             },
+
             showReply(name,e){
                 let vm = this;
 
-                let d = this.$refs.replyContent.classList;
+             if(this.$store.getters.isLogin==true){
+                 let d = this.$refs.replyContent.classList;
 
 
-                    if(d.value.indexOf('z-show')>=0){
-                        if(this.eTarget==e.target){
-                            d.remove('z-show')
-                        }else{
-                            if(name){
-                                this.replyName = '对 '+name+' 的回复'
-                            }else{
-                                this.replyName = '评论'
-                            }
+                 if(d.value.indexOf('z-show')>=0){
+                     if(this.eTarget==e.target){
+                         d.remove('z-show')
+                     }else{
+                         if(name){
+                             this.replyName = '对 '+name+' 的回复'
+                         }else{
+                             this.replyName = '评论'
+                         }
 
-                        }
-                    }else{
-                        d.add('z-show')
-                    }
-               this.eTarget =  e.target;
+                     }
+                 }else{
+                     d.add('z-show')
+                 }
+                 this.eTarget =  e.target;
+             }else{
+                 this.$router.push('/signin')
+             }
+
 
 
 
             },
+            /*取消回复*/
             cancel(e){
                 e.target.parentNode.classList.remove('z-show');
+            },
+            /*评论*/
+            setComments(){
+                let vm = this;
+
+
+
+                if(this.content1==''){
+                    vm.$store.commit('SET_TIPS','请输入评论');
+                }else{
+                    vm.$store.dispatch('SET_COMMENTS',{
+                        _aid:'',
+                        _uid:'',
+                        name:'',
+                    })
+                }
             }
         }
 

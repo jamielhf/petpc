@@ -63,11 +63,11 @@ const routes = [
                 component: Write,
                 beforeEnter: notLogin
             },
+            {
+                path:'/article/content',
+                component:Content
+            },
         ]
-    },
-    {
-        path:'/article/content',
-        component:Content
     },
 
     {

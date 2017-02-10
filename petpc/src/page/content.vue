@@ -1,5 +1,6 @@
 <template>
-    <div >
+    <div>
+
      <com-expand  :class ="{'z-active':show}"  @prev = "prev" @next = "next" :selNum = 'selNum'  @changeShow="changeShow" :img="content.imgArr"></com-expand>
 
         <span @click="goBack" class="glyphicon glyphicon-remove g-content-remove"></span>
@@ -9,7 +10,7 @@
            <h1>{{content.title}}</h1>
             <img :src="content.uHead">
            <div class="c-list">
-               <p>作者:12313</p>
+               <p>作者:{{content.username}}</p>
            </div>
             <div class="c-list">
                 <time>{{content.time}}</time>
@@ -52,7 +53,6 @@
 
         <comComment></comComment>
     </div>
-
 </template>
 
 <style  rel="stylesheet/scss" lang="scss">
@@ -62,7 +62,7 @@
         color: $color;
         font-size: 30px;
         position: absolute;
-        top: 20px;
+        top: 120px;
         left:50px;
         z-index: 10;
         cursor:pointer;
@@ -148,12 +148,14 @@
 import expand from '../components/expand.vue';
 import comment from '../components/comment.vue';
 
+
     export default {
         data(){
             return{
                 show:false,
                 imgArr:{},
-                selNum :0
+                selNum :0,
+                userInfo:{}  //用户信息
             }
         },
         created(){
@@ -164,7 +166,7 @@ import comment from '../components/comment.vue';
         },
         components:{
            comExpand:expand,
-           comComment:comment
+           comComment:comment,
         },
         methods: {
             goBack(){

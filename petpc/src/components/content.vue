@@ -210,11 +210,16 @@
             star(id,isStar){
                 let vm = this;
 
-                    this.$store.dispatch('setArticleStar',{
-                        uid:vm.uid,
-                        aid :id,
-                        star:!isStar
-                    });
+                    if(vm.$store.getters.signStatus==true){
+                        this.$store.dispatch('setArticleStar',{
+                            uid:vm.uid,
+                            aid :id,
+                            star:!isStar
+                        });
+
+                    }else{
+                        this.$router.push('signin')
+                    }
 
             }
         }
