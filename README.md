@@ -18,3 +18,6 @@ cd petpc
 npm install
 npm run dev
 
+### 其他
+
+因为工作问题，可能暂时开发的时间会比较少，更新也会变少
