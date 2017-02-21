@@ -6,12 +6,8 @@ var fs = require('fs');
 var upload = require('../middlewares/multerHead');
 
 
-var url = 'http://localhost:3000/';
+var url = 'http://localhost:3001/';
 
-router.get('/', function(req, res, next) {
-
-    res.json({'name':'121233'})
-});
 
 /*
 * 提交图片
