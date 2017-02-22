@@ -2,7 +2,7 @@
 
 <template>
 
-<div class="p-index">
+<div class="p-index clearfix">
     <com-nav ></com-nav>
     <div class="m-content">
         <div class="content-top">

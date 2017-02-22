@@ -7,10 +7,10 @@
                <router-link to="/write"><span class="glyphicon glyphicon-plus"></span></router-link>
                <a><span class="glyphicon glyphicon-search"></span></a>
                <a><span class="glyphicon glyphicon-bell"></span></a>
-               <a class="img-box" @click = "detail">
-                   <img :src=file>
+               <a class="img-box" >
+                   <img @click = "detail" ref = 'showImg' :src=file>
                </a>
-               <ul class="list-group"  v-show=isShow>
+               <ul class="list-group"  v-if=isShow>
                    <li class="list-group-item" @click = "detail"><router-link to="/user/setting">我的主页</router-link></li>
                    <li class="list-group-item" @click = "detail"><router-link to="/user/star">我的收藏</router-link></li>
                    <li class="list-group-item" @click = "detail"><router-link to="/user/article">我的文章</router-link></li>
@@ -60,7 +60,9 @@
                 }
             }
             .img-box{
-
+                display: inline-block;
+                width: 40px;
+                height: 40px;
             }
             img{
                 width: 40px;
@@ -123,9 +125,19 @@
                 isShow:false
             }
         },
+        mounted(){
+            let vm = this;
+            console.log()
+            document.addEventListener('click',function(e){
+                if(e.target!=vm.$refs.showImg){
+                    vm.isShow = false
+                }
+            })
+        },
         methods:{
           detail:function () {
               this.isShow = !this.isShow;
+
           },
           signout:function () {
               this.isShow = !this.isShow;

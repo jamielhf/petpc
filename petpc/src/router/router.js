@@ -4,14 +4,18 @@
 import Vue from 'vue';
 import VueRouter from 'vueRouter';
 import App from '../App.vue'
-import Index from '../page/index.vue'
-import Signup from '../page/signup.vue'
-import Signin from '../page/signin.vue'
-import User from '../page/user.vue'
-import Write from '../page/write.vue'
-import Article from '../page/article.vue'
-import Content from '../page/content.vue'
-import MyStar from '../page/myStar.vue'
+
+
+
+const User = resolve => require(['../page/user.vue'], resolve);
+const Index = resolve => require(['../page/index.vue'], resolve);
+const Signup = resolve => require(['../page/signup.vue'], resolve);
+const Signin = resolve => require(['../page/signin.vue'], resolve);
+const Write = resolve => require(['../page/write.vue'], resolve);
+const Article = resolve => require(['../page/article.vue'], resolve);
+const Content = resolve => require(['../page/content.vue'], resolve);
+const MyStar = resolve => require(['../page/myStar.vue'], resolve);
+
 
 Vue.use(VueRouter);
 
@@ -27,6 +31,7 @@ const isLogin = (to, from, next) => {
         next()
     }
 }
+
 const notLogin = (to, from, next) => {
     let token = localStorage.getItem('token');
     if (!token) {

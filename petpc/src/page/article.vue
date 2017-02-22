@@ -1,5 +1,3 @@
-
-
 <template>
 
 <div class="p-user-article">
@@ -37,8 +35,6 @@
 </style>
 
 <script>
-
-
 import content from '../components/content.vue';
 
  export default {
@@ -71,7 +67,7 @@ import content from '../components/content.vue';
 
              this.all =  this.$store.getters.getArticleList?this.$store.getters.getArticleList:[];
              this.articleData  = this.all;
-               console.log(this.articleData+'_____123')
+
              let k;
 
              for(let v = 0;v<this.$store.getters.getArticleList.length;v++){
