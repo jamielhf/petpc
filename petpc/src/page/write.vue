@@ -268,7 +268,6 @@
 <script>
    import {addressInit} from '../js/lib/address';
 
-
     import { quillEditor } from 'vue-quill-editor'
 
 
@@ -290,11 +289,17 @@
                 immune:2,//免疫
                 insect:2,//驱虫
                 otherData:['是','否','不详'],
-                file:'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg'
+                file:'https://shq-pic.b0.upaiyun.com/Attachment/face/010/82/07/06_avatar.jpg',
+
             }
         },
+        created(){
 
+        },
+        mounted() {
+            addressInit('cmbProvince', 'cmbCity', 'cmbArea');
 
+        },
         components: {
             quillEditor
         },
@@ -331,6 +336,7 @@
             * 保存文章
             * */
             saveArticle:function () {
+                let vm = this;
                 let address = document.querySelector('#cmbProvince').value +"|"+
                              document.querySelector('#cmbCity').value +"|"+
                              document.querySelector('#cmbArea').value ;
@@ -362,7 +368,11 @@
                     content : this.content,
                     address:address
                 };
-                this.$store.dispatch('saveArticle',data)
+                this.$store.dispatch('saveArticle',data).then(function(){
+                   setTimeout(function(){
+                       vm.$router.push('/user/article')
+                   },500)
+                })
 
             },
             /*
@@ -398,20 +408,15 @@
                 return this.$refs.myTextEditor.quillEditor
             },
             imgArr:function () {
-
+//                return []
                 if(this.$store.getters.getImgArr.length>0){
                     return this.$store.getters.getImgArr
                 }else{
                     return []
                 }
             }
-        },
-        mounted() {
-            addressInit('cmbProvince', 'cmbCity', 'cmbArea');
-            // you can use current editor object to do something(editor methods)
-//            console.log('this is my editor', this.editor)
-            // this.editor to do something...
         }
+
     }
 
     </script>

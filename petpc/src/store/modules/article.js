@@ -18,15 +18,28 @@ const getters = {
 
 
 const actions = {
+    /*
+    * 保存文章处理
+    *
+    * */
     saveArticle({commit},data){
         commit(types.SET_LOADING,true);
-        api.saveArticle(data,function (res) {
-            commit(types.SET_LOADING,false);
-            if(res.status==200){
-                commit(types.SET_TIPS,'投递成功');
-            }
+        return new Promise((resolve,reject) =>{
+            api.saveArticle(data,function (res) {
+                commit(types.SET_LOADING,false);
+                if(res.status==200){
+                    commit(types.SET_TIPS,'投递成功');
+                    //删除图片
+                    commit(types.REMOVE_ARTICLE_PHOTO,'all')
+                    resolve()
+                }
+            })
         })
     },
+    /*
+     * 上传图片处理
+     *
+     * */
     articlePhoto({commit},data){
         commit(types.SET_LOADING,true);
         api.articlePhoto(data,function (res) {
@@ -104,7 +117,9 @@ const mutations = {
         state.imgArr.push({photo:data.photo,sPhoto:data.sPhoto})
     },
     [types.REMOVE_ARTICLE_PHOTO](state,key){
-        if(key==0){
+        if(key=='all'){
+            state.imgArr = []
+        }else if(key==0){
             state.imgArr = state.imgArr.slice(1);
         }else{
             console.log(parseInt(key)+1);

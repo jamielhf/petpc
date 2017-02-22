@@ -6,9 +6,8 @@ import VueRouter from 'vueRouter';
 import App from '../App.vue'
 
 
-
+import Index from '../page/index.vue';
 const User = resolve => require(['../page/user.vue'], resolve);
-const Index = resolve => require(['../page/index.vue'], resolve);
 const Signup = resolve => require(['../page/signup.vue'], resolve);
 const Signin = resolve => require(['../page/signin.vue'], resolve);
 const Write = resolve => require(['../page/write.vue'], resolve);
