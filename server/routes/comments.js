@@ -14,8 +14,12 @@ var ensureAuthorized = require('../middlewares/check').ensureAuthorized;
  * */
 
 
-router.get(function (req, res, next) {
-
+router.get('/',function (req, res, next) {
+    res.json({
+        status:401,
+        msg:'参数错误',
+        data:[1]
+    })
 })
 /*
  *
@@ -44,18 +48,23 @@ router.get(function (req, res, next) {
 //         }
 //     ]
 // });
-router.post(ensureAuthorized,function (req, res, next) {
-
+router.post('/',ensureAuthorized,function (req, res, next) {
+    console.log(123);
     if(req.body._uid&&req.body.name&&req.body._aid&&req.body.content){
         var _uid = req.body._uid;
         var name = req.body.name;
         var _aid = req.body._aid;
         var content = req.body.content;
         /*
-         * 判断是否是回复信息
+         * 判断是用户评论还是文章评论
          * */
+        //对用户评论
         if(req.body._cid){
+            Comments.find({_aid:_aid,_cid:req.body._cid},function (err,doc) {
 
+            })
+        }else{
+            //对文章评论
             Comments.find({_aid:_aid},function (err,doc) {
                 if(!err){
                     console.log(doc);
@@ -69,17 +78,17 @@ router.post(ensureAuthorized,function (req, res, next) {
                             content:content,
                             time:(new Date()).getTime(),
                         })
-                        doc.update({_aid:_aid},{$set:{comments:doc[0].comments}},function (err, r) {
+                        Comments.update({_aid:_aid},{$set:{comments:doc[0].comments}},function (err, r) {
                             if(!err){
                                 res.json({
                                     status:200,
                                     msg:'评论成功',
-                                    data:''
+                                    data:doc[0]
                                 })
                             }
                         })
                     }else{
-                     //没有评论记录
+                        //没有评论记录
                         var  comments = [];
                         comments.push({
                             _cid:_cid,
@@ -98,18 +107,16 @@ router.post(ensureAuthorized,function (req, res, next) {
                             res.json({
                                 status:200,
                                 msg:'评论成功',
-                                data:''
+                                data:doc
                             })
                         });
                     }
                 }
             })
 
-
-
-        }else{
-
         }
+
+
     }else{
         res.json({
             status:401,

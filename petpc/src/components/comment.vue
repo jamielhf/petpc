@@ -12,28 +12,63 @@
             </div>
         </div>
         <div class="c-comments">
-            <div class="comments-list">
+            <!--<div class="comments-list">-->
+                <!--<img src="http://localhost:3001/user/20170117/file-1484533279305.png">-->
+                <!--<p class="c-name">卑劣者</p>-->
+                <!--<time>2017.02.09 13:17</time>-->
+                <!--<p class="c-content">拍马屁，我只服那一句“笔神落惊风雨，诗成泣鬼”</p>-->
+                <!--<span class="c-reply-btn" @click = "showReply('',$event)">回复</span>-->
+                <!--<ul class="c-ul-list">-->
+                    <!--<li>-->
+                        <!--<p><a>卑劣者</a>:<span>我只服那一句</span></p>-->
+                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者',$event)">回复</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<p><a>卑劣者</a>:<span>我只服那一句</span></p>-->
+                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者1',$event)">回复</span>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--<div ref="replyContent" v-if = true  class="c-reply content">-->
+                    <!--<textarea v-model="content2" :placeholder="replyName"></textarea>-->
+                    <!--<a @click="cancel" class="c-btn cancel">取消</a>-->
+                    <!--<a class="c-btn sure">确定</a>-->
+                <!--</div>-->
+
+            <!--</div>-->
+            <!--<div class="comments-list">-->
+                <!--<img src="http://localhost:3001/user/20170117/file-1484533279305.png">-->
+                <!--<p class="c-name">卑劣者</p>-->
+                <!--<time>2017.02.09 13:17</time>-->
+                <!--<p class="c-content">拍马屁，我只服那一句“笔神落惊风雨，诗成泣鬼”</p>-->
+                <!--<span class="c-reply-btn" @click = "showReply('',$event)">回复</span>-->
+                <!--<ul class="c-ul-list">-->
+                    <!--<li>-->
+                        <!--<p><a>卑劣者</a>:<span>我只服那一句</span></p>-->
+                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者',$event)">回复</span>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<p><a>卑劣者</a>:<span>我只服那一句</span></p>-->
+                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者1',$event)">回复</span>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--<div ref="replyContent"   class="c-reply content">-->
+                    <!--<textarea v-model="content2" :placeholder="replyName"></textarea>-->
+                    <!--<a @click="cancel" class="c-btn cancel">取消</a>-->
+                    <!--<a class="c-btn sure">确定</a>-->
+                <!--</div>-->
+
+            <!--</div>-->
+            <div class="comments-list" v-for="(item,index) in commentsList "  :id ="item._cid" >
                 <img src="http://localhost:3001/user/20170117/file-1484533279305.png">
-                <p class="c-name">卑劣者</p>
-                <time>2017.02.09 13:17</time>
-                <p class="c-content">拍马屁，我只服那一句“笔神落惊风雨，诗成泣鬼”</p>
+                <p class="c-name">{{item.name}}</p>
+                <time>{{item.time}}</time>
+                <p class="c-content">{{item.content}}</p>
                 <span class="c-reply-btn" @click = "showReply('',$event)">回复</span>
-                <ul class="c-ul-list">
-                    <li>
-                        <p><a>卑劣者</a>:<span>我只服那一句</span></p>
-                        <time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者',$event)">回复</span>
-                    </li>
-                    <li>
-                        <p><a>卑劣者</a>:<span>我只服那一句</span></p>
-                        <time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者1',$event)">回复</span>
-                    </li>
-                </ul>
                 <div ref="replyContent"  class="c-reply content">
                     <textarea v-model="content2" :placeholder="replyName"></textarea>
                     <a @click="cancel" class="c-btn cancel">取消</a>
                     <a class="c-btn sure">确定</a>
                 </div>
-
             </div>
 
         </div>
@@ -268,6 +303,8 @@
         created(){
             let vm = this;
 
+
+
             this.$store.dispatch('checkedLogin',function (res) {
                 console.log(res.status);
                     if(res.status){
@@ -282,6 +319,19 @@
             })
 
         },
+        updated(){
+            console.log(this.comments)
+        },
+        props:{
+            comments:{
+                type:Object
+            }
+        },
+        computed:{
+            commentsList(){
+                return this.comments.comments
+            }
+        },
         methods:{
             enter(){
 
@@ -293,21 +343,19 @@
              if(this.$store.getters.isLogin==true){
                  let d = this.$refs.replyContent.classList;
 
-
-                 if(d.value.indexOf('z-show')>=0){
                      if(this.eTarget==e.target){
                          d.remove('z-show')
                      }else{
-                         if(name){
-                             this.replyName = '对 '+name+' 的回复'
-                         }else{
-                             this.replyName = '评论'
-                         }
+
+                             if(name){
+                                 this.replyName = '对 '+name+' 的回复'
+                             }else{
+                                 this.replyName = '评论'
+                             }
+                             d.add('z-show')
 
                      }
-                 }else{
-                     d.add('z-show')
-                 }
+
                  this.eTarget =  e.target;
              }else{
                  this.$router.push('/signin')
@@ -325,15 +373,18 @@
             setComments(){
                 let vm = this;
 
-
+                console.log(vm.userData);
 
                 if(this.content1==''){
                     vm.$store.commit('SET_TIPS','请输入评论');
                 }else{
-                    vm.$store.dispatch('SET_COMMENTS',{
-                        _aid:'',
-                        _uid:'',
-                        name:'',
+                    vm.$store.dispatch('setComments',{
+                        _aid:this.$route.query.id,
+                        _uid:vm.userData._id,
+                        name:vm.userData.username,
+                        content:vm.content1
+                    }).then(function(){
+                        vm.content1 = ''
                     })
                 }
             }

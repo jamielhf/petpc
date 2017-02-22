@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../model/user');
 var Article = require('../model/article');
+var Comments = require('../model/comments');
 var Star = require('../model/star');
 var ensureAuthorized = require('../middlewares/check').ensureAuthorized;
 
@@ -27,12 +28,19 @@ router.get('/',function (req, res, next) {
                     Article.findByIdAndUpdate(req.query.id,{$set:{read:doc.read+1}}).exec(function(err,doc1) {
 
                             if(!err){
+                                Comments.find({_aid:req.query.id}).exec(function(err,comments){
+                                  if(comments.length>0){
 
-                                    res.json({
-                                            status:200,
-                                            msg:"文章列表",
-                                            data:doc1
-                                    })
+                                      doc1.comments = comments[0];
+                                      res.json({
+                                          status:200,
+                                          msg:"文章列表",
+                                          data:doc1
+                                      })
+                                  }
+
+                                })
+
                             }else{
                                     res.json({
                                             status:404,

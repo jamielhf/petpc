@@ -11,18 +11,7 @@ var _Article = new Schema({
     time:Date,      //日期
     address:String, //地区
     imgArr:[],
-    comments:[
-        {
-            content:String,
-            time:Date,
-            uid:String,
-            uHead:String,
-            username :String,      //用户id
-            rid: String,
-            rHead:String,
-            rUsername:String,
-        }
-    ], //评论
+    comments:{}, //评论
     pet:{},
     read:Number,
     star:Number,    //收藏人数

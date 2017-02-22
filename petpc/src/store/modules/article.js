@@ -72,6 +72,7 @@ const actions = {
                 console.log(res);
                 if(res.status==200){
                     commit(types.GET_ARTICLE_CONTENT,res.data)
+                    commit(types.SET_COMMENTS,res.data.comments)
                 }else{
                     commit(types.SET_TIPS,res.msg);
                 }

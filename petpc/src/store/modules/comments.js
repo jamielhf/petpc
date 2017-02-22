@@ -7,25 +7,34 @@ import api from '../../api/api'
 
 
 const state = {
-
+   comments:''
 }
 
 const getters = {
-
+    getComments : state => state.comments
 }
 
 const actions = {
-    setComments(commit,data){
-     api.setComments(data,function (res) {
-         console.log(res);
+    setComments({commit},data){
+        return new Promise((resolve,reject)=>{
+            api.setComments(data,function (res) {
+                if(res.status==200){
+                    commit('SET_TIPS',res.msg);
+                    commit('SET_COMMENTS',res.data);
+                    resolve()
+                }
+            })
+        })
 
-     })
     }
 }
 
 
 const mutations = {
+    [types.SET_COMMENTS](state,data){
 
+        state.comments = data
+    }
 }
 
 

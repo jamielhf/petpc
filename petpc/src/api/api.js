@@ -144,11 +144,9 @@ export  default {
     *
     * */
     setComments(data,cb){
-        axios.post(baseUrl+'articleList/star',data).then(function (res) {
+        axios.post(baseUrl+'articleList/comments',data).then(function (res) {
             console.log(res.data);
-            if(res.data.status==200){
-                cb(res.data.data)
-            }
+                cb(res.data)
         }).catch(function (error) {
             console.log(error);
         });
@@ -156,10 +154,3 @@ export  default {
 }
 
 
-// axios.post(baseUrl+'index/getList').then(function (res) {
-//     if (res.data.data.code == 1000) {
-//         setTimeout(function () {
-//             cb(res.data.data.data);
-//         }, 300)
-//     }
-// });

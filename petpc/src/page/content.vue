@@ -51,7 +51,7 @@
 
     </div>
 
-        <comComment></comComment>
+        <comComment :comments = commentsData></comComment>
     </div>
 </template>
 
@@ -196,7 +196,7 @@ import comment from '../components/comment.vue';
              content(){
                  let c = this.$store.getters.getArticleContent
                 if(c._id){
-                    c.cLength = c.comments.length
+                    c.cLength = c.comments.comments.length
                     return c
                 }else{
                     return []
@@ -219,10 +219,20 @@ import comment from '../components/comment.vue';
                  }else{
                      return false
                  }
+             },
+             commentsData(){
+                 if(this.$store.getters.getComments){
+                     return this.$store.getters.getComments
+                 }else{
+                     return {}
+                 }
+
+
              }
 
         },
         mounted() {
+
         }
     }
 
