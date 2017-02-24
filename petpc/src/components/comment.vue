@@ -59,7 +59,7 @@
 
             <!--</div>-->
             <div class="comments-list" v-for="(item,index) in commentsList "  :id ="item._cid" >
-                <img src="http://localhost:3001/user/20170117/file-1484533279305.png">
+                <img :src="item.head">
                 <p class="c-name">{{item.name}}</p>
                 <time>{{item.newTime}}</time>
                 <p class="c-content">{{item.content}}</p>
@@ -404,10 +404,12 @@ import util from '../js/util'
                 if(this.content1==''){
                     vm.$store.commit('SET_TIPS','请输入评论');
                 }else{
+                    console.log(vm.userData)
                     vm.$store.dispatch('setComments',{
                         _aid:this.$route.query.id,
                         _uid:vm.userData._id,
                         name:vm.userData.username,
+                        head:vm.userData.head,
                         content:vm.content1
                     }).then(function(){
                         vm.content1 = ''

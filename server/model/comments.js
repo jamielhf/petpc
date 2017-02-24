@@ -9,6 +9,7 @@ var _Comments = new Schema({
             _uid:String, //用户id
             name:String, //用户昵称
             content:String, //评论内容
+            head:String,
             time:Date,  //日期
             replyContent:[
                 {

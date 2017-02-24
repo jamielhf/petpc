@@ -50,7 +50,7 @@ router.get('/',function (req, res, next) {
 // });
 router.post('/',ensureAuthorized,function (req, res, next) {
     console.log(123);
-    if(req.body._uid&&req.body.name&&req.body._aid&&req.body.content){
+    if(req.body._uid&&req.body.name&&req.body._aid&&req.body.content&&req.body.head){
         var _uid = req.body._uid;
         var name = req.body.name;
         var _aid = req.body._aid;
@@ -76,6 +76,7 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                             _uid:_uid,
                             name:name,
                             content:content,
+                            head:req.body.head,
                             time:(new Date()).getTime(),
                         })
                         Comments.update({_aid:_aid},{$set:{comments:doc[0].comments}},function (err, r) {
@@ -95,6 +96,7 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                             _uid:_uid,
                             name:name,
                             content:content,
+                            head:req.body.head,
                             time:(new Date()).getTime(),
                         });
 
