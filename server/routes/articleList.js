@@ -25,19 +25,29 @@ router.get('/',function (req, res, next) {
 
         if(req.query.id){
                 Article.findOne({_id:req.query.id}).exec(function (err, doc) {
+
+
                     Article.findByIdAndUpdate(req.query.id,{$set:{read:doc.read+1}}).exec(function(err,doc1) {
 
                             if(!err){
                                 Comments.find({_aid:req.query.id}).exec(function(err,comments){
+
                                   if(comments.length>0){
 
                                       doc1.comments = comments[0];
-                                      res.json({
-                                          status:200,
-                                          msg:"文章列表",
-                                          data:doc1
-                                      })
+
+                                  }else{
+                                      doc1.comments ={
+                                          _aid:req.query.id,
+                                          comments:[]
+                                      };
                                   }
+                                    console.log(123);
+                                    res.json({
+                                        status:200,
+                                        msg:"文章列表",
+                                        data:doc1
+                                    })
 
                                 })
 

@@ -71,7 +71,7 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                     var _cid = parseInt((new Date()).getTime()/1000);
                     //已有评论记录
                     if(doc.length>0){
-                        doc[0].comments.push({
+                        doc[0].comments.unshift({
                             _cid:_cid,
                             _uid:_uid,
                             name:name,
@@ -101,6 +101,7 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                         var commentsModel  = new Comments({
                             _aid:_aid,
                             comments:comments,
+                            time:(new Date()).getTime(),
                             replyContent:[]
                         });
                         commentsModel.save(function (err, doc) {

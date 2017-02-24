@@ -17,18 +17,18 @@
                 <!--<p class="c-name">卑劣者</p>-->
                 <!--<time>2017.02.09 13:17</time>-->
                 <!--<p class="c-content">拍马屁，我只服那一句“笔神落惊风雨，诗成泣鬼”</p>-->
-                <!--<span class="c-reply-btn" @click = "showReply('',$event)">回复</span>-->
+                <!--<span class="c-reply-btn" @click = "showReply('1','',$event)">回复</span>-->
                 <!--<ul class="c-ul-list">-->
                     <!--<li>-->
                         <!--<p><a>卑劣者</a>:<span>我只服那一句</span></p>-->
-                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者',$event)">回复</span>-->
+                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('1','卑劣者',$event)">回复</span>-->
                     <!--</li>-->
                     <!--<li>-->
                         <!--<p><a>卑劣者</a>:<span>我只服那一句</span></p>-->
-                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者1',$event)">回复</span>-->
+                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('1','卑劣者1',$event)">回复</span>-->
                     <!--</li>-->
                 <!--</ul>-->
-                <!--<div ref="replyContent" v-if = true  class="c-reply content">-->
+                <!--<div ref="t1" id="1" class="js-reply c-reply content z-none">-->
                     <!--<textarea v-model="content2" :placeholder="replyName"></textarea>-->
                     <!--<a @click="cancel" class="c-btn cancel">取消</a>-->
                     <!--<a class="c-btn sure">确定</a>-->
@@ -40,18 +40,18 @@
                 <!--<p class="c-name">卑劣者</p>-->
                 <!--<time>2017.02.09 13:17</time>-->
                 <!--<p class="c-content">拍马屁，我只服那一句“笔神落惊风雨，诗成泣鬼”</p>-->
-                <!--<span class="c-reply-btn" @click = "showReply('',$event)">回复</span>-->
+                <!--<span class="c-reply-btn" @click = "showReply('2','',$event)">回复</span>-->
                 <!--<ul class="c-ul-list">-->
                     <!--<li>-->
                         <!--<p><a>卑劣者</a>:<span>我只服那一句</span></p>-->
-                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者',$event)">回复</span>-->
+                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('2','卑劣者',$event)">回复</span>-->
                     <!--</li>-->
                     <!--<li>-->
                         <!--<p><a>卑劣者</a>:<span>我只服那一句</span></p>-->
-                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('卑劣者1',$event)">回复</span>-->
+                        <!--<time>2017.02.09 13:17</time> <span class="c-l-reply" @click = "showReply('2','卑劣者1',$event)">回复</span>-->
                     <!--</li>-->
                 <!--</ul>-->
-                <!--<div ref="replyContent"   class="c-reply content">-->
+                <!--<div ref="t2" id="2" class="js-reply c-reply content z-none">-->
                     <!--<textarea v-model="content2" :placeholder="replyName"></textarea>-->
                     <!--<a @click="cancel" class="c-btn cancel">取消</a>-->
                     <!--<a class="c-btn sure">确定</a>-->
@@ -61,10 +61,10 @@
             <div class="comments-list" v-for="(item,index) in commentsList "  :id ="item._cid" >
                 <img src="http://localhost:3001/user/20170117/file-1484533279305.png">
                 <p class="c-name">{{item.name}}</p>
-                <time>{{item.time}}</time>
+                <time>{{item.newTime}}</time>
                 <p class="c-content">{{item.content}}</p>
-                <span class="c-reply-btn" @click = "showReply('',$event)">回复</span>
-                <div ref="replyContent"  class="c-reply content">
+                <span class="c-reply-btn" @click = "showReply(item._cid,'',$event)">回复</span>
+                <div :ref="item.ref"  class="c-reply content z-none">
                     <textarea v-model="content2" :placeholder="replyName"></textarea>
                     <a @click="cancel" class="c-btn cancel">取消</a>
                     <a class="c-btn sure">确定</a>
@@ -199,7 +199,9 @@
            position: relative;
            transition:all .3s;
            margin-bottom: 50px;
-           display: none;
+           &.z-none{
+                display:none;
+            }
            textarea{
                margin-top: 10px;
                height: 80px;
@@ -288,7 +290,7 @@
    }
 </style>
 <script>
-
+import util from '../js/util'
     export default{
         data(){
             return{
@@ -297,7 +299,10 @@
                 content1:'',
                 content2:'',
                 userData:{},
-                isShowLogin:true
+                isShowLogin:true,
+                lastRef:'',
+                lastId:'',
+                lastDom:'',
             }
         },
         created(){
@@ -319,9 +324,7 @@
             })
 
         },
-        updated(){
-            console.log(this.comments)
-        },
+
         props:{
             comments:{
                 type:Object
@@ -329,39 +332,62 @@
         },
         computed:{
             commentsList(){
-                return this.comments.comments
+              if(this.comments.comments){
+                  let i = 0,l = this.comments.comments.length;
+                   if(l>0){
+                       this.comments.comments.map(function(v,k){
+                           v.ref = 't'+v._cid;
+                           v.newTime = util.changeTime(v.time)
+                       })
+                   }
+
+                  console.log(this.comments.comments)
+
+                  return this.comments.comments
+              }else{
+                  return []
+              }
+
             }
         },
         methods:{
             enter(){
 
             },
-
-            showReply(name,e){
+            showReply(id,name,e){
+                console.log(id)
                 let vm = this;
+                let d = 't'+id;
+                let c = vm.$refs[d][0].classList;
 
-             if(this.$store.getters.isLogin==true){
-                 let d = this.$refs.replyContent.classList;
+                if(this.$store.getters.isLogin==true){
 
-                     if(this.eTarget==e.target){
-                         d.remove('z-show')
-                     }else{
+                    if(vm.lastDom == e.target){
 
-                             if(name){
-                                 this.replyName = '对 '+name+' 的回复'
-                             }else{
-                                 this.replyName = '评论'
+                        if(c.value.indexOf('z-none')>=0){
+                            c.remove('z-none')
+                        }else{
+                            c.add('z-none')
+                        }
+                    }else{
+                        if(name){
+                            this.replyName = '对 '+name+' 的回复'
+                        }else{
+                            this.replyName = '评论'
+                        }
+                         if(vm.lastId!=id){
+                             if(vm.lastId){
+                                 vm.$refs['t'+vm.lastId][0].classList.add('z-none');
                              }
-                             d.add('z-show')
+                             c.remove('z-none');
+                        }
 
-                     }
-
-                 this.eTarget =  e.target;
-             }else{
-                 this.$router.push('/signin')
-             }
-
-
+                    }
+                    vm.lastDom = e.target;
+                    vm.lastId = id
+                }else{
+                    this.$router.push('/signin')
+                }
 
 
             },
