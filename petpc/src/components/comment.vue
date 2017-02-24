@@ -67,7 +67,7 @@
                 <div :ref="item.ref"  class="c-reply content z-none">
                     <textarea v-model="content2" :placeholder="replyName"></textarea>
                     <a @click="cancel" class="c-btn cancel">取消</a>
-                    <a class="c-btn sure">确定</a>
+                    <a class="c-btn sure" @click ="submitReply(item._cid)">确定</a>
                 </div>
             </div>
 
@@ -354,8 +354,14 @@ import util from '../js/util'
             enter(){
 
             },
+            /*
+            *
+            * 显示回复框
+            * id 回复框id
+            * name 回复人昵称
+            * */
             showReply(id,name,e){
-                console.log(id)
+
                 let vm = this;
                 let d = 't'+id;
                 let c = vm.$refs[d][0].classList;
@@ -415,6 +421,13 @@ import util from '../js/util'
                         vm.content1 = ''
                     })
                 }
+            },
+            /*
+            * 回复别人
+            * cid 评论id
+            * */
+            submitReply(cid){
+
             }
         }
 

@@ -60,8 +60,38 @@ router.post('/',ensureAuthorized,function (req, res, next) {
          * */
         //对用户评论
         if(req.body._cid){
-            Comments.find({_aid:_aid,_cid:req.body._cid},function (err,doc) {
+            Comments.find({_aid:_aid},function (err,doc) {
+                   if(!err){
+                       //_uid:String, //评论者id
+                       //    username:String, //用户昵称
+                       //    _rid:String, //回复的人的id
+                       //    rname:String, //回复的人的昵称
+                       //    content:String, //评论内容
+                       //    time:Date  //日期
+                       var i=0,l= doc[0].comments.length;
+                       var replyContent = {
+                           _uid:_uid,
+                           _rid:req.body._rid,
+                           rname:req.body.rname,
+                           content:req.body.content,
+                           time:(new Date()).getTime(),
+                       }
+                      for(;i<l;i++){
+                          if(doc[0].comments[i]._cid ==req.body._cid){
+                              doc[0].comments[i].replyContent.unshift(replyContent)
+                          }
+                      }
+                       Comments.update({_aid:_aid},{$set:{comments:doc[0].comments}},function (err, r) {
+                           if(!err){
+                               res.json({
+                                   status:200,
+                                   msg:'评论成功',
+                                   data:doc[0]
+                               })
+                           }
+                       })
 
+                   }
             })
         }else{
             //对文章评论
@@ -98,13 +128,12 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                             content:content,
                             head:req.body.head,
                             time:(new Date()).getTime(),
+                            replyContent:[]
                         });
 
                         var commentsModel  = new Comments({
                             _aid:_aid,
                             comments:comments,
-                            time:(new Date()).getTime(),
-                            replyContent:[]
                         });
                         commentsModel.save(function (err, doc) {
                             res.json({
