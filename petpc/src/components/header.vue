@@ -155,7 +155,7 @@
                 return this.isLogin
             },
             file:function () {
-                console.log(this.$store.getters.getInfo.head)
+
                 if(this.$store.getters.getInfo.head){
                     return this.$store.getters.getInfo.head
                 }else{

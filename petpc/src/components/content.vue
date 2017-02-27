@@ -210,7 +210,7 @@
             star(id,isStar){
                 let vm = this;
 
-                    if(vm.$store.getters.signStatus==true){
+                if(this.$store.getters.isLogin==true){
                         this.$store.dispatch('setArticleStar',{
                             uid:vm.uid,
                             aid :id,

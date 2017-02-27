@@ -85,26 +85,35 @@ router.get('/',function (req, res, next) {
                 Star.find({_uid:req.query.uid}).limit(20).exec(function (err, doc) {
 
                     if(!err){
-                        Article.find({_id:{$in:doc[0]._aid}}).sort({time:-1}).exec(function (err, r) {
-                            if(!err){
-                                var i=0,l=r.length;
-                                for(;i<l;i++){
-                                    r[i].isStar = true
+                        if(doc[0]){
+                            Article.find({_id:{$in:doc[0]._aid}}).sort({time:-1}).exec(function (err, r) {
+                                if(!err){
+                                    var i=0,l=r.length;
+                                    for(;i<l;i++){
+                                        r[i].isStar = true
+                                    }
+                                    res.json({
+                                        status:200,
+                                        msg:"文章列表",
+                                        data:r
+                                    })
+                                }else{
+                                    res.json({
+                                        status:404,
+                                        msg:"请求失败",
+                                        data:''
+                                    })
                                 }
-                                res.json({
-                                    status:200,
-                                    msg:"文章列表",
-                                    data:r
-                                })
-                            }else{
-                                res.json({
-                                    status:404,
-                                    msg:"请求失败",
-                                    data:''
-                                })
-                            }
 
-                        })
+                            })
+                        }else{
+                            res.json({
+                                status:200,
+                                msg:"文章列表",
+                                data:[]
+                            })
+                        }
+
                     }
 
                 })
