@@ -50,7 +50,7 @@ router.get('/',ensureAuthorized,function (req,res,next) {
                     Star.update({_id:doc[0]._id},{$set:{_aid:doc[0]._aid}},function(err,result){
 
                         Article.find({_id:aid},function(err,doc){
-                    
+
                             if(!err){
                                 if(star=="true"){
                                     Article.update({_id:aid},{$set:{star:doc[0].star+1}},function (err,d) {
