@@ -186,6 +186,7 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                                 data.comments = [];
                                 data.star = 0;
                                 data.status = 0;
+                                data.commentsNum = 0;
                                 data.read = 0;
                                 data.isDone = false;
                                 data.isStar = false;

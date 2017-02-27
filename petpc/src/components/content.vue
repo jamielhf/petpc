@@ -17,10 +17,10 @@
                                     <div class="glyphicon glyphicon-heart"></div>
                                     <div class="p1">{{v.star}}</div>
                                 </div>
-                                <div class="list-icon" title="评论">
+                                <router-link :to="{path:'/article/content',query:{id:v._id}}" class="list-icon" title="评论">
                                     <div class="glyphicon glyphicon-comment"></div>
-                                    <div class="p1">{{v.comments.length}}</div>
-                                </div>
+                                    <div class="p1">{{v.commentsNum}}</div>
+                                </router-link>
                             </div>
                             <div class="c-row">
                                 <div class="list-right">
@@ -198,7 +198,7 @@
             },
         },
         updated:function () {
-
+            console.log(this.article)
 //            console.log(this.article[0].imgArr)
         },
         computed:{

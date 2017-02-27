@@ -12,6 +12,7 @@ var _Article = new Schema({
     address:String, //地区
     imgArr:[],
     comments:{}, //评论
+    commentsNum:Number, //评论
     pet:{},
     read:Number,
     star:Number,    //收藏人数
