@@ -50,7 +50,7 @@ router.get('/',function (req, res, next) {
 // });
 router.post('/',ensureAuthorized,function (req, res, next) {
     console.log(123);
-    if(req.body._uid&&req.body.name&&req.body._aid&&req.body.content&&req.body.head){
+    if(req.body._uid&&req.body.name&&req.body._aid&&req.body.content){
         var _uid = req.body._uid;
         var name = req.body.name;
         var _aid = req.body._aid;
@@ -71,11 +71,12 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                        var i=0,l= doc[0].comments.length;
                        var replyContent = {
                            _uid:_uid,
+                           username:name,
                            _rid:req.body._rid,
                            rname:req.body.rname,
-                           content:req.body.content,
+                           content:content,
                            time:(new Date()).getTime(),
-                       }
+                       };
                       for(;i<l;i++){
                           if(doc[0].comments[i]._cid ==req.body._cid){
                               doc[0].comments[i].replyContent.unshift(replyContent)
