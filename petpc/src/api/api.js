@@ -116,10 +116,12 @@ export  default {
     },
     /*
     * 获取文章
+    * data {uid:0,type:'all'} uid 为0就是获取全部，不分用户，
+    * type :all ,star,myStar,time,comments
+    *
     * */
     getArticle(data,cb){
         axios.get(baseUrl+'articleList',{params:data}).then(function (res) {
-
             cb(res.data)
         }).catch(function (error) {
             console.log(error);

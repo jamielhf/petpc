@@ -123,6 +123,7 @@
            margin-top: 20px;
            left:30px;
            .c-btn{
+               position: absolute;
                top:5px;
                right: 0;
            }
@@ -245,18 +246,7 @@
                border-color: $color
            }
        }
-       .c-btn{
-           position: absolute;
-           text-decoration: none;
-           cursor: pointer;
-           display: inline-block;
-           background: $color;
-           color: #fff;
-           font-size: 14px;
-           border-radius: 2px;
-           border: none;
-           padding:5px 12px;
-       }
+
        .c-ul-list{
            margin: 10px 0;
            border-left: 3px solid #e1e1e1;

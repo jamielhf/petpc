@@ -52,7 +52,7 @@ const actions = {
     },
     //文章列表
     getArticle({commit},data){
-        console.log(data);
+
         return new Promise((resolve, reject) => {
                 api.getArticle(data,function (res) {
                     if(res.status==200){

@@ -72,14 +72,7 @@ router.get('/',function (req, res, next) {
 
 
         if(req.query.type&&req.query.uid){
-                var s , q = {};
-                switch(req.query.type){
-                        case 'time' :s = {time:-1};break;
-                        case 'star' :s = {star:-1};break;
-                        case 'all' :s = {time:-1};break;
-                        case 'my' :s = {star:-1};q = {uid:req.query.uid};break;
-                        default :s = {time:-1};
-                }
+
 
             if(req.query.type=='myStar'){
                 Star.find({_uid:req.query.uid}).limit(20).exec(function (err, doc) {
@@ -119,6 +112,18 @@ router.get('/',function (req, res, next) {
                 })
 
             }else{
+                var s , q = {};
+                switch(req.query.type){
+                    case 'time' :s = {time:-1};break;
+                    case 'star' :s = {star:-1};break;
+                    case 'noPass' :q = {status:2};break;
+                    case 'reviewed' :q = {status:0};break;
+                    case 'pass' :q = {status:1};break;
+                    case 'all' :s = {time:-1};break;
+                    case 'comments' :s = {commentsNum:-1};break;
+                    case 'my' :s = {star:-1};q = {uid:req.query.uid};break;
+                    default :s = {time:-1};
+                }
                 Article.find(q).sort(s).limit(20).exec(function (err, doc) {
                     /*
                      *

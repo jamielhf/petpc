@@ -7,6 +7,11 @@
                <router-link to="/write"><span class="glyphicon glyphicon-plus"></span></router-link>
                <a><span class="glyphicon glyphicon-search"></span></a>
                <a><span class="glyphicon glyphicon-bell"></span></a>
+               <router-link v-if="isAdmin" to="/admin"><span class="glyphicon glyphicon glyphicon-cog"></span></router-link>
+
+
+
+
                <a class="img-box" >
                    <img @click = "detail" ref = 'showImg' :src=file>
                </a>
@@ -127,7 +132,7 @@
         },
         mounted(){
             let vm = this;
-            console.log()
+
             document.addEventListener('click',function(e){
                 if(e.target!=vm.$refs.showImg){
                     vm.isShow = false
@@ -153,6 +158,15 @@
         computed:{
             a:function () {
                 return this.isLogin
+            },
+            isAdmin:function(){
+               let info = this.$store.getters.getInfo;
+                console.log(info)
+                if(info.type=='user'){
+                    return false
+                }else if(info.type=='admin'){
+                    return true
+                }
             },
             file:function () {
 

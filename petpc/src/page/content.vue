@@ -51,7 +51,11 @@
 
     </div>
 
-        <comComment :comments = commentsData></comComment>
+        <comComment v-if="isAdmin" :comments = commentsData></comComment>
+        <div v-if="!isAdmin"  class="c-btn-group">
+            <a class="c-btn c-pass">通过</a>
+            <a  class="c-btn c-nopass">不通过</a>
+        </div>
     </div>
 </template>
 
@@ -66,6 +70,19 @@
         left:50px;
         z-index: 10;
         cursor:pointer;
+    }
+    .c-btn-group{
+            width:285px;
+            margin:30px auto;
+        .c-btn{
+           width:100px;
+            text-align: center;
+              margin:0 20px;
+            &.c-nopass{
+                background-color: #666;
+             }
+
+        }
     }
     .g-content{
         position: relative;
@@ -202,6 +219,14 @@ import comment from '../components/comment.vue';
                     return []
                 }
 
+             },
+             isAdmin(){
+                 let info = this.$store.getters.getInfo;
+                 if(info.type=='user'){
+                     return true
+                 }else if(info.type=='admin'){
+                     return false
+                 }
              },
              pet(){
                  if(this.$store.getters.getArticleContent.pet){

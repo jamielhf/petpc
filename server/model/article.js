@@ -16,7 +16,7 @@ var _Article = new Schema({
     pet:{},
     read:Number,
     star:Number,    //收藏人数
-    status:String, //文章审核状态
+    status:String, //文章审核状态 0 审核中 1 审核通过 2审核不通过
     isDone:Boolean,  //文章类型，是否领养成功
     isStar:Boolean
 });
