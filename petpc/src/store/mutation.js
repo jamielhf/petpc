@@ -39,6 +39,15 @@ export const GET_ARTICLE_CONTENT = 'GET_ARTICLE_CONTENT'
 export const SET_ARTICLE_STAR = 'SET_ARTICLE_STAR';
 
 /*
+* 管理员
+*
+* */
+export const SET_ARTICLE_STATUS = 'SET_ARTICLE_STATUS'
+
+
+
+
+/*
 *
 * 评论
 * */

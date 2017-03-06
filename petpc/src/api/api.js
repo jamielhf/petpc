@@ -10,6 +10,8 @@ let token = localStorage.token;
 
 axios.defaults.headers.common['Authorization'] = 'Bearer ' +token;
 
+
+
 export  default {
 
     /*
@@ -96,7 +98,6 @@ export  default {
     * */
     articlePhoto(data,cb){
         axios.post(baseUrl+'articleList/photo',data,{'content-type': 'multipart/form-data'}).then(function (res) {
-
             cb(res.data)
         }).catch(function (error) {
             console.log(error);
@@ -147,12 +148,27 @@ export  default {
     * */
     setComments(data,cb){
         axios.post(baseUrl+'articleList/comments',data).then(function (res) {
-
                 cb(res.data)
         }).catch(function (error) {
             console.log(error);
         });
+    },
+    /*
+    * 修改文章审核状态
+    * @data {
+    *   id:文章id，
+    *   status:审核状态，
+    * }
+    * */
+    setArticleStatus(data,cb){
+        axios.get(baseUrl+'articleList/status',{params:data}).then(function(res){
+            cb(res.data)
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
+
+
 }
 
 
