@@ -3,10 +3,6 @@
       <ul class="nav-ul">
           <li class="nav-li " :class = {active:isActive[0]} @click="handleClick(0)">
               <div>首页</div>
-              <ul class="nav-ul-ul">
-                  <li><a class="active">分类1</a></li>
-                  <li><a>分类1</a></li>
-              </ul>
 
           </li>
           <li class="nav-li"  :class = {active:isActive[1]}  @click="handleClick(1)">

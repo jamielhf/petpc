@@ -52,7 +52,7 @@ const actions = {
     },
     //文章列表
     getArticle({commit},data){
-        console.log(data);
+
         return new Promise((resolve, reject) => {
                 api.getArticle(data,function (res) {
                     if(res.status==200){
@@ -91,6 +91,19 @@ const actions = {
 
         })
 
+    },
+    //修改文章审核状态
+    setArticleStatus({commit},data){
+
+        return new Promise((resolve,rejected) =>{
+            api.setArticleStatus(data,function(res){
+                if(res.status ==200){
+                    resolve()
+                }
+
+            })
+        })
+
     }
 
 }
@@ -102,11 +115,9 @@ const mutations = {
     [types.GET_ARTICLE](state,data){
          if(data.length>0){
 
-
              for(let i=0;i<data.length;i++){
 
                      data[i].time =   util.changeTime(data[i].time);
-
 
              }
          }
@@ -154,7 +165,8 @@ const mutations = {
 
             }
         }
-    }
+    },
+
 
 }
 

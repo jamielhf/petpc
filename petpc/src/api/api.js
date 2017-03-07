@@ -10,6 +10,8 @@ let token = localStorage.token;
 
 axios.defaults.headers.common['Authorization'] = 'Bearer ' +token;
 
+
+
 export  default {
 
     /*
@@ -18,7 +20,7 @@ export  default {
     signup: function (data,cb) {
 
         axios.post(baseUrl+'signup',data).then(function (res) {
-            console.log(res.data);
+
             if(res.data.status==200){
                 localStorage.token = res.data.data.token;
                 localStorage.uid = res.data.data._id;
@@ -36,7 +38,7 @@ export  default {
     * */
     checkLogin:function (cb) {
         axios.get(baseUrl+'signin',{headers: {'X-Requested-With': 'XMLHttpRequest'}}).then(function (res) {
-            console.log(res.data)
+
             cb(res.data)
         }).catch(function (error) {
             console.log(error);
@@ -49,7 +51,7 @@ export  default {
     signin: function (data,cb) {
 
         axios.post(baseUrl+'signin',data).then(function (res) {
-            console.log(res.data);
+
             if(res.data.status==200){
                 localStorage.token = res.data.data.token;
                 localStorage.uid = res.data.data._id;
@@ -70,7 +72,7 @@ export  default {
         console.log(data);
         setTimeout(function () {
             axios.post(baseUrl+'user',data).then(function (res) {
-                console.log(res.data);
+
                 cb(res.data)
             }).catch(function (error) {
                 console.log(error);
@@ -84,7 +86,7 @@ export  default {
     * */
     setHead:function (data,cb) {
         axios.post(baseUrl+'user/head',data,{'content-type': 'multipart/form-data'}).then(function (res) {
-            console.log(res.data);
+
             cb(res.data)
         }).catch(function (error) {
             console.log(error);
@@ -96,7 +98,6 @@ export  default {
     * */
     articlePhoto(data,cb){
         axios.post(baseUrl+'articleList/photo',data,{'content-type': 'multipart/form-data'}).then(function (res) {
-            console.log(res.data);
             cb(res.data)
         }).catch(function (error) {
             console.log(error);
@@ -116,10 +117,12 @@ export  default {
     },
     /*
     * 获取文章
+    * data {uid:0,type:'all'} uid 为0就是获取全部，不分用户，
+    * type :all ,star,myStar,time,comments
+    *
     * */
     getArticle(data,cb){
         axios.get(baseUrl+'articleList',{params:data}).then(function (res) {
-            console.log(res.data);
             cb(res.data)
         }).catch(function (error) {
             console.log(error);
@@ -131,7 +134,7 @@ export  default {
     * */
     setStar(data,cb){
         axios.get(baseUrl+'articleList/star',{params:data}).then(function (res) {
-            console.log(res.data);
+
             cb(res.data)
 
         }).catch(function (error) {
@@ -145,12 +148,27 @@ export  default {
     * */
     setComments(data,cb){
         axios.post(baseUrl+'articleList/comments',data).then(function (res) {
-            console.log(res.data);
                 cb(res.data)
         }).catch(function (error) {
             console.log(error);
         });
+    },
+    /*
+    * 修改文章审核状态
+    * @data {
+    *   id:文章id，
+    *   status:审核状态，
+    * }
+    * */
+    setArticleStatus(data,cb){
+        axios.get(baseUrl+'articleList/status',{params:data}).then(function(res){
+            cb(res.data)
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
+
+
 }
 
 

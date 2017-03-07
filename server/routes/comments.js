@@ -4,6 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var Comments = require('../model/comments');
+var Article = require('../model/article');
 var ensureAuthorized = require('../middlewares/check').ensureAuthorized;
 
 
@@ -49,8 +50,8 @@ router.get('/',function (req, res, next) {
 //     ]
 // });
 router.post('/',ensureAuthorized,function (req, res, next) {
-    console.log(123);
-    if(req.body._uid&&req.body.name&&req.body._aid&&req.body.content&&req.body.head){
+
+    if(req.body._uid&&req.body.name&&req.body._aid&&req.body.content){
         var _uid = req.body._uid;
         var name = req.body.name;
         var _aid = req.body._aid;
@@ -71,11 +72,12 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                        var i=0,l= doc[0].comments.length;
                        var replyContent = {
                            _uid:_uid,
+                           username:name,
                            _rid:req.body._rid,
                            rname:req.body.rname,
-                           content:req.body.content,
+                           content:content,
                            time:(new Date()).getTime(),
-                       }
+                       };
                       for(;i<l;i++){
                           if(doc[0].comments[i]._cid ==req.body._cid){
                               doc[0].comments[i].replyContent.unshift(replyContent)
@@ -111,11 +113,19 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                         })
                         Comments.update({_aid:_aid},{$set:{comments:doc[0].comments}},function (err, r) {
                             if(!err){
-                                res.json({
-                                    status:200,
-                                    msg:'评论成功',
-                                    data:doc[0]
+                                Article.find({_id:_aid},function(err,article){
+                                    Article.update({_id:_aid},{$set:{commentsNum:article[0].commentsNum+1}}).exec(function(err){
+                                     if(!err){
+                                         res.json({
+                                             status:200,
+                                             msg:'评论成功',
+                                             data:doc[0]
+                                         })
+                                     }
+
+                                    })
                                 })
+
                             }
                         })
                     }else{
@@ -136,11 +146,19 @@ router.post('/',ensureAuthorized,function (req, res, next) {
                             comments:comments,
                         });
                         commentsModel.save(function (err, doc) {
-                            res.json({
-                                status:200,
-                                msg:'评论成功',
-                                data:doc
+                            Article.find({_id:_aid},function(err,article){
+                                Article.update({_id:_aid},{$set:{commentsNum:article[0].commentsNum+1}}).exec(function(err){
+                                    if(!err){
+                                        res.json({
+                                            status:200,
+                                            msg:'评论成功',
+                                            data:doc
+                                        })
+                                    }
+
+                                })
                             })
+
                         });
                     }
                 }

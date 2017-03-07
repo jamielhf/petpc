@@ -1,5 +1,5 @@
 @import "base/base";
-
+@import "base/min";
 html,body{
   -webkit-overflow-scrolling : touch;
   width: 100%;
@@ -17,4 +17,21 @@ html,body{
   top: 0;
   position: absolute;
   z-index: 99;
+}
+
+.c-btn{
+  position: relative;
+  text-decoration: none !important;
+  cursor: pointer;
+  display: inline-block;
+  background: $color;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 2px;
+  border: none;
+  padding:5px 12px;
+  &:hover{
+   opacity: 0.8;
+    color: #fff;
+  }
 }

@@ -7,10 +7,9 @@
     <div class="m-content">
         <div class="content-top">
             <ul class="top-left clearfix">
-                <li>最新</li>
-                <li>最多收藏</li>
-                <li>完成领养</li>
-                <li>未被领养</li>
+                <li @click = "sort('all')">最新</li>
+                <li @click = "sort('star')">最多收藏</li>
+                <li @click = "sort('comments')">最多评论</li>
             </ul>
 
         </div>
@@ -64,6 +63,14 @@ import content from '../components/content.vue';
 
 
 
+     },
+     methods:{
+        sort:function(type){
+            let vm =this;
+            this.$store.dispatch('getArticle',{uid:0,type:type}).then(function () {
+                vm.article = vm.$store.getters.getArticleList;
+            })
+        }
      },
 
      components:{

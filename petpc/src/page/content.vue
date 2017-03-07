@@ -51,7 +51,11 @@
 
     </div>
 
-        <comComment :comments = commentsData></comComment>
+        <comComment v-if="isAdmin" :comments = commentsData></comComment>
+        <div v-if="!isAdmin"  class="c-btn-group">
+            <a @click = 'changeStatus(1)' class="c-btn c-pass">通过</a>
+            <a @click = 'changeStatus(2)'  class="c-btn c-nopass">不通过</a>
+        </div>
     </div>
 </template>
 
@@ -66,6 +70,19 @@
         left:50px;
         z-index: 10;
         cursor:pointer;
+    }
+    .c-btn-group{
+            width:285px;
+            margin:30px auto;
+        .c-btn{
+           width:100px;
+            text-align: center;
+              margin:0 20px;
+            &.c-nopass{
+                background-color: #666;
+             }
+
+        }
     }
     .g-content{
         position: relative;
@@ -188,7 +205,28 @@ import comment from '../components/comment.vue';
                 if(this.selNum+1<this.content.imgArr.length){
                     this.selNum++;
                 }
-            }
+            },
+            /*
+            * 审核
+            * */
+            changeStatus(status){
+                let vm = this;
+                this.$store.dispatch('setArticleStatus',{
+                    id:vm.$route.query.id,
+                    status:status
+                }).then(function(){
+                    if(status==1){
+                        vm.$store.commit('SET_TIPS','审核通过')
+                    }else if(status==2){
+                        vm.$store.commit('SET_TIPS','审核不通过')
+                    }
+                    setTimeout(function(){
+                        vm.$router.push('/admin')
+                    },1000)
+
+                })
+            },
+
 
 
         },
@@ -202,6 +240,15 @@ import comment from '../components/comment.vue';
                     return []
                 }
 
+             },
+             isAdmin(){
+                 let info = this.$store.getters.getInfo;
+
+                 if(info.type=='user'){
+                     return true
+                 }else if(info.type=='admin'){
+                     return false
+                 }
              },
              pet(){
                  if(this.$store.getters.getArticleContent.pet){

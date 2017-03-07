@@ -14,15 +14,14 @@ const Write = resolve => require(['../page/write.vue'], resolve);
 const Article = resolve => require(['../page/article.vue'], resolve);
 const Content = resolve => require(['../page/content.vue'], resolve);
 const MyStar = resolve => require(['../page/myStar.vue'], resolve);
+const Admin = resolve => require(['../page/admin.vue'], resolve);
 
 
 Vue.use(VueRouter);
 
 const isLogin = (to, from, next) => {
     let token = localStorage.getItem('token');
-
     if (token) {
-        console.log(132);
         next({
             path: '/index'
         })
@@ -34,7 +33,6 @@ const isLogin = (to, from, next) => {
 const notLogin = (to, from, next) => {
     let token = localStorage.getItem('token');
     if (!token) {
-        console.log(132);
         next({
             path: '/index'
         })
@@ -65,6 +63,11 @@ const routes = [
             {
                 path: '/write',
                 component: Write,
+                beforeEnter: notLogin
+            },
+            {
+                path: '/admin',
+                component: Admin,
                 beforeEnter: notLogin
             },
             {

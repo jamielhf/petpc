@@ -63,11 +63,18 @@
                 <p class="c-name">{{item.name}}</p>
                 <time>{{item.newTime}}</time>
                 <p class="c-content">{{item.content}}</p>
-                <span class="c-reply-btn" @click = "showReply(item._cid,'',$event)">回复</span>
+                <span class="c-reply-btn" @click = "showReply(item._cid,item._uid,item.name,$event)">回复</span>
+                <ul class="c-ul-list" >
+                <li v-for="(item1,index1) in item.replyContent ">
+                <p><a>{{item1.username}}</a>回复<a>{{item1.rname}}</a>:<span>{{item1.content}}</span></p>
+                <time>{{item1.newTime}}</time> <span class="c-l-reply" @click = "showReply(item._cid,item1._uid,item1.username,$event)">回复</span>
+                </li>
+
+                </ul>
                 <div :ref="item.ref"  class="c-reply content z-none">
                     <textarea v-model="content2" :placeholder="replyName"></textarea>
                     <a @click="cancel" class="c-btn cancel">取消</a>
-                    <a class="c-btn sure" @click ="submitReply(item._cid)">确定</a>
+                    <a class="c-btn sure" @click ="submitReply(item._cid,rid,rname)">确定</a>
                 </div>
             </div>
 
@@ -116,6 +123,7 @@
            margin-top: 20px;
            left:30px;
            .c-btn{
+               position: absolute;
                top:5px;
                right: 0;
            }
@@ -238,18 +246,7 @@
                border-color: $color
            }
        }
-       .c-btn{
-           position: absolute;
-           text-decoration: none;
-           cursor: pointer;
-           display: inline-block;
-           background: $color;
-           color: #fff;
-           font-size: 14px;
-           border-radius: 2px;
-           border: none;
-           padding:5px 12px;
-       }
+
        .c-ul-list{
            margin: 10px 0;
            border-left: 3px solid #e1e1e1;
@@ -303,6 +300,8 @@ import util from '../js/util'
                 lastRef:'',
                 lastId:'',
                 lastDom:'',
+                rid:'',
+                rname:''
             }
         },
         created(){
@@ -337,12 +336,14 @@ import util from '../js/util'
                    if(l>0){
                        this.comments.comments.map(function(v,k){
                            v.ref = 't'+v._cid;
-                           v.newTime = util.changeTime(v.time)
+                           v.newTime = util.changeTime(v.time);
+                           let c=0;
+                           for(;c< v.replyContent.length;c++){
+                               v.replyContent[c].newTime =  util.changeTime(v.replyContent[c].time)
+                           }
                        })
                    }
-
-                  console.log(this.comments.comments)
-
+                  console.log(this.comments.comments);
                   return this.comments.comments
               }else{
                   return []
@@ -360,11 +361,14 @@ import util from '../js/util'
             * id 回复框id
             * name 回复人昵称
             * */
-            showReply(id,name,e){
+            showReply(id,rid,rname,e){
 
                 let vm = this;
                 let d = 't'+id;
                 let c = vm.$refs[d][0].classList;
+
+                vm.rname = rname;
+                vm.rid = rid;
 
                 if(this.$store.getters.isLogin==true){
 
@@ -376,8 +380,8 @@ import util from '../js/util'
                             c.add('z-none')
                         }
                     }else{
-                        if(name){
-                            this.replyName = '对 '+name+' 的回复'
+                        if(rname){
+                            this.replyName = '对 '+rname+' 的回复'
                         }else{
                             this.replyName = '评论'
                         }
@@ -426,7 +430,23 @@ import util from '../js/util'
             * 回复别人
             * cid 评论id
             * */
-            submitReply(cid){
+            submitReply(cid,rid,rname){
+                let vm  = this;
+                if(this.content2==''){
+                    vm.$store.commit('SET_TIPS','请输入内容');
+                }else{
+                    vm.$store.dispatch('setComments',{
+                        _aid:vm.$route.query.id,
+                        _cid:cid,
+                        _uid:vm.userData._id,
+                        name:vm.userData.username,
+                        _rid:rid,
+                        rname:rname,
+                        content:vm.content2
+                    }).then(function(){
+                        vm.content2 = ''
+                    })
+                }
 
             }
         }
