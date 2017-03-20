@@ -248,6 +248,8 @@ import comment from '../components/comment.vue';
                      return true
                  }else if(info.type=='admin'){
                      return false
+                 }else{
+                     return true
                  }
              },
              pet(){

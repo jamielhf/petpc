@@ -15,6 +15,7 @@ const Article = resolve => require(['../page/article.vue'], resolve);
 const Content = resolve => require(['../page/content.vue'], resolve);
 const MyStar = resolve => require(['../page/myStar.vue'], resolve);
 const Admin = resolve => require(['../page/admin.vue'], resolve);
+const Message = resolve => require(['../page/message.vue'], resolve);
 
 
 Vue.use(VueRouter);
@@ -53,6 +54,11 @@ const routes = [
             {
                 path: 'user/article',
                 component: Article,
+                beforeEnter: notLogin,
+            },
+            {
+                path: 'user/message',
+                component: Message,
                 beforeEnter: notLogin,
             },
             {
