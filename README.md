@@ -17,6 +17,10 @@ npm run dev
 cd petpc  
 npm install  
 npm run dev  
+数据库是mongodb  可以作为系统服务启动  
+
+### 截图
+
 
 ### 其他
 
